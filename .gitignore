@@ -8,3 +8,6 @@ data/cache/*.json
 
 # adaptateur premium privé — ne jamais committer dans le dépôt public
 backend/adapters/silexia.py
+
+# doc de passation locale (handoff Claude Code) — hors dépôt
+/MEMORY.md
