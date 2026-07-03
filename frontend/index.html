@@ -516,48 +516,1273 @@ const LAWS={
     ]
   },
 
-  /* ============ LOI PLEIN EMPLOI (RSA) ============ */
+  /* ============ LOIS DE DÉMO — données réelles (PISTE + HAL + parlement.tricoteuses.fr) ============ */
   rsa:{
-    pillName:"Loi plein emploi", pillDesc:"RSA · 2023-1196",
-    short:"2023-1196", cdate:"18 déc. 2023",
-    title:"LOI n° 2023-1196 du 18 décembre 2023 pour le plein emploi",
-    subt:"Réforme « plein emploi » : inscription automatique à France Travail, contrat d'engagement réciproque et obligation d'activité, avec un pouvoir de sanction confié au président du conseil départemental.",
-    dom:"Emploi · insertion · action sociale",
-    legitext:"LEGITEXT000048582985", nor:"MTRD2313163L", sig:"18/12/2023", pub:"19/12/2023",
-    measures:[
-      {n:"15-20",u:" h/sem.",l:"obligation d'activité (contrat d'engagement)"},
-      {n:"≥ 30",u:" %",l:"suspension possible du RSA (président du CD)"},
-      {n:"651,69",u:" €/mois",l:"RSA personne seule (2026)"},
-      {n:"11",u:" textes liés",l:"application, jurisprudence, doctrine"}
-    ],
-    toc:[
-      ["Inscription","Inscription automatique à France Travail"],
-      ["Contrat","Contrat d'engagement réciproque"],
-      ["Activité","15 à 20 h d'activité hebdomadaire"],
-      ["Sanction","« Suspension-remobilisation » décidée par le président du CD"],
-      ["Orientation","Délais d'orientation et d'accompagnement (décret 2024-1244)"]
-    ],
-    tocNote:"Compétence directe du Département : le conseil départemental est l'organisme référent et l'autorité de sanction.",
-    mgNote:"Jurisprudence administrative active sur la récupération de l'indu et les sanctions.",
-    related:[
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2024-1242 du 30 décembre 2024 relatif à l'inscription, à l'orientation et au contrat d'engagement des demandeurs d'emploi",who:"Légifrance",date:"31/12/2024",id:"LEGITEXT000050924505 · NOR TSSD2431074D",prov:"legifrance",note:"Fonde le contrat d'engagement et le pouvoir de sanction."},
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2024-1244 du 30 décembre 2024 relatif aux délais d'orientation et d'accompagnement des demandeurs d'emploi",who:"Légifrance",date:"31/12/2024",id:"Décret n° 2024-1244 — texte d'application",prov:"legifrance",note:""},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 6 août 2025 portant approbation du référentiel de l'accompagnement intensif (Comité national pour l'emploi)",who:"Légifrance",date:"août 2025",id:"LEGITEXT000052060992 · NOR TSSD2521879A",prov:"legifrance",note:""},
-      {f:'con',kind:'Code',badge:'k-con',title:"Code de l'action sociale et des familles — revenu de solidarité active (art. L. 262-1 et s.)",who:"Légifrance — code consolidé",date:"à jour",id:"CASF — orientation & contrat d'engagement",prov:"legifrance",note:"Fonde la compétence du conseil départemental."},
-      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Actualisation de la convention de gestion type pour le RSA",who:"Cabinet Landot & associés",date:"24/06/2026",id:"blog.landot-avocats.net — instruction CNAF du 18/06/2026",prov:"juriveille",note:"Met à jour le cadre de gestion entre CAF et Département."},
-      {f:'jur',kind:'Conseil d\'État',badge:'k-jur',title:"Conseil d'État, 1re-4e ch. réunies, 28 nov. 2024, n° 471819 — récupération de l'indu de RSA",who:"Conseil d'État / Légifrance",date:"28/11/2024",id:"CETATEXT000050682743",prov:"cetat",note:"Directement opposable au contentieux du Département."},
-      {f:'par',kind:'Officiel',badge:'k-par',title:"Signature du pacte sectoriel Transport-Logistique (porté par France Travail)",who:"DREETS Bretagne",date:"24/06/2026",id:"bretagne.dreets.gouv.fr",prov:"juriveille",note:""},
-      {f:'jur',kind:'Sanction CNIL',badge:'k-jur',title:"Délibération n° SAN-2026-003 du 22 janvier 2026 — sanction pécuniaire à l'encontre de l'opérateur FRANCE TRAVAIL",who:"CNIL — formation restreinte",date:"22/01/2026",id:"CNILTEXT000053408671",prov:"cnil",note:"Contrôle des traitements de données des demandeurs d'emploi et allocataires — enjeu RGPD direct pour le Département."},
-      {f:'jur',kind:'Cour d\'appel',badge:'k-jur',title:"Cour d'appel de Paris, pôle 6 ch. 13, 23 février 2024, n° 17/08365 — contentieux de l'indu de RSA",who:"Cour d'appel / Judilibre",date:"23/02/2024",id:"Judilibre — arrêt n° 17/08365",prov:"judilibre",note:""},
-      {f:'jur',kind:'Trib. judiciaire',badge:'k-jur',title:"Tribunal judiciaire d'Amiens, 19 janvier 2026, n° 25/00016 — récupération d'un trop-perçu de RSA",who:"Tribunal judiciaire / Judilibre",date:"19/01/2026",id:"Judilibre — décision n° 25/00016",prov:"judilibre",note:"Jurisprudence du fond, fraîche, sur la mécanique de récupération de l'indu."},
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Non-proportionnalité des sanctions contre les bénéficiaires du RSA",who:"Assemblée nationale (LFI-NFP)",date:"12/05/2026",id:"QANR5L17QE15100 — en attente de réponse",prov:"qp",note:"Interroge directement le régime de sanction confié au président du Département."}
-    ]
-  }
+      "pillName": "Loi plein emploi",
+      "pillDesc": "RSA · 2023-1196",
+      "short": "2023-1196",
+      "cdate": "18 déc. 2023",
+      "title": "LOI n° 2023-1196 du 18 décembre 2023 pour le plein emploi (1)",
+      "subt": "Réforme « plein emploi » : inscription automatique à France Travail, contrat d'engagement réciproque et obligation d'activité, avec un pouvoir de sanction confié au président du conseil départemental.",
+      "dom": "Emploi · insertion · action sociale",
+      "legitext": "LEGITEXT000048582985",
+      "nor": "MTRD2313163L",
+      "sig": "18/12/2023",
+      "pub": "19/12/2023",
+      "measures": [
+          {
+              "n": "15-20",
+              "u": " h/sem.",
+              "l": "obligation d'activité (contrat d'engagement)"
+          },
+          {
+              "n": "≥ 30",
+              "u": " %",
+              "l": "suspension possible du RSA (président du CD)"
+          },
+          {
+              "n": "7",
+              "u": " décisions",
+              "l": "jurisprudence (CE, Cassation, CNIL)"
+          },
+          {
+              "n": "40",
+              "u": " textes liés",
+              "l": "constellation reconstituée, tous sourcés"
+          }
+      ],
+      "toc": [
+          [
+              "Inscription",
+              "Inscription automatique à France Travail"
+          ],
+          [
+              "Contrat",
+              "Contrat d'engagement réciproque"
+          ],
+          [
+              "Activité",
+              "15 à 20 h d'activité hebdomadaire"
+          ],
+          [
+              "Sanction",
+              "« Suspension-remobilisation » (président du CD)"
+          ],
+          [
+              "Orientation",
+              "Délais d'orientation et d'accompagnement"
+          ]
+      ],
+      "tocNote": "Compétence directe du Département : organisme référent et autorité de sanction.",
+      "mgNote": "Jurisprudence administrative active sur la récupération de l'indu et les sanctions.",
+      "related": [
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-208 du 4 mars 2025 relatif aux priorités pluriannuelles d'action en matière de surveillance et de contrôle des établissements et services d'accueil des enfants de moins de six ans et de contrôle, de surveillance et d'accompagnement des assistants maternels",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051293381_06-03-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051293381_06-03-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-819 du 13 août 2025 portant modification de l'article 49 septies Y de l'annexe III au code général des impôts",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052105922_16-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105922_16-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-252 du 20 mars 2025 relatif aux éléments constitutifs de l'offre raisonnable d'emploi",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051358280_22-03-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358280_22-03-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-253 du 20 mars 2025 relatif au schéma pluriannuel de maintien et de développement de l'offre d'accueil du jeune enfant prévus à l'article L. 214-1-3 du code de l'action sociale et des familles",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051358300_22-03-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358300_22-03-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-1242 du 30 décembre 2024 relatif à l'inscription, à l'orientation et au contrat d'engagement des demandeurs d'emploi",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000050924505_01-01-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050924505_01-01-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-584 du 24 juin 2024 relatif aux organismes chargés du repérage et de l'accompagnement spécifique des personnes les plus éloignées de l'emploi et à la rémunération de leurs bénéficiaires",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049776475_26-06-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049776475_26-06-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-678 du 21 juillet 2025 relatif aux modalités de répartition de l'accompagnement financier des communes de plus de 3 500 habitants pour l'exercice des compétences d'autorité organisatrice de l'accueil du jeune enfant",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051935978_23-07-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051935978_23-07-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-844 du 25 août 2025 relatif aux droits et aux parcours professionnels des travailleurs handicapés admis en établissements et services d'accompagnement par le travail",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052138832_28-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138832_28-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-816 du 13 août 2025 relatif au délai dans lequel chaque organisme référent conclut le contrat d'engagement mentionné à l'article L. 5411-6 du code du travail avec le demandeur d'emploi dont il assure l'accompagnement au 1er janvier 2025 en Guadeloupe, en Guyane, en Martinique, à Mayotte, à La Réunion, à Saint-Barthélemy, à Saint-Martin et à Saint-Pierre-et-Miquelon",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052105881_16-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105881_16-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-1147 du 4 décembre 2024 relatif aux comités territoriaux pour l'emploi institués en Guadeloupe, en Guyane, en Martinique, à Mayotte, à La Réunion, à Saint-Barthélemy, à Saint-Martin et à Saint-Pierre-et-Miquelon",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000050737653_06-12-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050737653_06-12-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-99 du 10 février 2024 relatif aux entreprises adaptées et aux entreprises adaptées de travail temporaire",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049123665_12-02-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049123665_12-02-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-845 du 25 août 2025 relatif aux établissements et services d'accompagnement par le travail et au contrat d'accompagnement par le travail conclu avec les travailleurs admis au sein de ces établissements ou services",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052138938_28-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138938_28-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-1244 du 30 décembre 2024 relatif aux délais d'orientation et d'accompagnement des demandeurs d'emploi",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000050923101_01-01-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050923101_01-01-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret du 14 janvier 2026 relatif au calendrier d'autorisation et de renouvellement pour les établissements d'accueil du jeune enfant existants avant l'application de la loi n° 2023-1196 du 18 décembre 2023 pour le plein emploi",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000053374824_17-01-2026",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000053374824_17-01-2026"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-478 du 30 mai 2025 relatif aux sanctions applicables aux demandeurs d'emploi en cas de manquement à leurs obligations",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051676587_01-06-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051676587_01-06-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 25 août 2025 fixant la base et les états justificatifs de la compensation par l'Etat des cotisations payées par les établissements et services d'accompagnement par le travail au titre de la couverture collective à adhésion obligatoire en matière de remboursements complémentaires de frais occasionnés par une maladie, une maternité ou un accident, prévue à l'article L. 344-2-10 du code de l'action sociale et des familles",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052138917_28-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138917_28-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 23 septembre 2025 modifiant l'arrêté du 25 août 2025 fixant la base et les états justificatifs de la compensation par l'Etat des cotisations payées par les établissements et services d'accompagnement par le travail au titre de la couverture collective à adhésion obligatoire en matière de remboursements complémentaires de frais occasionnés par une maladie, une maternité ou un accident, prévue à l'article L. 344-2-10 du code de l'action sociale et des familles",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052291301_27-09-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052291301_27-09-2025"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 1ère chambre, 28/04/2026, 512004, Inédit au recueil Lebon",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000053980087",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000053980087"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 1ère - 4ème chambres réunies, 27/05/2026, 504769, Inédit au recueil Lebon",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000054178558",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000054178558"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre sociale, 2 avril 2025, 24-11.728, Publié au bulletin",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000051464758",
+              "prov": "judilibre",
+              "note": "Cassation partielle",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051464758"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 2, 26 juin 2025, 23-14.831, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000051931361",
+              "prov": "judilibre",
+              "note": "Cassation partielle",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051931361"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre sociale, 6 mai 2026, 25-10.164, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000054110023",
+              "prov": "judilibre",
+              "note": "Cassation partielle sans renvoi",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000054110023"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre sociale, 1 avril 2026, 24-17.822, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000053859621",
+              "prov": "judilibre",
+              "note": "Cassation partielle partiellement sans renvoi",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000053859621"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Délibération CNIL",
+              "title": "Délibération n° 2024-088 du 5 décembre 2024 portant avis sur un projet de décret relatif au système d'information de l'opérateur France Travail et portant diverses dispositions relatives aux traitements de données à caractère personnel dans le champ de l'emploi, de l'insertion et de la formation professionnelle",
+              "who": "CNIL",
+              "date": "09/01/2025",
+              "id": "CNILTEXT000050959708",
+              "prov": "cnil",
+              "note": "data_cnil",
+              "url": "https://www.legifrance.gouv.fr/cnil/id/CNILTEXT000050959708"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "« Repérer » ou connaître ?",
+              "who": "Pierre-Yves Verkindt",
+              "date": "2024-01-10",
+              "id": "halshs-04382678",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04382678v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Paradoxe et controverses du « plein emploi », nouvel objectif des politiques de l'emploi",
+              "who": "Christophe Willmann",
+              "date": "2024-01-10",
+              "id": "halshs-04382674",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04382674v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Désinsertion professionnelle et droit du travail",
+              "who": "Jean-Michel Lattes",
+              "date": "1998-02",
+              "id": "hal-02873502",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-02873502v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "La digitalisation au service des demandeurs d’emploi : une évolution ambiguë",
+              "who": "Marion del Sol, Anne-Sophie Ginon",
+              "date": "2024-10",
+              "id": "halshs-04914254",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04914254v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Orienter et accompagner les demandeurs d'emploi : deux raisons de prendre la réforme France travail au sérieux",
+              "who": "Laurent Duclos, Jean-Yves Kerbourc'h",
+              "date": "2024-01-10",
+              "id": "halshs-04382675",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04382675v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Le renforcement des devoirs des bénéficiaires du revenu de solidarité active : beaucoup de bruit pour pas grand-chose",
+              "who": "Hervé Rihal",
+              "date": "2024-01-10",
+              "id": "halshs-04382676",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04382676v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Priorité d'accès des salariés à temps partiel à un emploi à temps plein ou à un emploi d'une durée supérieure",
+              "who": "Françoise Favennec-Héry",
+              "date": "2008-12-10",
+              "id": "halshs-02199046",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-02199046v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "L'empreinte du workfare dans les programmes d'assistance aux États-Unis",
+              "who": "Olivier André",
+              "date": "2024-01-10",
+              "id": "halshs-04382677",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04382677v1"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Aptitude à la conduite des personnes atteintes de sclérose en plaques",
+              "who": "Mme Christelle D'Intorni",
+              "date": "30/06/2026",
+              "id": "QANR5L17QE16472",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16472QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Communication institutionnelle de la CNAF",
+              "who": "M. Antoine Valentin",
+              "date": "30/06/2026",
+              "id": "QANR5L17QE16564",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16564QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Effets du cumul emploi-retraite sur le recrutement des conducteurs scolaires",
+              "who": "M. Pierre-Henri Carbonnel",
+              "date": "23/06/2026",
+              "id": "QANR5L17QE16336",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16336QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Décret n° 2026-261 du 8 avril 2026 - exonération de cotisations patronales",
+              "who": "M. Stéphane Delautrette",
+              "date": "23/06/2026",
+              "id": "QANR5L17QE16151",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16151QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Demande de remboursement de rémunérations demandées aux soignants",
+              "who": "Mme Céline Thiébault-Martinez",
+              "date": "23/06/2026",
+              "id": "QANR5L17QE16212",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16212QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Situation des AESH",
+              "who": "Mme Christine Engrand",
+              "date": "23/06/2026",
+              "id": "QANR5L17QE16219",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-16219QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite Sénat",
+              "title": "Négociations relatives à la future convention d'objectifs et de gestion de la Mutualité sociale agricole pour la période 2026-2030",
+              "who": "M. Jean-Pierre Corbisez",
+              "date": "11/06/2026",
+              "id": "SEQ260609068",
+              "prov": "qp",
+              "note": "Réponse reçue",
+              "url": ""
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Prise en compte des travaux d'utilité collective (TUC)",
+              "who": "Mme Mathilde Hignet",
+              "date": "09/06/2026",
+              "id": "QANR5L17QE15862",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-15862QE.htm"
+          }
+      ]
+  },
+  immigration:{
+      "pillName": "Loi immigration",
+      "pillDesc": "immigration · 2024-42",
+      "short": "2024-42",
+      "cdate": "26 janv. 2024",
+      "title": "LOI n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration (1)",
+      "subt": "Réforme de l'immigration : titres de séjour et régularisation, regroupement familial, éloignement (OQTF) et rétention, asile, accès au travail. Partiellement censurée avant promulgation, puis très contestée par QPC.",
+      "dom": "Immigration · droit des étrangers · asile",
+      "legitext": "LEGITEXT000049042993",
+      "nor": "IOMV2236472L",
+      "sig": "26/01/2024",
+      "pub": "27/01/2024",
+      "measures": [
+          {
+              "n": "54",
+              "u": " textes liés",
+              "l": "constellation reconstituée, tous sourcés"
+          },
+          {
+              "n": "21",
+              "u": " décisions",
+              "l": "jurisprudence (Conseil d'État + Cassation)"
+          },
+          {
+              "n": "5",
+              "u": " QPC",
+              "l": "Conseil constitutionnel — rétention, visa, éloignement"
+          },
+          {
+              "n": "2024",
+              "u": "",
+              "l": "censure partielle avant promulgation (2023-863 DC)"
+          }
+      ],
+      "toc": [
+          [
+              "Séjour",
+              "Titres de séjour et conditions de régularisation"
+          ],
+          [
+              "Regroupement",
+              "Regroupement familial durci"
+          ],
+          [
+              "Éloignement",
+              "OQTF et rétention administrative"
+          ],
+          [
+              "Asile",
+              "Procédures d'asile"
+          ],
+          [
+              "Travail",
+              "Accès au marché du travail des étrangers"
+          ]
+      ],
+      "tocNote": "Texte transversal (séjour, éloignement, asile, travail) → contentieux constitutionnel dense.",
+      "mgNote": "Loi massivement contestée par QPC depuis sa promulgation (rétention, visa, éloignement) — l'illustration de « la loi après la loi ».",
+      "related": [
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-647 du 15 juillet 2025 relatif aux dispositions de l'article 20 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration et autres mesures relatives à l'évolution du contrat d'intégration républicaine",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051902505_18-07-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902505_18-07-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-809 du 5 juillet 2024 portant modification du dispositif de refus ou de cessation des conditions matérielles d'accueil",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049990867_17-07-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049990867_17-07-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2026-471 du 10 juin 2026 relatif à l'exécution des mesures d'éloignement à Mayotte",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000054239222_13-06-2026",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054239222_13-06-2026"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-648 du 15 juillet 2025 portant modification du décret n° 93-1362 du 30 décembre 1993 modifié relatif aux déclarations de nationalité, aux décisions de naturalisation, de réintégration, de perte, de déchéance et de retrait de la nationalité française",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051902730_18-07-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902730_18-07-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-756 du 1er août 2025 portant création des chambres territoriales de la Cour nationale du droit d'asile de Marseille et Nantes et relatif à la procédure applicable devant la Cour nationale du droit d'asile",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052035877_04-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052035877_04-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-800 du 8 juillet 2024 pris pour l'application de l'article 70 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration et relatif à l'organisation et à la procédure applicable devant la Cour nationale du droit d'asile",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049973967_15-07-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049973967_15-07-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2025-539 du 13 juin 2025 relatif aux cartes de séjour « talent » et modifiant certaines dispositions relatives aux cartes de séjour « recherche d'emploi-création d'entreprise » et « entrepreneur et profession libérale »",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000051737142_16-06-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051737142_16-06-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Decret",
+              "title": "Décret n° 2024-799 du 2 juillet 2024 pris pour l'application du titre VII de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration, relatif à la simplification des règles du contentieux",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049969799_15-07-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049969799_15-07-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 25 octobre 2025 modifiant l'arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052475649_02-11-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052475649_02-11-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 6 octobre 2024 modifiant l'arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000050351465_17-10-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050351465_17-10-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000049538550_02-11-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049538550_02-11-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 19 juin 2026 relatif au modèle type de contrat d'intégration républicaine créé par la loi n° 2016-274 du 7 mars 2016 relative au droit des étrangers en France",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000054306912_26-06-2026",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306912_26-06-2026"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 22 juillet 2025 relatif au modèle type de contrat d'intégration républicaine créé par la loi n° 2016-274 du 7 mars 2016 relative au droit des étrangers en France",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052023467_26-06-2026",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023467_26-06-2026"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 14 août 2024 fixant le modèle de formulaire rappelant les droits et obligations du demandeur d'asile pris pour l'application de l'article R. 523-3 du code de l'entrée et du séjour des étrangers et du droit d'asile",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000050134991_25-08-2024",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050134991_25-08-2024"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 20 août 2025 relatif à la procédure d'agrément des organismes en charge de la mise en œuvre de l'examen civique",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052130796_24-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052130796_24-08-2025"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 19 juin 2026 relatif au modèle type de contrat d'intégration républicaine spécifique à Mayotte",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000054306956_26-06-2026",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306956_26-06-2026"
+          },
+          {
+              "f": "app",
+              "badge": "k-app",
+              "kind": "Arrete",
+              "title": "Arrêté du 22 juillet 2025 relatif au modèle type de contrat d'intégration républicaine spécifique à Mayotte",
+              "who": "Légifrance",
+              "date": "",
+              "id": "LEGITEXT000052023492_02-08-2025",
+              "prov": "legifrance",
+              "note": "",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023492_02-08-2025"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "CAA de LYON, 6ème chambre, 15/05/2025, 24LY02003",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000051605033",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000051605033"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "CAA de LYON, 4ème chambre, 03/04/2025, 24LY01854",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000051428511",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000051428511"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 2ème - 7ème chambres réunies, 09/06/2026, 506729",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000054227854",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000054227854"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 2ème - 7ème chambres réunies, 09/06/2026, 505954",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000054227853",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000054227853"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 2ème - 7ème chambres réunies, 09/06/2026, 504383",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000054227851",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000054227851"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "CAA de NANCY, 2ème chambre, 04/12/2025, 24NC01867, Inédit au recueil Lebon",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000052994501",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000052994501"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "Conseil d'État, 2ème - 7ème chambres réunies, 06/03/2025, 497929, Inédit au recueil Lebon",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000051303916",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000051303916"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil d'État",
+              "title": "CAA de NANTES, 4ème chambre, 06/02/2026, 25NT00626, Inédit au recueil Lebon",
+              "who": "CETAT",
+              "date": "",
+              "id": "CETATEXT000053448482",
+              "prov": "cetat",
+              "note": "data_juri",
+              "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000053448482"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 14 novembre 2024, 23-15.075, Publié au bulletin",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000050510220",
+              "prov": "judilibre",
+              "note": "Rejet",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000050510220"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 20 novembre 2024, 24-70.005, Publié au bulletin",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000050761579",
+              "prov": "judilibre",
+              "note": "Avis sur saisine",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000050761579"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, criminelle, Chambre criminelle, 4 mars 2026, 25-82.666, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000053764849",
+              "prov": "judilibre",
+              "note": "Rejet",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000053764849"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 7 janvier 2025, 24-70.008, Publié au bulletin",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000051012227",
+              "prov": "judilibre",
+              "note": "Avis sur saisine",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051012227"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 9 juillet 2025, 25-40.014, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000051931802",
+              "prov": "judilibre",
+              "note": "Qpc seule - renvoi au cc",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051931802"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 15 octobre 2025, 24-16.261, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000052484629",
+              "prov": "judilibre",
+              "note": "Cassation sans renvoi",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000052484629"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 11 septembre 2024, 24-40.014, Inédit",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000050221583",
+              "prov": "judilibre",
+              "note": "Qpc seule - Non-lieu à renvoi au cc",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000050221583"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Cour de cassation",
+              "title": "Cour de cassation, civile, Chambre civile 1, 9 avril 2025, 25-40.003, Publié au bulletin",
+              "who": "JURI",
+              "date": "",
+              "id": "JURITEXT000051464991",
+              "prov": "judilibre",
+              "note": "QPC - Non-lieu à renvoi au Conseil constitutionnel",
+              "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051464991"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil constit.",
+              "title": "Décision 2026-1196 QPC - 30 avril 2026 - M. Alexandre D. et autre [Refus de délivrance d’un visa à un étranger ayant fait l’objet d’une obligation de quitter le territoire français non exécutée dans le délai de départ volontaire ou sans délai] - Conformité - réserve",
+              "who": "CONSTIT",
+              "date": "",
+              "id": "CONSTEXT000054103364",
+              "prov": "constit",
+              "note": "Conformité - réserve",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000054103364"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil constit.",
+              "title": "Décision 2025-1158 QPC - 12 septembre 2025 - M. Icham E. [Durée du maintien d’un étranger à la disposition de la justice en cas de décision du juge mettant fin à sa rétention] - Non conformité totale - effet différé - réserve transitoire",
+              "who": "CONSTIT",
+              "date": "",
+              "id": "CONSTEXT000052372184",
+              "prov": "constit",
+              "note": "Non conformité totale - effet différé - réserve transitoire",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000052372184"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil constit.",
+              "title": "Décision 2025-1140 QPC - 23 mai 2025 - Association Gisti et autres [Cas de placement en rétention administrative du demandeur d’asile] - Non conformité totale",
+              "who": "CONSTIT",
+              "date": "",
+              "id": "CONSTEXT000051680044",
+              "prov": "constit",
+              "note": "Non conformité totale",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000051680044"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil constit.",
+              "title": "Décision 2025-1172 QPC - 16 octobre 2025 - M. Chakib G. [Réitération du placement en rétention administrative d’un étranger] - Non conformité totale - effet différé - réserve transitoire",
+              "who": "CONSTIT",
+              "date": "",
+              "id": "CONSTEXT000052555274",
+              "prov": "constit",
+              "note": "Non conformité totale - effet différé - réserve transitoire",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000052555274"
+          },
+          {
+              "f": "jur",
+              "badge": "k-jur",
+              "kind": "Conseil constit.",
+              "title": "Décision 2025-1147 QPC - 11 juillet 2025 - M. Azizbek K. [Procédure contradictoire asymétrique pour le contentieux de certains actes administratifs] - Non conformité totale",
+              "who": "CONSTIT",
+              "date": "",
+              "id": "CONSTEXT000051898922",
+              "prov": "constit",
+              "note": "Non conformité totale",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000051898922"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Le projet de loi « Darmanin » peut-il contribuer à contrôler l’immigration et améliorer l’intégration?",
+              "who": "Serge Slama",
+              "date": "2023-02-10",
+              "id": "hal-03988121",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-03988121v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Le projet de loi « Darmanin » peut-il contribuer à contrôler l’immigration et améliorer l’intégration?. Focus sur deux mesures précises",
+              "who": "Serge Slama",
+              "date": "2023-02-13",
+              "id": "hal-03988151",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-03988151v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Lecture de certains articles censurés de la loi du 19 décembre 2023 sur l’immigration au regard de « La gouvernance par les nombres » (1) et (2)",
+              "who": "Bénédicte Lavaud-Legendre",
+              "date": "2024",
+              "id": "halshs-04863807",
+              "prov": "hal",
+              "note": "",
+              "url": "https://shs.hal.science/halshs-04863807v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Pour contrôler l’immigration, améliorer l’intégration",
+              "who": "Serge Slama",
+              "date": "2023-03-09",
+              "id": "hal-03992005",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-03992005v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "Projet de loi pour contrôler l'immigration, améliorer l'intégration",
+              "who": "Bérangère Taxil, Serge Slama",
+              "date": "2023-02-06",
+              "id": "hal-03992036",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-03992036v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "[Entretien] À propos de la loi pour contrôler l'immigration, améliorer l'intégration",
+              "who": "Serge Slama",
+              "date": "2024-01-23",
+              "id": "hal-04829545",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-04829545v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "La loi n° 2024-42 du 22 janvier 2024 pour contrôler (beaucoup) l’immigration, améliorer (un peu) l’intégration",
+              "who": "Dominique Turpin",
+              "date": "2024-04",
+              "id": "hal-04582744",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.science/hal-04582744v1"
+          },
+          {
+              "f": "doc",
+              "badge": "k-doc",
+              "kind": "Article de revue",
+              "title": "« Présentation générale de la loi pour contrôler l'immigration, améliorer l'intégration »",
+              "who": "Eric Sales",
+              "date": "2024-10-10",
+              "id": "hal-04961965",
+              "prov": "hal",
+              "note": "",
+              "url": "https://hal.umontpellier.fr/hal-04961965v1"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Récépissés et droit au travail (métiers en tension)",
+              "who": "M. Emmanuel Duplessy",
+              "date": "09/06/2026",
+              "id": "QANR5L17QE15783",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-15783QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite Sénat",
+              "title": "Mise en péril du droit au séjour pour raisons médicales",
+              "who": "Mme Anne Souyris",
+              "date": "12/03/2026",
+              "id": "SEQ260308025",
+              "prov": "qp",
+              "note": "En cours",
+              "url": ""
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Durcissement des conditions pour la régularisation des personnes étrangères",
+              "who": "M. Sylvain Carrière",
+              "date": "10/02/2026",
+              "id": "QANR5L17QE12754",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-12754QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Dématérialisation des cours d'apprentissage de la langue française",
+              "who": "M. Karim Benbrahim",
+              "date": "23/12/2025",
+              "id": "QANR5L17QE11956",
+              "prov": "qp",
+              "note": "Réponse publiée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-11956QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Modalités de mise en oeuvre de l'examen civique",
+              "who": "M. Paul Christophle",
+              "date": "09/12/2025",
+              "id": "QANR5L17QE11488",
+              "prov": "qp",
+              "note": "Déposée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-11488QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite Sénat",
+              "title": "Évolutions législatives ou règlementaires consécutives aux recommandations du rapport pour une amélioration de la délivrance des visas",
+              "who": "M. Mickaël Vallet",
+              "date": "13/11/2025",
+              "id": "SEQ251106670",
+              "prov": "qp",
+              "note": "Réponse reçue",
+              "url": ""
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Régularisation des travailleurs de l'Arena Porte de la Chapelle",
+              "who": "M. Ugo Bernalicis",
+              "date": "21/10/2025",
+              "id": "QANR5L17QE10483",
+              "prov": "qp",
+              "note": "Réponse publiée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-10483QE.htm"
+          },
+          {
+              "f": "par",
+              "badge": "k-par",
+              "kind": "Question écrite AN",
+              "title": "Dématérialisation des cours de français et atteinte à un accueil digne",
+              "who": "Mme Ségolène Amiot",
+              "date": "14/10/2025",
+              "id": "QANR5L17QE10232",
+              "prov": "qp",
+              "note": "Réponse publiée",
+              "url": "https://questions.assemblee-nationale.fr/q17/17-10232QE.htm"
+          }
+      ],
+      "amont": [
+          {
+              "date": "25/01/2024",
+              "kind": "Conseil constitutionnel",
+              "prov": "constit",
+              "title": "Décision n° 2023-863 DC — censure partielle AVANT promulgation (plusieurs dispositions écartées, dont des « cavaliers législatifs »)",
+              "id": "CONSTEXT000049184156",
+              "url": "https://www.legifrance.gouv.fr/cnst/id/CONSTEXT000049184156"
+          }
+      ]
+  },
+
 };
 
 /* ---------- RENDER ENGINE ---------- */
 const CLUSTERS=['app','con','doc','jur','par'];
-let current='lfi2026', activeF='all', q='';
+let current='immigration', activeF='all', q='';
 
 const $=id=>document.getElementById(id);
 
@@ -612,7 +1837,7 @@ function renderLaw(){
       <div class="relbody">
         <div class="rt">${d.title}</div>
         <div class="rmeta"><span class="who">${d.who}</span><span class="dt">${d.date}</span></div>
-        <div class="rid">${d.id}</div>
+        <div class="rid">${d.url?`<a href="${d.url}" target="_blank" rel="noopener">${d.id}</a>`:d.id}</div>
         ${d.note?`<div class="rnote">${d.note}</div>`:''}
       </div>
       <div class="prov"><span class="src"><span class="pd" style="background:${p.c}"></span>${p.label}</span></div>
@@ -652,6 +1877,7 @@ function parseDate(s){
 function renderTimeline(L){
   const events=[], socle=[];
   L.related.forEach(d=>{ const pd=parseDate(d.date); if(pd){events.push({...d,_d:pd});} else socle.push(d); });
+  (L.amont||[]).forEach(d=>{ const pd=parseDate(d.date); if(pd) events.push({...d,_d:pd,_amont:true}); });
   const lawDate=parseDate(L.pub)||parseDate(L.sig);
   events.push({_mile:true,_d:lawDate});
   events.sort((a,b)=> (a._d-b._d) || (a._mile?-1:1));
@@ -659,6 +1885,13 @@ function renderTimeline(L){
   events.forEach(e=>{
     if(e._mile){
       html+=`<div class="tlmile"><span class="tldot"></span><div class="mlbox"><div class="mlt">Promulgation de la loi · ${L.pub}</div><div class="mld">${L.title}</div></div></div>`;
+    }else if(e._amont){
+      const p=PROV[e.prov]||{c:'#7a2650',label:e.kind};
+      html+=`<div class="tlitem tlamont" data-f="amont"><span class="tldot" style="background:${p.c}"></span>
+        <div class="tldate">${e.date}</div>
+        <div class="tltitle">⚖ ${e.url?`<a href="${e.url}" target="_blank" rel="noopener">${e.title}</a>`:e.title}</div>
+        <div class="tlmeta"><span class="kindbadge k-jur">${e.kind}</span><span class="tlwho">${e.id||''}</span><span class="tlprov" style="color:${p.c}">● ${p.label}</span></div>
+      </div>`;
     }else{
       const col=TYPECOL[e.f]||'#888', p=PROV[e.prov];
       html+=`<div class="tlitem" data-f="${e.f}"><span class="tldot" style="background:${col}"></span>
