@@ -24,6 +24,7 @@ from backend.models import Loi, Noeud, Cluster, Provenance
 PISTE_BASE = os.environ.get("PISTE_BASE", "https://api.piste.gouv.fr/dila/legifrance/lf-engine-app")
 PISTE_OAUTH = "https://oauth.piste.gouv.fr/api/oauth/token"
 HAL_API = "https://api.archives-ouvertes.fr/search/"
+PARLEMENT_API = os.environ.get("PARLEMENT_API", "https://parlement.tricoteuses.fr")
 
 
 class PisteError(RuntimeError):
@@ -163,10 +164,40 @@ class ReferenceAdapter(ConnectorAdapter):
         return out
 
     def cluster_parlement(self, loi: Loi, mots_cles: list[str]) -> list[Noeud]:
-        # TODO(24h) : brancher l'open data questions écrites AN + Sénat.
-        # Pattern validé côté Silexia : recherche FTS sur mots-clés thématiques
-        # (sensible aux termes → utiliser l'expansion, pas le n° de loi brut).
-        return []
+        # Questions écrites AN + Sénat via l'API OUVERTE parlement.tricoteuses.fr
+        # (open data, sans clé). Recherche plein texte sur les mots-clés
+        # thématiques de la loi (sensible aux termes → alimentés par l'expansion,
+        # pas le n° de loi brut).
+        q = " ".join(mots_cles).strip() or loi.titre
+        if not q:
+            return []
+        try:
+            r = self._http.get(
+                f"{PARLEMENT_API}/questions/json",
+                params={"search": q, "type": "QE", "perPage": 8},
+            )
+            r.raise_for_status()
+            items = r.json().get("data", [])
+        except (httpx.HTTPError, ValueError):
+            return []  # source indisponible → cluster parlement vide, jamais bloquant
+        out: list[Noeud] = []
+        for h in items:
+            uid = h.get("uid", "")
+            if not uid:  # traçabilité : pas d'identifiant officiel → on écarte
+                continue
+            cham = (h.get("chambre") or "").upper()
+            out.append(Noeud(
+                cluster=Cluster.PARLEMENT,
+                titre=h.get("titre") or _strip_html(h.get("texteQuestion", ""))[:90],
+                identifiant=uid,
+                provenance=Provenance.QP,
+                kind="Question écrite " + {"AN": "AN", "SN": "Sénat"}.get(cham, cham),
+                who=_question_auteur(h.get("texteQuestion", "")),
+                date=_fmt_date(h.get("dateDepot", "")),
+                note=h.get("libelleCloture", ""),
+                url=_question_url(cham, h.get("legislature"), h.get("numero")),
+            ))
+        return out
 
     def cluster_connexes(self, loi: Loi) -> list[Noeud]:
         # TODO(24h) : lois/codes/ordonnances citées dans le dispositif.
@@ -215,6 +246,33 @@ def _fmt_date(v) -> str:
 
 import re as _re
 _re_iso = _re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
+_tag_re = _re.compile(r"<[^>]+>")
+
+
+def _strip_html(v):
+    """PISTE surligne le terme cherché avec des <mark>…</mark> → on nettoie le HTML."""
+    return _tag_re.sub("", v).strip() if isinstance(v, str) else v
+
+
+_auteur_re = _re.compile(
+    r"^\s*((?:M\.|Mme|MM\.|Mlle)\s+.{2,60}?)\s+"
+    r"(?:interroge|attire|appelle|demande|rappelle|souhaite|expose|alerte|interpelle|saisit|signale)"
+)
+
+
+def _question_auteur(texte: str) -> str:
+    """Extrait l'auteur au début du texte d'une question (« Mme X interroge… »)."""
+    if not isinstance(texte, str):
+        return ""
+    m = _auteur_re.match(_strip_html(texte))
+    return m.group(1).strip() if m else ""
+
+
+def _question_url(chambre: str, legislature, numero) -> str:
+    """Permalien officiel — construit seulement quand on en est sûr (AN)."""
+    if chambre == "AN" and legislature and numero:
+        return f"https://questions.assemblee-nationale.fr/q{legislature}/{legislature}-{numero}QE.htm"
+    return ""  # Sénat : format d'UID non garanti ici → pas de lien plutôt qu'un lien cassé
 
 
 def _legi_url(identifiant: str) -> str:
@@ -236,7 +294,7 @@ def _normalize_piste_hits(data: dict) -> list[dict]:
         identifiant = _pick(t, "id") or _pick(res, "id")
         out.append({
             "id": identifiant,
-            "title": _pick(t, "title") or _pick(res, "title"),
+            "title": _strip_html(_pick(t, "title") or _pick(res, "title")),
             "nor": _pick(res, "nor"),
             "num": _pick(res, "num", "numero"),
             # dates : LODA (signature/publication) vs jurisprudence (décision)
