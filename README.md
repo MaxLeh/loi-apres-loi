@@ -1,5 +1,7 @@
 # La loi après la loi
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 > Relier chaque texte voté à sa vie réglementaire et jurisprudentielle.
 > Défi du Hackathon Assemblée nationale 2026 — *« Le parcours de la loi : vers une IA de confiance »*.
 
