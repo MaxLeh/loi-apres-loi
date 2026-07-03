@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silexia · Fiche-loi enrichie — maquette adaptative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ee;--surface:#fff;--elevated:#efece3;--deep:#15203f;
+  --border:#e6e2d6;--border2:#d6d0c0;
+  --ink:#1a1814;--ink2:#56524a;--muted:#928c81;
+  --navy:#1e2d5e;--navy-l:#e7ecf6;--gold:#b0892f;--gold-s:#f3ead0;
+  --green:#1f7a4d;--green-b:#dcf0e4;
+  --blue:#1e40af;--blue-b:#dde7fb;
+  --orange:#a3540f;--orange-b:#fbe6d2;
+  --purple:#5b3aa6;--purple-b:#ece3fb;
+  --red:#9a2222;--red-b:#fbe0de;
+  --teal:#0d6b6b;--teal-b:#d3eeee;
+  --fd:'Playfair Display',Georgia,serif;--fb:'Source Serif 4',Georgia,serif;--fm:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.topbar{background:var(--deep);color:#fff;padding:11px 0}
+.topbar .row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.tb-brand{display:flex;align-items:center;gap:11px}
+.tb-logo{width:30px;height:30px;border:1.4px solid var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;color:var(--gold);font-size:15px}
+.tb-brand b{font-family:var(--fd);font-size:15px}
+.tb-brand span{font-size:11.5px;color:#aeb7d0;letter-spacing:.03em}
+.breadcrumb{font-family:var(--fm);font-size:11px;color:#aeb7d0}
+.breadcrumb b{color:#e9c878}
+
+/* law selector */
+.lawbar{background:#101a33;border-bottom:1px solid rgba(255,255,255,.07);padding:13px 0}
+.lawbar .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.lawbar .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a96b8;font-weight:600}
+.lawpills{display:flex;gap:9px;flex-wrap:wrap}
+.lawpill{font-family:var(--fb);font-size:13px;font-weight:600;color:#c4cce0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);padding:8px 15px;border-radius:10px;cursor:pointer;transition:.15s;display:flex;flex-direction:column;gap:1px;line-height:1.25}
+.lawpill .pl-n{font-size:13px}
+.lawpill .pl-d{font-size:10.5px;color:#8a96b8;font-family:var(--fm);letter-spacing:.02em}
+.lawpill:hover{background:rgba(255,255,255,.1);color:#fff}
+.lawpill.active{background:var(--gold);border-color:var(--gold);color:#231a07}
+.lawpill.active .pl-d{color:#5c4715}
+
+/* fiche header */
+.fiche{background:linear-gradient(165deg,#15203f 0%,#1e2d5e 55%,#26407a 100%);color:#fff;padding:30px 0 26px;position:relative;overflow:hidden}
+.fiche::after{content:"";position:absolute;right:-90px;top:-90px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(176,137,47,.20),transparent 70%)}
+.fiche .inner{position:relative;z-index:2}
+.statusline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.04em;padding:5px 11px;border-radius:999px;text-transform:uppercase}
+.pill.vig{background:var(--green-b);color:var(--green)}
+.pill.nat{background:rgba(255,255,255,.12);color:#dfe5f3;border:1px solid rgba(255,255,255,.18)}
+.pill.dom{background:var(--gold-s);color:#8a6a1e}
+.fiche h1{font-family:var(--fd);font-weight:600;font-size:30px;line-height:1.18;max-width:840px;transition:.2s}
+.fiche .subt{color:#cdd6ec;margin-top:8px;font-size:15px;max-width:740px}
+.idgrid{display:grid;grid-template-columns:repeat(4,auto);gap:10px 34px;margin-top:20px}
+.idcell .k{font-size:11px;color:#9fabca;letter-spacing:.04em;text-transform:uppercase}
+.idcell .v{font-family:var(--fm);font-size:13.5px;color:#fff;margin-top:3px;font-weight:500}
+.idcell .v.gold{color:#e9c878}
+
+/* measures strip */
+.measures{background:var(--surface);border-bottom:1px solid var(--border)}
+.measures .row{display:flex;gap:0;overflow-x:auto}
+.measure{flex:1 0 0;min-width:172px;padding:16px 20px;border-right:1px solid var(--border)}
+.measure:last-child{border-right:none}
+.measure .mn{font-family:var(--fd);font-weight:700;font-size:21px;color:var(--navy);line-height:1.15}
+.measure .mn span{font-size:13px;color:var(--gold);font-weight:600;font-family:var(--fb)}
+.measure .ml{font-size:12px;color:var(--ink2);margin-top:3px;line-height:1.35}
+
+/* layout */
+main{padding:30px 0 60px}
+.cols{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start}
+.sectitle{font-family:var(--fd);font-weight:600;font-size:20px;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.secsub{color:var(--ink2);font-size:14px;margin-bottom:16px;max-width:640px}
+
+/* graph */
+.graphcard{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 18px 8px;margin-bottom:22px}
+.graphcard .gt{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px}
+svg.constellation{width:100%;height:auto;display:block}
+.node-c{cursor:pointer;transition:.2s}
+.node-c:hover{opacity:.88}
+.node-bub{transition:.2s}
+.cl-link{stroke:var(--border2);stroke-width:1.4;stroke-dasharray:3 4}
+.legend-mini{display:flex;flex-wrap:wrap;gap:12px;padding:6px 4px 4px;border-top:1px solid var(--border);margin-top:4px}
+.legend-mini .li{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink2)}
+.legend-mini .sw{width:10px;height:10px;border-radius:3px}
+
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.fchip{font-family:var(--fb);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--border2);background:var(--surface);color:var(--ink2);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+.fchip .ct{font-family:var(--fm);font-size:10.5px;background:var(--elevated);padding:1px 6px;border-radius:6px}
+.fchip:hover{border-color:var(--navy);color:var(--navy)}
+.fchip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fchip.active .ct{background:rgba(255,255,255,.2);color:#fff}
+.search{margin-left:auto;position:relative}
+.search input{font-family:var(--fb);font-size:13.5px;padding:8px 13px 8px 32px;border:1px solid var(--border2);border-radius:9px;background:var(--surface);width:210px;color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--navy)}
+.search .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px}
+
+/* related list */
+.rel{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:0;overflow:hidden}
+.relitem{display:flex;gap:14px;padding:15px 18px;border-bottom:1px solid var(--border);transition:.13s}
+.relitem:last-child{border-bottom:none}
+.relitem:hover{background:#fbfaf6}
+.relitem.hidden{display:none}
+.kindbadge{flex:0 0 auto;align-self:flex-start;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:4px 9px;border-radius:7px;white-space:nowrap;margin-top:2px}
+.k-app{background:var(--blue-b);color:var(--blue)}
+.k-doc{background:var(--gold-s);color:#8a6a1e}
+.k-jur{background:var(--purple-b);color:var(--purple)}
+.k-con{background:var(--teal-b);color:var(--teal)}
+.k-par{background:var(--orange-b);color:var(--orange)}
+.relbody{flex:1;min-width:0}
+.relbody .rt{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.34}
+.relbody .rmeta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:6px}
+.relbody .rmeta .who{font-size:12px;color:var(--navy);font-weight:600}
+.relbody .rmeta .dt{font-family:var(--fm);font-size:11px;color:var(--muted)}
+.relbody .rid{font-family:var(--fm);font-size:10.5px;color:var(--gold);margin-top:5px;word-break:break-all}
+.relbody .rnote{font-size:12.5px;color:var(--ink2);margin-top:5px;font-style:italic}
+.prov{flex:0 0 auto;align-self:center;font-family:var(--fm);font-size:10px;color:var(--muted);text-align:right}
+.prov .src{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:6px;background:var(--elevated);color:var(--ink2);font-weight:600;white-space:nowrap}
+.prov .src .pd{width:6px;height:6px;border-radius:50%}
+
+/* right rail */
+.rail{position:sticky;top:18px;display:flex;flex-direction:column;gap:16px}
+.railcard{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:18px}
+.railcard h4{font-family:var(--fd);font-weight:600;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.toc{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc li{font-size:13px;color:var(--ink);padding:8px 10px;border-radius:8px;display:flex;gap:9px;align-items:baseline}
+.toc li:nth-child(odd){background:var(--bg)}
+.toc li .art{font-family:var(--fm);font-size:11px;color:var(--gold);font-weight:600;flex:0 0 auto}
+.minigraph{display:flex;flex-direction:column;gap:9px}
+.mg{display:flex;align-items:center;gap:10px}
+.mg .lbl{font-size:12.5px;color:var(--ink2);flex:0 0 118px}
+.mg .bar{flex:1;height:8px;border-radius:5px;background:var(--elevated);overflow:hidden}
+.mg .bar i{display:block;height:100%;border-radius:5px;transition:.3s}
+.mg .num{font-family:var(--fm);font-size:12px;color:var(--ink);font-weight:600;flex:0 0 auto;width:18px;text-align:right}
+.railnote{font-size:11.5px;color:var(--muted);font-style:italic;margin-top:4px}
+.cta{background:linear-gradient(135deg,#15203f,#26407a);color:#fff;border-radius:13px;padding:18px}
+.cta h4{font-family:var(--fd);font-size:16px;margin-bottom:7px}
+.cta p{font-size:13px;color:#cdd6ec}
+.cta .b{margin-top:12px;display:inline-block;background:var(--gold);color:#231a07;font-weight:600;font-size:13px;padding:9px 15px;border-radius:9px}
+
+.hidden{display:none!important}
+.viewtoggle{display:inline-flex;background:var(--elevated);border:1px solid var(--border);border-radius:11px;padding:3px;gap:3px;margin-bottom:14px}
+.vt{font-family:var(--fb);font-size:13.5px;font-weight:600;color:var(--ink2);padding:8px 17px;border-radius:9px;cursor:pointer;border:none;background:transparent;transition:.15s}
+.vt.active{background:var(--surface);color:var(--navy);box-shadow:0 1px 2px rgba(0,0,0,.07)}
+.timelinecard{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 22px 14px;margin-bottom:22px}
+.tlphase{display:flex;align-items:center;gap:12px;margin:2px 0 6px;padding:11px 14px;border-radius:11px;background:var(--bg);border:1px dashed var(--border2)}
+.tlphase .pi{font-size:17px;color:var(--muted)}
+.tlphase .pt{font-size:13px;font-weight:700;color:var(--ink)}
+.tlphase .ps{font-size:11.5px;color:var(--muted);font-family:var(--fm);margin-top:1px}
+.tlconn{height:14px;border-left:2px dashed var(--border2);margin-left:9px}
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:8px;top:4px;bottom:8px;width:2px;background:var(--border2)}
+.tlitem{position:relative;padding:9px 0 9px 14px}
+.tlitem .tldot{position:absolute;left:-22px;top:13px;width:12px;height:12px;border-radius:50%;border:2.5px solid var(--surface);box-shadow:0 0 0 1px var(--border2)}
+.tlitem .tldate{font-family:var(--fm);font-size:11px;color:var(--muted);font-weight:600}
+.tlitem .tltitle{font-size:14px;font-weight:600;color:var(--ink);margin-top:2px;line-height:1.32}
+.tlitem .tlmeta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.tlitem .tlwho{font-size:11.5px;color:var(--navy);font-weight:600}
+.tlitem .tlprov{font-family:var(--fm);font-size:10px}
+.tlmile{position:relative;padding:12px 0 12px 14px;margin:4px 0}
+.tlmile .tldot{position:absolute;left:-26px;top:16px;width:20px;height:20px;border-radius:50%;background:var(--gold);border:3px solid var(--surface);box-shadow:0 0 0 2px var(--gold)}
+.tlmile .mlbox{background:linear-gradient(120deg,var(--gold-s),#fbf6e8);border:1px solid #e8d9ad;border-radius:11px;padding:12px 15px}
+.tlmile .mlt{font-family:var(--fd);font-weight:700;font-size:15px;color:#7a5e1c}
+.tlmile .mld{font-size:12px;color:#6e5a2c;margin-top:2px}
+.socle{background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:13px 16px;margin-top:14px}
+.socle .sh{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+.socle .si{font-size:12.5px;color:var(--ink2);padding:4px 0;display:flex;gap:8px;align-items:baseline}
+.socle .si b{color:var(--ink);font-weight:600}
+footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font-size:12px}
+.footrow{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.note{font-size:11.5px;color:var(--muted);font-style:italic;margin-top:14px}
+
+@media(max-width:920px){
+  .cols{grid-template-columns:1fr}
+  .rail{position:static}
+  .idgrid{grid-template-columns:repeat(2,auto);gap:14px 28px}
+  .fiche h1{font-size:24px}
+  .search{margin-left:0;width:100%}.search input{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="tb-brand">
+        <div class="tb-logo">S</div>
+        <div><b>Silexia</b> &nbsp;<span>Fiche-loi enrichie · maquette adaptative</span></div>
+      </div>
+      <div class="breadcrumb">Légifrance &nbsp;›&nbsp; LODA &nbsp;›&nbsp; <b id="bc">—</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- LAW SELECTOR -->
+<div class="lawbar">
+  <div class="wrap">
+    <div class="row">
+      <span class="lbl">Loi affichée</span>
+      <div class="lawpills" id="lawpills"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FICHE HEADER -->
+<section class="fiche">
+  <div class="wrap inner">
+    <div class="statusline">
+      <span class="pill vig"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>En vigueur</span>
+      <span class="pill nat" id="f-nat">Nature · LOI</span>
+      <span class="pill dom" id="f-dom">—</span>
+    </div>
+    <h1 id="f-title">—</h1>
+    <p class="subt" id="f-subt">—</p>
+    <div class="idgrid">
+      <div class="idcell"><div class="k">Identifiant Légifrance</div><div class="v" id="f-legitext">—</div></div>
+      <div class="idcell"><div class="k">NOR</div><div class="v gold" id="f-nor">—</div></div>
+      <div class="idcell"><div class="k">Signature</div><div class="v" id="f-sig">—</div></div>
+      <div class="idcell"><div class="k">Publication JO</div><div class="v" id="f-pub">—</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY MEASURES -->
+<section class="measures">
+  <div class="wrap"><div class="row" id="measures"></div></div>
+</section>
+
+<main>
+<div class="wrap">
+<div class="cols">
+
+  <!-- LEFT -->
+  <div>
+    <div class="sectitle">◈ Vues de la loi</div>
+    <p class="secsub">Deux représentations des mêmes données : la <b>constellation</b> (les relations entre textes) et le <b>parcours</b> (la chronologie, du dépôt à la jurisprudence). Filtres et recherche s'appliquent aux deux.</p>
+
+    <div class="viewtoggle">
+      <button class="vt active" data-view="graph">◈ Constellation</button>
+      <button class="vt" data-view="timeline">↗ Parcours</button>
+    </div>
+
+    <div id="viewGraph">
+    <div class="graphcard">
+      <div class="gt">Vue relationnelle — <b id="total-label">0 textes rattachés</b></div>
+      <svg class="constellation" viewBox="0 0 760 330" role="img" aria-label="Constellation des textes liés">
+        <line class="cl-link" x1="380" y1="165" x2="180" y2="78"/>
+        <line class="cl-link" x1="380" y1="165" x2="585" y2="74"/>
+        <line class="cl-link" x1="380" y1="165" x2="655" y2="205"/>
+        <line class="cl-link" x1="380" y1="165" x2="380" y2="292"/>
+        <line class="cl-link" x1="380" y1="165" x2="112" y2="208"/>
+        <!-- center -->
+        <circle cx="380" cy="165" r="56" fill="#1e2d5e"/>
+        <circle cx="380" cy="165" r="56" fill="none" stroke="#b0892f" stroke-width="2"/>
+        <text x="380" y="158" text-anchor="middle" fill="#fff" font-family="JetBrains Mono" font-size="11" font-weight="600">LOI</text>
+        <text id="c-short" x="380" y="174" text-anchor="middle" fill="#e9c878" font-family="Playfair Display" font-size="15" font-weight="700">—</text>
+        <text id="c-date" x="380" y="189" text-anchor="middle" fill="#aeb7d0" font-family="JetBrains Mono" font-size="8.5">—</text>
+        <!-- application -->
+        <g class="node-c" data-filter="app" id="g-app">
+          <circle class="node-bub" cx="180" cy="78" r="42" fill="#dde7fb" stroke="#1e40af" stroke-width="1.5"/>
+          <text id="cnt-app" x="180" y="72" text-anchor="middle" fill="#1e40af" font-family="Playfair Display" font-size="20" font-weight="700">0</text>
+          <text x="180" y="88" text-anchor="middle" fill="#1e40af" font-family="JetBrains Mono" font-size="8.5" font-weight="600">APPLICATION</text>
+        </g>
+        <!-- connexes -->
+        <g class="node-c" data-filter="con" id="g-con">
+          <circle class="node-bub" cx="585" cy="74" r="36" fill="#d3eeee" stroke="#0d6b6b" stroke-width="1.5"/>
+          <text id="cnt-con" x="585" y="69" text-anchor="middle" fill="#0d6b6b" font-family="Playfair Display" font-size="18" font-weight="700">0</text>
+          <text x="585" y="84" text-anchor="middle" fill="#0d6b6b" font-family="JetBrains Mono" font-size="8" font-weight="600">CONNEXES</text>
+        </g>
+        <!-- doctrine -->
+        <g class="node-c" data-filter="doc" id="g-doc">
+          <circle class="node-bub" cx="655" cy="205" r="33" fill="#f3ead0" stroke="#b0892f" stroke-width="1.5"/>
+          <text id="cnt-doc" x="655" y="200" text-anchor="middle" fill="#8a6a1e" font-family="Playfair Display" font-size="17" font-weight="700">0</text>
+          <text x="655" y="215" text-anchor="middle" fill="#8a6a1e" font-family="JetBrains Mono" font-size="7.5" font-weight="600">DOCTRINE</text>
+        </g>
+        <!-- jurisprudence -->
+        <g class="node-c" data-filter="jur" id="g-jur">
+          <circle class="node-bub" cx="380" cy="292" r="30" fill="#ece3fb" stroke="#5b3aa6" stroke-width="1.5"/>
+          <text id="cnt-jur" x="380" y="288" text-anchor="middle" fill="#5b3aa6" font-family="Playfair Display" font-size="16" font-weight="700">0</text>
+          <text x="380" y="302" text-anchor="middle" fill="#5b3aa6" font-family="JetBrains Mono" font-size="7" font-weight="600">JURISPR.</text>
+        </g>
+        <!-- presse -->
+        <g class="node-c" data-filter="par" id="g-par">
+          <circle class="node-bub" cx="112" cy="208" r="34" fill="#fbe6d2" stroke="#a3540f" stroke-width="1.5"/>
+          <text id="cnt-par" x="112" y="203" text-anchor="middle" fill="#a3540f" font-family="Playfair Display" font-size="17" font-weight="700">0</text>
+          <text x="112" y="218" text-anchor="middle" fill="#a3540f" font-family="JetBrains Mono" font-size="7.5" font-weight="600">PARLEM.</text>
+        </g>
+      </svg>
+      <div class="legend-mini">
+        <div class="li"><span class="sw" style="background:#1e40af"></span>Décrets & arrêtés d'application</div>
+        <div class="li"><span class="sw" style="background:#0d6b6b"></span>Textes connexes / visés</div>
+        <div class="li"><span class="sw" style="background:#b0892f"></span>Doctrine & blogs</div>
+        <div class="li"><span class="sw" style="background:#5b3aa6"></span>Jurisprudence & contrôle</div>
+        <div class="li"><span class="sw" style="background:#a3540f"></span>Travaux parlementaires & presse</div>
+      </div>
+    </div>
+    </div><!-- /viewGraph -->
+
+    <div id="viewTimeline" style="display:none">
+      <div class="timelinecard">
+        <div class="gt" style="font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px">Parcours chronologique — du dépôt à la jurisprudence</div>
+        <div id="timeline"></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips" id="chips"></div>
+      <div class="search"><span class="si">⌕</span><input id="q" type="text" placeholder="Filtrer (décret, dotation…)"></div>
+    </div>
+
+    <div class="rel" id="rel"></div>
+    <p class="note">Maquette adaptative. Le sélecteur en haut reconfigure entièrement la fiche à partir des données de chaque loi. Les identifiants Légifrance (LEGITEXT), NOR et n° de décision sont réels, remontés par les connecteurs MCP Silexia ; la couche doctrine/presse provient de Juriveille.</p>
+  </div>
+
+  <!-- RIGHT RAIL -->
+  <aside class="rail">
+    <div class="railcard">
+      <h4>◷ Points clés</h4>
+      <ul class="toc" id="toc"></ul>
+      <p class="railnote" id="toc-note"></p>
+    </div>
+    <div class="railcard">
+      <h4>◴ Répartition des textes liés</h4>
+      <div class="minigraph" id="minigraph"></div>
+      <p class="railnote" id="mg-note"></p>
+    </div>
+    <div class="cta">
+      <h4>Veille active sur ce texte</h4>
+      <p>Recevez une alerte dès qu'un nouveau décret, arrêté, commentaire ou arrêt vient se rattacher à cette loi.</p>
+      <span class="b" id="cta-b">+ Suivre cette loi</span>
+    </div>
+  </aside>
+
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footrow">
+      <div><b>Silexia</b> · Fiche-loi enrichie — maquette adaptative (sources primaires + veille)</div>
+      <div style="font-family:var(--fm)">Généré le 26/06/2026</div>
+    </div>
+    <p class="note">Maquette de démonstration. Données réelles issues des connecteurs MCP Silexia (Légifrance / Conseil d'État) et de l'environnement Juriveille (juin 2026). Le contrôle de constitutionnalité, lorsqu'il existe, figure au titre des textes rattachés ; sa référence est indexée via le connecteur dédié.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- DATA : une entrée par loi ---------- */
+const PROV={
+  legifrance:{label:'Légifrance',c:'#1e40af'},
+  juriveille:{label:'Juriveille',c:'#b0892f'},
+  constit:{label:'Cons. constit.',c:'#5b3aa6'},
+  cetat:{label:"Conseil d'État",c:'#0d6b6b'},
+  judilibre:{label:'Judilibre',c:'#b45309'},
+  cnil:{label:'CNIL',c:'#be123c'},
+  qp:{label:'Quest. parl.',c:'#4338ca'},
+  bofip:{label:'BOFiP',c:'#0f766e'},
+  eurlex:{label:'EUR-Lex',c:'#1d4ed8'},
+  hal:{label:'HAL (doctrine)',c:'#7c2d12'}
+};
+
+const LAWS={
+  /* ============ LIBERTE DE LA PRESSE - 29 juillet 1881 ============ */
+  presse:{
+    pillName:"Liberté de la presse", pillDesc:"presse · 1881",
+    short:"1881", cdate:"29 juil. 1881",
+    title:"Loi du 29 juillet 1881 sur la liberté de la presse",
+    subt:"Socle de la liberté d'expression et d'information : régit les délits de presse (diffamation, injure, provocation), le droit de réponse et la responsabilité « en cascade ». Toujours en vigueur, abondamment modifiée depuis 145 ans.",
+    dom:"Libertés publiques · presse · droit pénal",
+    legitext:"LEGITEXT000006070722", nor:"LGFX0877119L", sig:"29/07/1881", pub:"30/07/1881",
+    measures:[
+      {n:"145",u:" ans",l:"en vigueur — plus d'un siècle de sédimentation normative"},
+      {n:"34 952",u:" arrêts",l:"décisions de la Cour de cassation visant la loi (Judilibre)"},
+      {n:"2029",u:"",l:"art. 45 déjà modifié, en vigueur différée (« tribunaux délictuels »)"},
+      {n:"14",u:" textes liés",l:"application, connexes, doctrine, jurisprudence, parlement"}
+    ],
+    toc:[
+      ["Art. 1","Principe : l'imprimerie et la librairie sont libres"],
+      ["Art. 29","Définition de la diffamation et de l'injure"],
+      ["Art. 32","Peines de la diffamation ; circonstances aggravantes"],
+      ["Art. 42","Responsabilité « en cascade » (directeur, auteur, imprimeur)"],
+      ["Art. 45","Compétence — « tribunaux délictuels » à compter du 01/01/2029"],
+      ["Art. 53","Formalisme de la citation — prescription trimestrielle"]
+    ],
+    tocNote:"Articles pivots de la loi. La couche pénale (diffamation, injure, provocation) concentre l'essentiel du contentieux.",
+    mgNote:"Loi séculaire : la strate jurisprudentielle est massive et continue de s'enrichir en continu (Judilibre / Cour de cassation).",
+    related:[
+      /* ---- APPLICATION -------------------------------------------------- */
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-337 du 30 avril 2026 relatif aux procédures engagées contre des personnes en raison de leur participation au débat public (transposition de la directive « procédures bâillons »)",who:"Min. Justice / Légifrance",date:"05/05/2026",id:"JORFTEXT000054026906 · NOR JUSC2605045D",prov:"legifrance",note:"Insère l'art. 499-1 CPP et un rejet accéléré des demandes manifestement infondées — protège les journalistes poursuivis sur le fondement de la loi de 1881."},
+      {f:'app',kind:'Modification',badge:'k-app',title:"Loi de 1881, art. 45 — nouvelle rédaction en vigueur différée : « tribunaux correctionnels » → « tribunaux délictuels »",who:"Légifrance",date:"01/01/2029",id:"LEGIARTI000052847326 — VIGUEUR_DIFF",prov:"legifrance",note:"Effet d'une réforme de procédure pénale postérieure : illustration directe de « la loi après la loi »."},
+      /* ---- CONNEXES (droit interne + européen) -------------------------- */
+      {f:'con',kind:'Règlement UE',badge:'k-con',title:"Règlement (UE) 2024/1083 établissant un cadre commun pour les services de médias dans le marché intérieur (European Media Freedom Act)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024R1083",prov:"eurlex",note:"Cadre européen sur le pluralisme et la protection des sources — appelle une adaptation du droit interne de la presse."},
+      {f:'con',kind:'Directive UE',badge:'k-con',title:"Directive (UE) 2024/1069 du 11 avril 2024 sur la protection des personnes participant au débat public (procédures bâillons / anti-SLAPP)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024L1069 — transposée par le décret 2026-337",prov:"eurlex",note:"Source directe du décret d'application ci-dessus."},
+      {f:'con',kind:'PPL adoptée',badge:'k-con',title:"Proposition de loi Erwan Balanant visant à renforcer l'effectivité des droits voisins de la presse — adoptée par l'Assemblée nationale",who:"Assemblée nationale",date:"26/03/2026",id:"PPL droits voisins — 17e législature",prov:"qp",note:"Volet économique de l'écosystème « presse », cité en réponse à la QAG Sénat du 09/04/2026."},
+      /* ---- JURISPRUDENCE (échantillon sur 34 952) ---------------------- */
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 27 mai 2026, n° 25-81.031 — cassation (art. 29 al. 1 de la loi de 1881)",who:"Cour de cassation / Judilibre",date:"27/05/2026",id:"ECLI:FR:CCASS:2026:CR00690",prov:"judilibre",note:"Arrêt récent — cassation sur le terrain de la diffamation."},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 10 septembre 2024, n° 23-83.138 — rejet (art. 29 et 32, diffamation)",who:"Cour de cassation / Judilibre",date:"10/09/2024",id:"ECLI:FR:CCASS:2024:CR00923",prov:"judilibre",note:""},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 10 septembre 2024, n° 23-83.154 — rejet (art. 53, formalisme de la citation)",who:"Cour de cassation / Judilibre",date:"10/09/2024",id:"ECLI:FR:CCASS:2024:CR00933",prov:"judilibre",note:"Sur l'art. 53 — écho direct à la doctrine de S. Mercoli (ci-dessous)."},
+      /* ---- DOCTRINE ---------------------------------------------------- */
+      {f:'doc',kind:'Article',badge:'k-doc',title:"L'article 53 de la loi de 1881 sur la liberté de la presse et la Cour de cassation : quel droit transitoire en droit positif ?",who:"S. Mercoli — HAL",date:"2017",id:"hal-02562864",prov:"hal",note:"Éclaire l'exigence de l'art. 53 au cœur des arrêts de cassation ci-dessus."},
+      {f:'doc',kind:'Communication',badge:'k-doc',title:"Le délit de presse entre répression nécessaire et liberté affirmée (1881-1914)",who:"J.-F. Tanguy — HAL",date:"2006",id:"halshs-00493743",prov:"hal",note:"Perspective historique sur la genèse du régime des délits de presse."},
+      {f:'doc',kind:'Article',badge:'k-doc',title:"La chambre criminelle, la Convention européenne des droits de l'homme et la loi sur la presse",who:"P. Wachsmann — HAL",date:"2001",id:"halshs-02206287",prov:"hal",note:"Articulation entre la loi de 1881 et l'article 10 de la CEDH."},
+      /* ---- PARLEMENT & PRESSE ------------------------------------------ */
+      {f:'par',kind:'QAG Sénat',badge:'k-par',title:"Défense des médias traditionnels — mise en conformité avec le règlement européen sur la liberté des médias et transposition de la directive « procédures bâillons »",who:"Sénat — S. Robert (SER, Ille-et-Vilaine)",date:"09/04/2026",id:"SEQ26040786G — RÉPONDUE (min. Culture)",prov:"qp",note:"Réponse ministérielle : projet de loi post-États généraux de l'information toujours attendu."},
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Procédures-bâillon : révision à la hausse des sanctions et protection des lanceurs d'alerte et des médias",who:"Assemblée nationale — D. Potier (SOC)",date:"30/06/2026",id:"QANR5L17QE16457 — en attente de réponse",prov:"qp",note:"Juge la transposition par décret en-deçà de l'ambition initiale."},
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Transposition de la directive « procédures bâillons » : exclusion du domaine pénal (diffamation)",who:"Assemblée nationale — S. Taillé-Polian (ECOS)",date:"26/05/2026",id:"QANR5L17QE15420 — en attente de réponse",prov:"qp",note:"Regrette que les diffamations abusives restent hors du dispositif protecteur."}
+    ]
+  },
+  /* ============ LFI 2026 ============ */
+  lfi2026:{
+    pillName:"LFI 2026", pillDesc:"finances · 2026-103",
+    short:"2026-103", cdate:"19 fév. 2026",
+    title:"LOI n° 2026-103 du 19 février 2026 de finances pour 2026",
+    subt:"Loi de finances initiale. Porte notamment le gel de la DGF, le dispositif de lissage conjoncturel (DILICO), l'abondement du fonds de sauvegarde des départements et la hausse de la cotisation CNRACL.",
+    dom:"Finances publiques · collectivités",
+    legitext:"LEGITEXT000053511213", nor:"CPPX2524517L", sig:"19/02/2026", pub:"20/02/2026",
+    measures:[
+      {n:"27,4",u:" Md€",l:"DGF gelée, non indexée sur l'inflation"},
+      {n:"140",u:" M€",l:"DILICO à la charge des départements"},
+      {n:"600",u:" M€",l:"Abondement du fonds de sauvegarde des départements"},
+      {n:"+1,2",u:" Md€",l:"Surcoût CNRACL pour les budgets locaux"}
+    ],
+    toc:[
+      ["DGF","Gel de la dotation globale de fonctionnement à 27,4 Md€"],
+      ["DILICO","Lissage conjoncturel — 740 M€ (dont 140 M€ départements)"],
+      ["FDS","Fonds de sauvegarde des départements abondé de 600 M€"],
+      ["CNRACL","Hausse du taux de cotisation employeur (+3 pts étalés)"],
+      ["Fonds vert","Crédits ramenés à ~1,91 Md€ (−16 %)"],
+      ["Élu local","59 M€ fléchés vers le statut de l'élu local"]
+    ],
+    tocNote:"Dispositions intéressant le bloc départemental — sourcées AMF / ADF / Banque des territoires.",
+    mgNote:"Loi récente : la couche jurisprudentielle s'enrichira via Judilibre & Conseil d'État.",
+    related:[
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-363 du 8 mai 2026 portant diverses mesures relatives aux dotations de l'État aux collectivités territoriales et à la péréquation des ressources fiscales",who:"DGCL / Légifrance",date:"10/05/2026",id:"LEGITEXT000054056404 · NOR ATDB2605441D",prov:"legifrance",note:"Texte d'application central pour le volet collectivités."},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 15 avril 2026 — attributions individuelles de DGF aux collectivités et EPCI au titre de 2026 (art. L. 1613-5-1 CGCT)",who:"DGCL / Légifrance",date:"12/05/2026",id:"LEGITEXT000054064339 · NOR ATDB2608826A",prov:"legifrance",note:""},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 11 mai 2026 — dotation « conditions d'exercice des mandats locaux » (art. L. 2335-1 CGCT)",who:"DGCL / Légifrance",date:"23/06/2026",id:"LEGITEXT000054299153 · NOR ATDB2609741A",prov:"legifrance",note:""},
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-108 du 19 février 2026 pris en application de l'article 44 de la loi organique relative aux lois de finances",who:"Ministère / Légifrance",date:"20/02/2026",id:"LEGITEXT000053510983 · NOR CPPB2604304D",prov:"legifrance",note:""},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 16 avril 2026 relatif à l'application de l'article 184 de la loi de finances pour 2026",who:"Ministère / Légifrance",date:"19/04/2026",id:"LEGITEXT000053913012 · NOR ECOR2605762A",prov:"legifrance",note:""},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 5 mars 2026 relatif à la gestion et au contrôle budgétaires de l'État jusqu'au 31 décembre 2026",who:"Direction du budget / Légifrance",date:"08/03/2026",id:"LEGITEXT000053638341 · NOR CPPB2606525A",prov:"legifrance",note:""},
+      {f:'con',kind:'Loi organique',badge:'k-con',title:"LOI organique n° 2001-692 du 1er août 2001 relative aux lois de finances (LOLF)",who:"Visa fondateur / Légifrance",date:"02/08/2001",id:"Texte de référence — cadre organique",prov:"legifrance",note:"Fondement constitutionnel de la loi de finances."},
+      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2025-1249 du 22 décembre 2025 portant création d'un statut de l'élu local",who:"Légifrance",date:"22/12/2025",id:"LEGITEXT000053145205 — financé par la LFI (59 M€)",prov:"legifrance",note:"La LFI 2026 fléche les crédits de la dotation élu local."},
+      {f:'con',kind:'Ordonnance',badge:'k-con',title:"Ordonnance n° 2026-468 du 10 juin 2026 portant extension outre-mer du statut de l'élu local",who:"Légifrance",date:"11/06/2026",id:"LEGITEXT000054230901 · NOR MOMO2610008R",prov:"legifrance",note:""},
+      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2025-127 du 14 février 2025 de finances pour 2025",who:"Légifrance",date:"14/02/2025",id:"LEGITEXT000051172988 — exercice antérieur",prov:"legifrance",note:"Référence pour l'évolution des dotations."},
+      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Notification des attributions individuelles de la dotation élu local",who:"Cabinet Landot & associés",date:"23/06/2026",id:"blog.landot-avocats.net",prov:"juriveille",note:"Commente directement l'arrêté du 11 mai 2026 ci-dessus."},
+      {f:'doc',kind:'Veille pro',badge:'k-doc',title:"Collectivités locales : un décret et un arrêté pris pour application de la loi de finances pour 2026",who:"Weka — fonction publique",date:"2026",id:"weka.fr — veille finances locales",prov:"juriveille",note:""},
+      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Pérennisation de la rupture conventionnelle dans la fonction publique",who:"CNB — Blogs des avocats",date:"19/06/2026",id:"consultation.avocat.fr",prov:"juriveille",note:""},
+      {f:'jur',kind:'Conseil constit.',badge:'k-jur',title:"Contrôle de constitutionnalité a priori de la loi de finances pour 2026 (décision DC)",who:"Conseil constitutionnel",date:"févr. 2026",id:"Référence indexée via le connecteur CONSTIT",prov:"constit",note:"Saisine de droit pour les lois de finances — décision rendue avant promulgation."},
+      {f:'jur',kind:'Juge administ.',badge:'k-jur',title:"FNP-DMTO : non-conformité de la clé de répartition relevée par le juge administratif (à l'origine de la clarification opérée par la LFI 2026)",who:"Conseil d'État / Légifrance",date:"contexte 2024-2026",id:"Jurisprudence liée — péréquation des DMTO",prov:"cetat",note:"Illustre la veille remontant à la source d'un article de la loi."},
+      {f:'par',kind:'Presse instit.',badge:'k-par',title:"Finances locales : l'AMF appelle l'État à « en finir avec les erreurs du passé »",who:"Maires Infos — AMF",date:"26/06/2026",id:"maire-info.com",prov:"juriveille",note:"Préparation du budget 2027 dans le prolongement de la LFI 2026."},
+      {f:'par',kind:'Presse instit.',badge:'k-par',title:"Assises des petites villes : revitalisation, réindustrialisation… et baisse des dotations",who:"Banque des territoires (Localtis)",date:"19/06/2026",id:"banquedesterritoires.fr",prov:"juriveille",note:""},
+      {f:'par',kind:'Travaux Sénat',badge:'k-par',title:"Le Sénat reprend l'idée d'un « 1 % ingénierie » sanctuarisé sur les dotations",who:"Banque des territoires (Localtis)",date:"19/06/2026",id:"rapport sénatorial — dotations",prov:"juriveille",note:""},
+      {f:'par',kind:'Presse locale',badge:'k-par',title:"« Face à la loi de finances, nous avons intérêt à faire bloc » : les intercommunalités de Bretagne",who:"Le Télégramme",date:"18/06/2026",id:"letelegramme.fr",prov:"juriveille",note:""},
+      {f:'doc',kind:'Doctrine BOFiP',badge:'k-doc',title:"BOI-IF-TFB-10-170-20 — exonération de taxe foncière des jeunes entreprises d'innovation (application des art. 23 et 40 de la LFI 2026)",who:"BOFiP — impots.gouv.fr",date:"15/04/2026",id:"BOI-IF-TFB-10-170-20",prov:"bofip",note:"Doctrine fiscale officielle, datée, appliquant directement la loi."},
+      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Hausse tendancielle des dépenses de fonctionnement des collectivités et ralentissement de leurs recettes",who:"Sénat (H. Maurey) — réponse min. du 11/02/2026",date:"11/02/2026",id:"Sénat QE — RÉPONDUE",prov:"qp",note:"Réponse ministérielle officielle éclairant l'esprit du texte."},
+      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Critères d'attribution de la dotation globale de fonctionnement des communes",who:"Sénat (F. Bonneau)",date:"21/05/2026",id:"Sénat QE — en attente de réponse",prov:"qp",note:""}
+    ]
+  },
+
+  /* ============ STATUT ÉLU LOCAL ============ */
+  elu:{
+    pillName:"Statut de l'élu local", pillDesc:"mandats · 2025-1249",
+    short:"2025-1249", cdate:"22 déc. 2025",
+    title:"LOI n° 2025-1249 du 22 décembre 2025 portant création d'un statut de l'élu local",
+    subt:"Crée un statut de l'élu local : revalorisation des indemnités, protection sociale, congés, formation et conditions d'exercice des mandats. Financement adossé à la loi de finances.",
+    dom:"Vie politique locale · mandats",
+    legitext:"LEGITEXT000053145205", nor:"TECX2407140L", sig:"22/12/2025", pub:"23/12/2025",
+    measures:[
+      {n:"59",u:" M€",l:"fléchés par la LFI 2026 vers la dotation élu local"},
+      {n:"3",u:" textes",l:"décret, arrêté et ordonnance d'application publiés"},
+      {n:"Mars",u:" 2026",l:"municipales — pic de contentieux attendu"},
+      {n:"10",u:" textes liés",l:"application, doctrine, connexes"}
+    ],
+    toc:[
+      ["Indemnités","Revalorisation et barèmes des indemnités de fonction"],
+      ["Protection","Protection sociale et congés des élus locaux"],
+      ["Formation","Droit individuel à la formation (DIF) des élus"],
+      ["Dotation","« Conditions d'exercice des mandats locaux » (L. 2335-1 CGCT)"],
+      ["Outre-mer","Extension par ordonnance du 10 juin 2026"]
+    ],
+    tocNote:"Mesures structurant l'exercice des mandats — utiles aux services aux élus et à la DRH.",
+    mgNote:"Loi récente : contentieux électoral et inéligibilités suivis en continu via le Conseil d'État.",
+    related:[
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-380 du 15 mai 2026 pris pour l'application des articles 3, 9 et 40 de la loi portant création d'un statut de l'élu local",who:"DGCL / Légifrance",date:"15/05/2026",id:"LEGITEXT000054111152 · NOR ATDB2605182D",prov:"legifrance",note:"Premier décret d'application des dispositions structurantes."},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 11 mai 2026 — attributions individuelles de la dotation « conditions d'exercice des mandats locaux » (art. L. 2335-1 CGCT)",who:"DGCL / Légifrance",date:"23/06/2026",id:"LEGITEXT000054299153 · NOR ATDB2609741A",prov:"legifrance",note:""},
+      {f:'app',kind:'Ordonnance',badge:'k-app',title:"Ordonnance n° 2026-468 du 10 juin 2026 — extension et adaptation outre-mer du statut de l'élu local",who:"Légifrance",date:"11/06/2026",id:"LEGITEXT000054230901 · NOR MOMO2610008R",prov:"legifrance",note:""},
+      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2026-103 du 19 février 2026 de finances pour 2026 — fléchage de 59 M€ vers la dotation élu local",who:"Légifrance",date:"19/02/2026",id:"LEGITEXT000053511213",prov:"legifrance",note:"Le financement du statut est porté par la loi de finances."},
+      {f:'con',kind:'Code',badge:'k-con',title:"Code général des collectivités territoriales — statut, indemnités et garanties des élus",who:"Légifrance — code consolidé",date:"à jour",id:"CGCT — articles modifiés par la loi",prov:"legifrance",note:"Version consolidée consultable à la date voulue."},
+      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Notification des attributions individuelles de la dotation élu local",who:"Cabinet Landot & associés",date:"23/06/2026",id:"blog.landot-avocats.net",prov:"juriveille",note:"Commente l'arrêté du 11 mai 2026 ci-dessus."},
+      {f:'par',kind:'Veille pro',badge:'k-par',title:"Municipales 2026 : quelle pratique du contentieux électoral et de sécurisation des scrutins ?",who:"Weka — fonction publique",date:"2026",id:"weka.fr",prov:"juriveille",note:""},
+      {f:'jur',kind:'Veille',badge:'k-jur',title:"Contentieux électoral & inéligibilités — décisions du Conseil d'État (veille active)",who:"Conseil d'État / Judilibre",date:"en continu",id:"Indexation au fil des décisions",prov:"cetat",note:"Couche jurisprudentielle en cours d'enrichissement (loi récente)."},
+      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Modalités d'application de la revalorisation des indemnités de fonction des maires issue de la loi n° 2025-1249",who:"Sénat (S. Noël)",date:"05/03/2026",id:"Sénat QE — en attente de réponse",prov:"qp",note:"Cite expressément la loi commentée — signal d'une difficulté d'application."},
+      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Revalorisation des indemnités de fonction des élus locaux par la loi du 22 décembre 2025",who:"Sénat (C. Pellevat)",date:"26/03/2026",id:"Sénat QE",prov:"qp",note:""}
+    ]
+  },
+
+  /* ============ LOI PLEIN EMPLOI (RSA) ============ */
+  rsa:{
+    pillName:"Loi plein emploi", pillDesc:"RSA · 2023-1196",
+    short:"2023-1196", cdate:"18 déc. 2023",
+    title:"LOI n° 2023-1196 du 18 décembre 2023 pour le plein emploi",
+    subt:"Réforme « plein emploi » : inscription automatique à France Travail, contrat d'engagement réciproque et obligation d'activité, avec un pouvoir de sanction confié au président du conseil départemental.",
+    dom:"Emploi · insertion · action sociale",
+    legitext:"LEGITEXT000048582985", nor:"MTRD2313163L", sig:"18/12/2023", pub:"19/12/2023",
+    measures:[
+      {n:"15-20",u:" h/sem.",l:"obligation d'activité (contrat d'engagement)"},
+      {n:"≥ 30",u:" %",l:"suspension possible du RSA (président du CD)"},
+      {n:"651,69",u:" €/mois",l:"RSA personne seule (2026)"},
+      {n:"11",u:" textes liés",l:"application, jurisprudence, doctrine"}
+    ],
+    toc:[
+      ["Inscription","Inscription automatique à France Travail"],
+      ["Contrat","Contrat d'engagement réciproque"],
+      ["Activité","15 à 20 h d'activité hebdomadaire"],
+      ["Sanction","« Suspension-remobilisation » décidée par le président du CD"],
+      ["Orientation","Délais d'orientation et d'accompagnement (décret 2024-1244)"]
+    ],
+    tocNote:"Compétence directe du Département : le conseil départemental est l'organisme référent et l'autorité de sanction.",
+    mgNote:"Jurisprudence administrative active sur la récupération de l'indu et les sanctions.",
+    related:[
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2024-1242 du 30 décembre 2024 relatif à l'inscription, à l'orientation et au contrat d'engagement des demandeurs d'emploi",who:"Légifrance",date:"31/12/2024",id:"LEGITEXT000050924505 · NOR TSSD2431074D",prov:"legifrance",note:"Fonde le contrat d'engagement et le pouvoir de sanction."},
+      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2024-1244 du 30 décembre 2024 relatif aux délais d'orientation et d'accompagnement des demandeurs d'emploi",who:"Légifrance",date:"31/12/2024",id:"Décret n° 2024-1244 — texte d'application",prov:"legifrance",note:""},
+      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 6 août 2025 portant approbation du référentiel de l'accompagnement intensif (Comité national pour l'emploi)",who:"Légifrance",date:"août 2025",id:"LEGITEXT000052060992 · NOR TSSD2521879A",prov:"legifrance",note:""},
+      {f:'con',kind:'Code',badge:'k-con',title:"Code de l'action sociale et des familles — revenu de solidarité active (art. L. 262-1 et s.)",who:"Légifrance — code consolidé",date:"à jour",id:"CASF — orientation & contrat d'engagement",prov:"legifrance",note:"Fonde la compétence du conseil départemental."},
+      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Actualisation de la convention de gestion type pour le RSA",who:"Cabinet Landot & associés",date:"24/06/2026",id:"blog.landot-avocats.net — instruction CNAF du 18/06/2026",prov:"juriveille",note:"Met à jour le cadre de gestion entre CAF et Département."},
+      {f:'jur',kind:'Conseil d\'État',badge:'k-jur',title:"Conseil d'État, 1re-4e ch. réunies, 28 nov. 2024, n° 471819 — récupération de l'indu de RSA",who:"Conseil d'État / Légifrance",date:"28/11/2024",id:"CETATEXT000050682743",prov:"cetat",note:"Directement opposable au contentieux du Département."},
+      {f:'par',kind:'Officiel',badge:'k-par',title:"Signature du pacte sectoriel Transport-Logistique (porté par France Travail)",who:"DREETS Bretagne",date:"24/06/2026",id:"bretagne.dreets.gouv.fr",prov:"juriveille",note:""},
+      {f:'jur',kind:'Sanction CNIL',badge:'k-jur',title:"Délibération n° SAN-2026-003 du 22 janvier 2026 — sanction pécuniaire à l'encontre de l'opérateur FRANCE TRAVAIL",who:"CNIL — formation restreinte",date:"22/01/2026",id:"CNILTEXT000053408671",prov:"cnil",note:"Contrôle des traitements de données des demandeurs d'emploi et allocataires — enjeu RGPD direct pour le Département."},
+      {f:'jur',kind:'Cour d\'appel',badge:'k-jur',title:"Cour d'appel de Paris, pôle 6 ch. 13, 23 février 2024, n° 17/08365 — contentieux de l'indu de RSA",who:"Cour d'appel / Judilibre",date:"23/02/2024",id:"Judilibre — arrêt n° 17/08365",prov:"judilibre",note:""},
+      {f:'jur',kind:'Trib. judiciaire',badge:'k-jur',title:"Tribunal judiciaire d'Amiens, 19 janvier 2026, n° 25/00016 — récupération d'un trop-perçu de RSA",who:"Tribunal judiciaire / Judilibre",date:"19/01/2026",id:"Judilibre — décision n° 25/00016",prov:"judilibre",note:"Jurisprudence du fond, fraîche, sur la mécanique de récupération de l'indu."},
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Non-proportionnalité des sanctions contre les bénéficiaires du RSA",who:"Assemblée nationale (LFI-NFP)",date:"12/05/2026",id:"QANR5L17QE15100 — en attente de réponse",prov:"qp",note:"Interroge directement le régime de sanction confié au président du Département."}
+    ]
+  }
+};
+
+/* ---------- RENDER ENGINE ---------- */
+const CLUSTERS=['app','con','doc','jur','par'];
+let current='lfi2026', activeF='all', q='';
+
+const $=id=>document.getElementById(id);
+
+function renderPills(){
+  $('lawpills').innerHTML=Object.entries(LAWS).map(([k,l])=>
+    `<button class="lawpill ${k===current?'active':''}" data-law="${k}">
+       <span class="pl-n">${l.pillName}</span><span class="pl-d">${l.pillDesc}</span>
+     </button>`).join('');
+  document.querySelectorAll('.lawpill').forEach(p=>p.addEventListener('click',()=>switchLaw(p.dataset.law)));
+}
+
+function renderLaw(){
+  const L=LAWS[current];
+  $('bc').textContent='LOI '+L.short;
+  $('f-title').textContent=L.title;
+  $('f-subt').textContent=L.subt;
+  $('f-dom').textContent=L.dom;
+  $('f-legitext').textContent=L.legitext;
+  $('f-nor').textContent=L.nor;
+  $('f-sig').textContent=L.sig;
+  $('f-pub').textContent=L.pub;
+  $('c-short').textContent=L.short;
+  $('c-date').textContent=L.cdate;
+  $('cta-b').textContent='+ Suivre la LOI '+L.short;
+
+  // measures
+  $('measures').innerHTML=L.measures.map(m=>
+    `<div class="measure"><div class="mn">${m.n}<span>${m.u}</span></div><div class="ml">${m.l}</div></div>`).join('');
+
+  // counts
+  const counts={}; let total=0;
+  CLUSTERS.forEach(c=>{counts[c]=L.related.filter(r=>r.f===c).length;total+=counts[c];});
+  CLUSTERS.forEach(c=>{
+    $('cnt-'+c).textContent=counts[c];
+    $('g-'+c).style.opacity = counts[c]===0 ? .32 : 1;
+    $('g-'+c).style.pointerEvents = counts[c]===0 ? 'none' : 'auto';
+  });
+  $('total-label').textContent=total+' textes rattachés';
+
+  // chips
+  const labels={all:'Tous',app:'Application',con:'Connexes',doc:'Doctrine',jur:'Jurisprudence',par:'Parlement'};
+  let chipHTML=`<button class="fchip ${activeF==='all'?'active':''}" data-filter="all">Tous <span class="ct">${total}</span></button>`;
+  CLUSTERS.forEach(c=>{ if(counts[c]>0) chipHTML+=`<button class="fchip ${activeF===c?'active':''}" data-filter="${c}">${labels[c]} <span class="ct">${counts[c]}</span></button>`; });
+  $('chips').innerHTML=chipHTML;
+  document.querySelectorAll('.fchip').forEach(c=>c.addEventListener('click',()=>setFilter(c.dataset.filter)));
+
+  // related list
+  $('rel').innerHTML=L.related.map(d=>{
+    const p=PROV[d.prov];
+    return `<div class="relitem" data-f="${d.f}">
+      <span class="kindbadge ${d.badge}">${d.kind}</span>
+      <div class="relbody">
+        <div class="rt">${d.title}</div>
+        <div class="rmeta"><span class="who">${d.who}</span><span class="dt">${d.date}</span></div>
+        <div class="rid">${d.id}</div>
+        ${d.note?`<div class="rnote">${d.note}</div>`:''}
+      </div>
+      <div class="prov"><span class="src"><span class="pd" style="background:${p.c}"></span>${p.label}</span></div>
+    </div>`;
+  }).join('');
+
+  // toc
+  $('toc').innerHTML=L.toc.map(t=>`<li><span class="art">${t[0]}</span><span>${t[1]}</span></li>`).join('');
+  $('toc-note').textContent=L.tocNote;
+
+  // minigraph
+  const max=Math.max(...CLUSTERS.map(c=>counts[c]),1);
+  const cfg={app:['Application','#1e40af'],con:['Connexes','#0d6b6b'],par:['Parlement & presse','#a3540f'],doc:['Doctrine & blogs','#b0892f'],jur:['Jurisprudence','#5b3aa6']};
+  $('minigraph').innerHTML=Object.entries(cfg).map(([c,[lbl,col]])=>
+    `<div class="mg"><span class="lbl">${lbl}</span><span class="bar"><i style="width:${Math.round(counts[c]/max*100)}%;background:${col}"></i></span><span class="num">${counts[c]}</span></div>`).join('');
+  $('mg-note').textContent=L.mgNote;
+
+  renderTimeline(L);
+  highlightCluster();
+  apply();
+}
+
+const TYPECOL={app:'#1e40af',con:'#0d6b6b',doc:'#b0892f',jur:'#5b3aa6',par:'#a3540f'};
+const MONTHS=[['janv',0],['févr',1],['fév',1],['mars',2],['avr',3],['mai',4],['juin',5],['juil',6],['août',7],['aout',7],['sept',8],['oct',9],['nov',10],['déc',11],['dec',11]];
+function parseDate(s){
+  if(!s) return null;
+  let m=s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(m) return new Date(+m[3],+m[2]-1,+m[1]);
+  const low=s.toLowerCase();
+  const ym=low.match(/\b(20\d{2})\b/);
+  if(ym){
+    for(const [k,idx] of MONTHS){ if(low.includes(k)) return new Date(+ym[1],idx,15); }
+    if(/^\s*20\d{2}\s*$/.test(s)) return new Date(+ym[1],5,15);
+  }
+  return null; // date non ponctuelle -> socle
+}
+function renderTimeline(L){
+  const events=[], socle=[];
+  L.related.forEach(d=>{ const pd=parseDate(d.date); if(pd){events.push({...d,_d:pd});} else socle.push(d); });
+  const lawDate=parseDate(L.pub)||parseDate(L.sig);
+  events.push({_mile:true,_d:lawDate});
+  events.sort((a,b)=> (a._d-b._d) || (a._mile?-1:1));
+  let html=`<div class="tlphase"><span class="pi">▣</span><div><div class="pt">Amont parlementaire — dépôt, amendements, débats, votes</div><div class="ps">couvert par l'open data de l'Assemblée nationale · le pont Silexia prend le relais après la promulgation</div></div></div><div class="tlconn"></div><div class="tl">`;
+  events.forEach(e=>{
+    if(e._mile){
+      html+=`<div class="tlmile"><span class="tldot"></span><div class="mlbox"><div class="mlt">Promulgation de la loi · ${L.pub}</div><div class="mld">${L.title}</div></div></div>`;
+    }else{
+      const col=TYPECOL[e.f]||'#888', p=PROV[e.prov];
+      html+=`<div class="tlitem" data-f="${e.f}"><span class="tldot" style="background:${col}"></span>
+        <div class="tldate">${e.date}</div>
+        <div class="tltitle">${e.title}</div>
+        <div class="tlmeta"><span class="kindbadge ${e.badge}">${e.kind}</span><span class="tlwho">${e.who}</span><span class="tlprov" style="color:${p.c}">● ${p.label}</span></div>
+      </div>`;
+    }
+  });
+  html+=`</div>`;
+  if(socle.length){
+    html+=`<div class="socle"><div class="sh">Socle permanent & veille continue (sans date ponctuelle)</div>`+
+      socle.map(s=>`<div class="si" data-f="${s.f}"><b>${s.kind} —</b> ${s.title} <span style="color:var(--muted)">· ${PROV[s.prov].label}</span></div>`).join('')+`</div>`;
+  }
+  $('timeline').innerHTML=html;
+}
+
+function apply(){
+  document.querySelectorAll('.relitem,.tlitem,.socle .si').forEach(el=>{
+    const okF=activeF==='all'||el.dataset.f===activeF;
+    const okQ=!q||el.textContent.toLowerCase().includes(q);
+    el.classList.toggle('hidden',!(okF&&okQ));
+  });
+}
+function setView(v){
+  document.querySelectorAll('.vt').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+  $('viewGraph').style.display = v==='graph'?'block':'none';
+  $('viewTimeline').style.display = v==='timeline'?'block':'none';
+}
+function highlightCluster(){
+  document.querySelectorAll('.node-bub').forEach(n=>{n.style.filter='';n.setAttribute('stroke-width','1.5');});
+  if(activeF!=='all'){
+    const node=document.querySelector(`#g-${activeF} .node-bub`);
+    if(node){node.setAttribute('stroke-width','3');node.style.filter='drop-shadow(0 2px 6px rgba(21,32,63,.25))';}
+  }
+}
+function setFilter(f){
+  activeF=f;
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.toggle('active',c.dataset.filter===f));
+  highlightCluster(); apply();
+}
+function switchLaw(k){
+  if(k===current)return;
+  current=k; activeF='all'; q=''; $('q').value='';
+  document.querySelectorAll('.lawpill').forEach(p=>p.classList.toggle('active',p.dataset.law===k));
+  renderLaw();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.node-c').forEach(n=>n.addEventListener('click',()=>{ if(n.style.pointerEvents!=='none') setFilter(n.dataset.filter); }));
+document.querySelectorAll('.vt').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+$('q').addEventListener('input',e=>{q=e.target.value.toLowerCase().trim();apply();});
+
+renderPills();
+renderLaw();
+</script>
+</body>
+</html>

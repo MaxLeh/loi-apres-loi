@@ -3,7 +3,8 @@
 Le prototype `loi_hub_adaptatif.html` (constellation + timeline + badges de
 provenance) est le socle UI. Deux étapes pour le rendre vivant :
 
-1. **Copier** le proto ici sous `frontend/index.html`.
+1. ✅ **Fait** — le proto est intégré ici sous `index.html` (4 lois codées en
+   dur : LFI 2026, statut de l'élu local, plein emploi, liberté de la presse 1881).
 2. **Remplacer** l'objet `LAWS` codé en dur par un appel à `/constellation`,
    piloté par la barre de recherche.
 
