@@ -127,6 +127,11 @@ class ReferenceAdapter(ConnectorAdapter):
                 ident = h.get("id", "")
                 if not ident or ident in vus:   # traçabilité + dédup
                     continue
+                # Précision : le fond CONSTIT matche parfois une décision dont le
+                # NUMÉRO coïncide avec le n° de loi (ex. « 2024-42…/53 ELEC »).
+                # On ne garde que les décisions substantielles (DC / QPC).
+                if fond == "CONSTIT" and not _CONSTIT_TYPES.search(h.get("title", "")):
+                    continue
                 vus.add(ident)
                 who = " · ".join(x for x in (h.get("juridiction", ""), h.get("formation", "")) if x)
                 out.append(Noeud(
@@ -247,6 +252,7 @@ def _fmt_date(v) -> str:
 import re as _re
 _re_iso = _re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
 _tag_re = _re.compile(r"<[^>]+>")
+_CONSTIT_TYPES = _re.compile(r"D[eé]cision\s+\S+\s+(QPC|DC)\b")  # type juste après le n° (≠ ELEC/AN/SEN…)
 
 
 def _strip_html(v):
