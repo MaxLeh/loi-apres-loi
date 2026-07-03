@@ -370,7 +370,7 @@ const PROV={
 };
 
 const LAWS={
-  /* ============ LIBERTE DE LA PRESSE - 29 juillet 1881 ============ */
+  /* ============ LIBERTÉ DE LA PRESSE — 29 juillet 1881 (constellation enrichie — données réelles, connecteurs officiels) ============ */
   presse:{
     pillName:"Liberté de la presse", pillDesc:"presse · 1881",
     short:"1881", cdate:"29 juil. 1881",
@@ -379,41 +379,54 @@ const LAWS={
     dom:"Libertés publiques · presse · droit pénal",
     legitext:"LEGITEXT000006070722", nor:"LGFX0877119L", sig:"29/07/1881", pub:"30/07/1881",
     measures:[
-      {n:"145",u:" ans",l:"en vigueur — plus d'un siècle de sédimentation normative"},
-      {n:"34 952",u:" arrêts",l:"décisions de la Cour de cassation visant la loi (Judilibre)"},
-      {n:"2029",u:"",l:"art. 45 déjà modifié, en vigueur différée (« tribunaux délictuels »)"},
-      {n:"14",u:" textes liés",l:"application, connexes, doctrine, jurisprudence, parlement"}
+      {n:"145",u:" ans",l:"en vigueur — loi du 29 juillet 1881, toujours applicable en 2026"},
+      {n:"27",u:" textes liés",l:"constellation reconstituée — chaque nœud porte un identifiant officiel vérifiable"},
+      {n:"5",u:" sources",l:"Légifrance · Judilibre · EUR-Lex · HAL · questions parlementaires"},
+      {n:"2024",u:"",l:"réforme UE en cours : EMFA + directive « procédures-bâillons » (transposition 2026)"}
     ],
     toc:[
       ["Art. 1","Principe : l'imprimerie et la librairie sont libres"],
       ["Art. 29","Définition de la diffamation et de l'injure"],
       ["Art. 32","Peines de la diffamation ; circonstances aggravantes"],
       ["Art. 42","Responsabilité « en cascade » (directeur, auteur, imprimeur)"],
-      ["Art. 45","Compétence — « tribunaux délictuels » à compter du 01/01/2029"],
-      ["Art. 53","Formalisme de la citation — prescription trimestrielle"]
+      ["Art. 53","Formalisme de la citation — qualification et texte visé"],
+      ["Art. 65","Prescription de l'action publique : trois mois"]
     ],
     tocNote:"Articles pivots de la loi. La couche pénale (diffamation, injure, provocation) concentre l'essentiel du contentieux.",
-    mgNote:"Loi séculaire : la strate jurisprudentielle est massive et continue de s'enrichir en continu (Judilibre / Cour de cassation).",
+    mgNote:"Corpus jurisprudentiel massif : la Cour de cassation applique et précise la loi de 1881 en continu. Échantillon d'arrêts de principe et récents ci-dessous (Judilibre), chacun identifié par son ECLI.",
     related:[
-      /* ---- APPLICATION -------------------------------------------------- */
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-337 du 30 avril 2026 relatif aux procédures engagées contre des personnes en raison de leur participation au débat public (transposition de la directive « procédures bâillons »)",who:"Min. Justice / Légifrance",date:"05/05/2026",id:"JORFTEXT000054026906 · NOR JUSC2605045D",prov:"legifrance",note:"Insère l'art. 499-1 CPP et un rejet accéléré des demandes manifestement infondées — protège les journalistes poursuivis sur le fondement de la loi de 1881."},
-      {f:'app',kind:'Modification',badge:'k-app',title:"Loi de 1881, art. 45 — nouvelle rédaction en vigueur différée : « tribunaux correctionnels » → « tribunaux délictuels »",who:"Légifrance",date:"01/01/2029",id:"LEGIARTI000052847326 — VIGUEUR_DIFF",prov:"legifrance",note:"Effet d'une réforme de procédure pénale postérieure : illustration directe de « la loi après la loi »."},
-      /* ---- CONNEXES (droit interne + européen) -------------------------- */
-      {f:'con',kind:'Règlement UE',badge:'k-con',title:"Règlement (UE) 2024/1083 établissant un cadre commun pour les services de médias dans le marché intérieur (European Media Freedom Act)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024R1083",prov:"eurlex",note:"Cadre européen sur le pluralisme et la protection des sources — appelle une adaptation du droit interne de la presse."},
-      {f:'con',kind:'Directive UE',badge:'k-con',title:"Directive (UE) 2024/1069 du 11 avril 2024 sur la protection des personnes participant au débat public (procédures bâillons / anti-SLAPP)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024L1069 — transposée par le décret 2026-337",prov:"eurlex",note:"Source directe du décret d'application ci-dessus."},
-      {f:'con',kind:'PPL adoptée',badge:'k-con',title:"Proposition de loi Erwan Balanant visant à renforcer l'effectivité des droits voisins de la presse — adoptée par l'Assemblée nationale",who:"Assemblée nationale",date:"26/03/2026",id:"PPL droits voisins — 17e législature",prov:"qp",note:"Volet économique de l'écosystème « presse », cité en réponse à la QAG Sénat du 09/04/2026."},
-      /* ---- JURISPRUDENCE (échantillon sur 34 952) ---------------------- */
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 27 mai 2026, n° 25-81.031 — cassation (art. 29 al. 1 de la loi de 1881)",who:"Cour de cassation / Judilibre",date:"27/05/2026",id:"ECLI:FR:CCASS:2026:CR00690",prov:"judilibre",note:"Arrêt récent — cassation sur le terrain de la diffamation."},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 10 septembre 2024, n° 23-83.138 — rejet (art. 29 et 32, diffamation)",who:"Cour de cassation / Judilibre",date:"10/09/2024",id:"ECLI:FR:CCASS:2024:CR00923",prov:"judilibre",note:""},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 10 septembre 2024, n° 23-83.154 — rejet (art. 53, formalisme de la citation)",who:"Cour de cassation / Judilibre",date:"10/09/2024",id:"ECLI:FR:CCASS:2024:CR00933",prov:"judilibre",note:"Sur l'art. 53 — écho direct à la doctrine de S. Mercoli (ci-dessous)."},
-      /* ---- DOCTRINE ---------------------------------------------------- */
-      {f:'doc',kind:'Article',badge:'k-doc',title:"L'article 53 de la loi de 1881 sur la liberté de la presse et la Cour de cassation : quel droit transitoire en droit positif ?",who:"S. Mercoli — HAL",date:"2017",id:"hal-02562864",prov:"hal",note:"Éclaire l'exigence de l'art. 53 au cœur des arrêts de cassation ci-dessus."},
-      {f:'doc',kind:'Communication',badge:'k-doc',title:"Le délit de presse entre répression nécessaire et liberté affirmée (1881-1914)",who:"J.-F. Tanguy — HAL",date:"2006",id:"halshs-00493743",prov:"hal",note:"Perspective historique sur la genèse du régime des délits de presse."},
-      {f:'doc',kind:'Article',badge:'k-doc',title:"La chambre criminelle, la Convention européenne des droits de l'homme et la loi sur la presse",who:"P. Wachsmann — HAL",date:"2001",id:"halshs-02206287",prov:"hal",note:"Articulation entre la loi de 1881 et l'article 10 de la CEDH."},
-      /* ---- PARLEMENT & PRESSE ------------------------------------------ */
-      {f:'par',kind:'QAG Sénat',badge:'k-par',title:"Défense des médias traditionnels — mise en conformité avec le règlement européen sur la liberté des médias et transposition de la directive « procédures bâillons »",who:"Sénat — S. Robert (SER, Ille-et-Vilaine)",date:"09/04/2026",id:"SEQ26040786G — RÉPONDUE (min. Culture)",prov:"qp",note:"Réponse ministérielle : projet de loi post-États généraux de l'information toujours attendu."},
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Procédures-bâillon : révision à la hausse des sanctions et protection des lanceurs d'alerte et des médias",who:"Assemblée nationale — D. Potier (SOC)",date:"30/06/2026",id:"QANR5L17QE16457 — en attente de réponse",prov:"qp",note:"Juge la transposition par décret en-deçà de l'ambition initiale."},
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Transposition de la directive « procédures bâillons » : exclusion du domaine pénal (diffamation)",who:"Assemblée nationale — S. Taillé-Polian (ECOS)",date:"26/05/2026",id:"QANR5L17QE15420 — en attente de réponse",prov:"qp",note:"Regrette que les diffamations abusives restent hors du dispositif protecteur."}
+      /* ---- APPLICATION : textes qui modifient / appliquent la loi de 1881 (Légifrance) ---- */
+      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 2017-86 du 27 janvier 2017 relative à l'égalité et à la citoyenneté — réforme des délits de presse (prescriptions allongées, aggravation des provocations discriminatoires)",who:"Légifrance",date:"27/01/2017",id:"LEGITEXT000033938072 · NOR LHAL1528110L",prov:"legifrance",note:"« La loi après la loi » : refonte du régime répressif et procédural hérité de 1881."},
+      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 2014-56 du 27 janvier 2014 visant à harmoniser les délais de prescription des infractions prévues par la loi du 29 juillet 1881 commises en raison du sexe, de l'orientation ou de l'identité sexuelle ou du handicap",who:"Légifrance",date:"27/01/2014",id:"LEGITEXT000028527662 · NOR JUSX1132133L",prov:"legifrance",note:"Porte à un an la prescription de certaines infractions de presse discriminatoires."},
+      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 92-1336 du 16 décembre 1992 relative à l'entrée en vigueur du nouveau code pénal — adaptation des dispositions pénales de la loi de 1881",who:"Légifrance",date:"16/12/1992",id:"LEGITEXT000006080560 · NOR JUSX9200040L",prov:"legifrance",note:"Mise en cohérence de la loi de 1881 avec le nouveau code pénal."},
+      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 52-336 du 25 mars 1952 modifiant certaines dispositions de la loi du 29 juillet 1881 sur la liberté de la presse",who:"Légifrance",date:"25/03/1952",id:"LEGITEXT000006068109",prov:"legifrance",note:"Illustration de la sédimentation : la loi de 1881 est déjà retouchée au milieu du XXe siècle."},
+      /* ---- CONNEXES : droit interne + droit de l'Union (Légifrance, EUR-Lex) ---- */
+      {f:'con',kind:'Loi',badge:'k-con',title:"Loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN) — responsabilité des contenus en ligne, en articulation avec la loi de 1881",who:"Légifrance",date:"21/06/2004",id:"LEGITEXT000005789847 · NOR ECOX0200175L",prov:"legifrance",note:"Étend le régime des délits de presse à la communication au public en ligne."},
+      {f:'con',kind:'Règlement UE',badge:'k-con',title:"Règlement (UE) 2024/1083 du 11 avril 2024 établissant un cadre commun pour les services de médias dans le marché intérieur (European Media Freedom Act)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024R1083",prov:"eurlex",note:"Cadre européen sur le pluralisme et la protection des sources — appelle une adaptation du droit interne de la presse."},
+      {f:'con',kind:'Directive UE',badge:'k-con',title:"Directive (UE) 2024/1069 du 11 avril 2024 sur la protection des personnes qui participent au débat public contre les procédures judiciaires abusives (« poursuites-bâillons » / anti-SLAPP)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024L1069",prov:"eurlex",note:"Transposition attendue en 2026 — protège notamment les journalistes poursuivis sur le fondement de la loi de 1881."},
+      /* ---- JURISPRUDENCE : échantillon réel Cour de cassation (Judilibre) ---- */
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 12 mai 2026, n° 25-81.556 — diffamation publique envers un particulier (directeur de la publication et journaliste)",who:"Cour de cassation / Judilibre",date:"12/05/2026",id:"ECLI:FR:CCASS:2026:CR00595 · n° 25-81.556",prov:"judilibre",note:"Arrêt récent : effet du désistement du plaignant sur l'action publique en matière de presse."},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 30 septembre 2025, n° 25-82.378 — diffamation (sur arrêt de la cour d'appel de Reims)",who:"Cour de cassation / Judilibre",date:"30/09/2025",id:"ECLI:FR:CCASS:2025:CR01401 · n° 25-82.378",prov:"judilibre",note:""},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 22 janvier 2025, n° 23-87.077 — propos rapportés dans un article de presse",who:"Cour de cassation / Judilibre",date:"22/01/2025",id:"ECLI:FR:CCASS:2025:CR00214 · n° 23-87.077",prov:"judilibre",note:""},
+      {f:'jur',kind:'Cass. Ass. plén.',badge:'k-jur',title:"Cour de cassation, assemblée plénière, 15 février 2013, n° 11-14.637 — art. 53 : précision et qualification du fait incriminé, à peine de nullité",who:"Cour de cassation / Judilibre",date:"15/02/2013",id:"ECLI:FR:CCASS:2013:PL00606 · n° 11-14.637",prov:"judilibre",note:"Arrêt de principe (assemblée plénière) sur le formalisme de l'article 53."},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 9 décembre 2014, n° 13-85.401 — injure publique et limites de la liberté d'expression dans le débat politique (art. 10 CEDH)",who:"Cour de cassation / Judilibre",date:"09/12/2014",id:"ECLI:FR:CCASS:2014:CR06506 · n° 13-85.401",prov:"judilibre",note:"Contrôle de proportionnalité de l'ingérence au regard de l'article 10 de la Convention EDH."},
+      {f:'jur',kind:'Cass. 1re civ.',badge:'k-jur',title:"Cour de cassation, première chambre civile, 14 janvier 2016, n° 14-28.327 — responsabilité civile et article 42 de la loi de 1881",who:"Cour de cassation / Judilibre",date:"14/01/2016",id:"ECLI:FR:CCASS:2016:C100044 · n° 14-28.327",prov:"judilibre",note:""},
+      {f:'jur',kind:'Cass. 1re civ.',badge:'k-jur',title:"Cour de cassation, première chambre civile, 2 avril 2009, n° 08-10.926 — définition de la diffamation et de l'injure (art. 29 et 32)",who:"Cour de cassation / Judilibre",date:"02/04/2009",id:"ECLI:FR:CCASS:2009:C100418 · n° 08-10.926",prov:"judilibre",note:""},
+      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 14 février 2012, n° 11-81.954 — garde à vue et délits de presse punis d'emprisonnement",who:"Cour de cassation / Judilibre",date:"14/02/2012",id:"ECLI:FR:CCASS:2012:CR01173 · n° 11-81.954",prov:"judilibre",note:""},
+      /* ---- DOCTRINE : accès ouvert (HAL) ---- */
+      {f:'doc',kind:'Article',badge:'k-doc',title:"Un an de droit de la presse (juillet 2024 - juin 2025)",who:"T. Besse — HAL",date:"2025",id:"HAL halshs-05288647",prov:"hal",note:"Panorama annuel de la jurisprudence et de l'actualité de la loi de 1881."},
+      {f:'doc',kind:'Article',badge:'k-doc',title:"Loi de 1881 : constitutionnalité de l'allongement de la prescription, inconstitutionnalité des exceptions à l'exceptio veritatis",who:"J.-B. Perrier — HAL",date:"2013",id:"HAL halshs-02226056",prov:"hal",note:"Commentaire de la décision QPC sur la prescription des délits de presse."},
+      {f:'doc',kind:'Chapitre',badge:'k-doc',title:"Blasphème, diffamation, injure : la religion devant la liberté de la presse",who:"P. Rolland — HAL",date:"2017",id:"HAL halshs-01588675",prov:"hal",note:""},
+      {f:'doc',kind:'Article',badge:'k-doc',title:"Rumeur et liberté d'expression : entre mensonge et vérité",who:"N. Mallet-Poujol — HAL",date:"2018",id:"HAL halshs-01947275",prov:"hal",note:""},
+      {f:'doc',kind:'Article',badge:'k-doc',title:"Mise en examen pour injure ou diffamation : l'absence d'information sur le droit au silence est contraire à la Constitution",who:"S. Lavric — HAL",date:"2024",id:"HAL hal-04615071",prov:"hal",note:"Écho doctrinal aux QPC procédurales sur les délits de presse."},
+      {f:'doc',kind:'Communication',badge:'k-doc',title:"Droit de la presse — rencontre autour de l'ouvrage",who:"E. Raschel — HAL",date:"2026",id:"HAL halshs-05569922",prov:"hal",note:""},
+      /* ---- PARLEMENT : questions écrites AN + Sénat (open data) ---- */
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Transposition de la directive européenne sur les procédures-bâillons",who:"Assemblée nationale (ECOS)",date:"26/05/2026",id:"QANR5L17QE15420 — en attente de réponse",prov:"qp",note:"Interroge le périmètre de la transposition de la directive (UE) 2024/1069."},
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Procédures-bâillon",who:"Assemblée nationale (SOC)",date:"30/06/2026",id:"QANR5L17QE16457 — en attente de réponse",prov:"qp",note:"Demande un renforcement des sanctions contre les poursuites abusives visant médias et lanceurs d'alerte."},
+      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Liberté de la presse et sécurité des journalistes",who:"Sénat — A. Souyris (GEST)",date:"25/09/2025",id:"Sénat qSEQ250906189 — RÉPONDUE",prov:"qp",note:"Réponse du ministère de l'Intérieur (12/02/2026)."},
+      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Conséquences pour la liberté de la presse du Schéma national des violences urbaines",who:"Sénat — S. Briante Guillemont (RDSE)",date:"18/09/2025",id:"Sénat qSEQ250906152 — RÉPONDUE",prov:"qp",note:""},
+      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Incarcération du journaliste Christophe Gleizes",who:"Sénat — S. Demilly (UC)",date:"12/02/2026",id:"Sénat qSEQ260207625 — RÉPONDUE",prov:"qp",note:"Liberté de la presse à l'étranger — réponse du ministère de l'Europe et des affaires étrangères (04/06/2026)."},
+      {f:'par',kind:'Question AN',badge:'k-par',title:"Moyens de garantir la dignité humaine dans les médias",who:"Assemblée nationale (DR)",date:"20/01/2026",id:"QANR5L17QE12327 — RÉPONDUE",prov:"qp",note:"Réponse du ministère de la Culture (05/05/2026)."}
     ]
   },
   /* ============ LFI 2026 ============ */
