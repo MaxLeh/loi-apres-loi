@@ -67,10 +67,4 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 - ![Vue timeline](images/image-2.png)
 
 ### Documents
-- [Sources & répartition des données](docs/sources-donnees.md)
-
-### URL de démonstration
-https://votre-demo.example.com
-
-### Diapositives de présentation
-[Diapositives de présentation](docs/diapositives.pdf)
+- [Sources & répartition des données](docs/sources-donnees.pdf)
