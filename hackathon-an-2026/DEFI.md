@@ -63,8 +63,8 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 - [ ] `legiwatch-serveur-mcp-parlement` — Serveur MCP Parlement ✺ LegiWatch
 
 ### Galerie
-- [Vue constellation](images/image-1.png)
-- [Vue timeline](images/image-2.png)
+- ![Vue constellation](images/image-1.png)
+- ![Vue timeline](images/image-2.png)
 
 ### Documents
 - [Sources & répartition des données](docs/sources-donnees.md)
