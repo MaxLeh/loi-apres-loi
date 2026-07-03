@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+data/cache/*.json
+.DS_Store
+
+# adaptateur premium privé — ne jamais committer dans le dépôt public
+backend/adapters/silexia.py

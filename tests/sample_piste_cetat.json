@@ -1,0 +1,37 @@
+{
+  "_note": "Réponse PISTE /search (fond CETAT, query='2023-1196') — forme réaliste pour valider le parseur hors-ligne. REMPLACER par une vraie réponse live pour confirmer les champs marqués '?' dans reference._normalize_piste_hits.",
+  "results": [
+    {
+      "titles": [
+        {
+          "id": "CETATEXT000053980087",
+          "cid": "CETATEXT000053980087",
+          "title": "Conseil d'État, 1ère chambre, 28/04/2026, 512004, Inédit au recueil Lebon"
+        }
+      ],
+      "date": "2026-04-28",
+      "juridiction": "Conseil d'État",
+      "formation": "1ère chambre",
+      "numeroAffaire": "512004",
+      "solution": "Rejet",
+      "type": "arret",
+      "text": "…considérant que la loi n° 2023-1196 du 18 décembre 2023…"
+    },
+    {
+      "titles": [
+        {
+          "id": "CETATEXT000054178558",
+          "cid": "CETATEXT000054178558",
+          "title": "Conseil d'État, 1ère - 4ème chambres réunies, 27/05/2026, 504769, Inédit au recueil Lebon"
+        }
+      ],
+      "date": 1780012800000,
+      "juridiction": "Conseil d'État",
+      "formation": "1ère - 4ème chambres réunies",
+      "numeroAffaire": "504769",
+      "solution": "Non-lieu à statuer"
+    }
+  ],
+  "totalResultNumber": 2,
+  "executionTime": 42
+}
