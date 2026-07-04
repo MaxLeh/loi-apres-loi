@@ -11,6 +11,9 @@ from __future__ import annotations
 import os
 import sys
 
+from backend.env import load_env
+load_env()  # charge .env avant l'import de cache.py (qui lit DEMO_MODE à l'import)
+
 from backend.orchestrator import constellation
 
 

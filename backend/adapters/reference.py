@@ -91,39 +91,96 @@ class ReferenceAdapter(ConnectorAdapter):
         return _normalize_piste_hits(data)
 
     # ---------- resolve ----------
+    def resolve_candidates(self, saisie: str, size: int = 8) -> list[Loi]:
+        # Renvoie les lois candidates (plus pertinentes d'abord). Le CHOIX final
+        # est délégué à la couche LLM (compréhension), qui tranche PARMI ces
+        # candidats déjà sourcés — jamais d'invention. Stratégie de requête :
+        #  - n° présent (« 2023-1196 ») : recherche plein texte, fiable ;
+        #  - intitulé (« la loi plein emploi ») : on RETIRE les mots vides
+        #    (« la », « loi »…) et on interroge le champ TITRE (sinon « la loi
+        #    plein emploi » remonte une loi organique de 2004).
+        q = saisie.strip()
+        if _LOI_NUM_RE.search(q):
+            hits = self._search("LODA_ETAT", q, nature="LOI", size=size)
+        else:
+            themed = _strip_stopwords(q) or q
+            hits = self._search("LODA_ETAT", themed, field="TITLE", nature="LOI", size=size)
+            if not hits:  # filet de sécurité : requête brute en plein texte
+                hits = self._search("LODA_ETAT", q, nature="LOI", size=size)
+        out: list[Loi] = []
+        for h in hits:
+            if not h.get("id"):  # sans identifiant vérifiable → écarté (traçabilité)
+                continue
+            out.append(Loi(
+                numero=h.get("num", ""), titre=h.get("title", ""),
+                legitext=h.get("id", ""), nor=h.get("nor", ""),
+                date_signature=h.get("date_sig", ""), date_publication=h.get("date_pub", ""),
+                url=_legi_url(h.get("id", "")),   # permalien source de la loi
+            ))
+        return out
+
     def resolve_loi(self, numero_ou_titre: str) -> Loi:
-        hits = self._search("LODA_ETAT", numero_ou_titre, nature="LOI", size=1)
-        if not hits:
+        cands = self.resolve_candidates(numero_ou_titre, size=1)
+        if not cands:
             raise ValueError(f"Loi introuvable : {numero_ou_titre!r}")
-        h = hits[0]
-        return Loi(
-            numero=h.get("num", ""), titre=h.get("title", ""),
-            legitext=h.get("id", ""), nor=h.get("nor", ""),
-            date_signature=h.get("date_sig", ""), date_publication=h.get("date_pub", ""),
-        )
+        return cands[0]
 
     # ---------- clusters ----------
     def cluster_application(self, loi: Loi) -> list[Noeud]:
-        # ✅ pattern validé : VISA + n° de loi sur LODA_ETAT
+        # UNION (recall) + tag de provenance, la CLASSIFICATION finale revenant
+        # au LLM (orchestrateur) :
+        #  - LODA_ETAT/VISA : décrets/arrêtés qui VISENT la loi → tag "application"
+        #    (confirmé — viser la loi = mesure d'application).
+        #  - JORF/ALL (lois numérotées) : textes qui CITENT le n° sans le viser
+        #    (loi appliquée via modification de codes, ex. renseignement 2021-998,
+        #    dont les décrets visent le code) → tag "a_verifier" : le LLM tranchera
+        #    application / citation / codification (ex. le décret de codification
+        #    2022-783 doit être écarté du bruit).
+        # Lois anciennes sans numéro (1881) : citées par leur DATE.
+        # Dédoublonnage inter-fonds par n° de décret (VISA prioritaire).
+        cite = loi.numero or _date_citation(loi.titre)
+        if not cite:
+            return []
+        _LABEL = {"DECRET": "Décret", "ARRETE": "Arrêté"}
         out: list[Noeud] = []
-        for nature in ("DECRET", "ARRETE"):
-            for h in self._search("LODA_ETAT", loi.numero, field="VISA", nature=nature, size=15):
-                out.append(Noeud(
-                    cluster=Cluster.APPLICATION, titre=h.get("title", ""),
-                    identifiant=h.get("id", ""), provenance=Provenance.LEGIFRANCE,
-                    kind=nature.capitalize(), who="Légifrance",
-                    date=h.get("date_pub", ""), url=h.get("url", ""),
-                ))
+        vus: set[str] = set()
+
+        def _collect(fond: str, field: str, query: str, tag: str) -> None:
+            for nature in ("DECRET", "ARRETE"):
+                for h in self._search(fond, query, field=field, nature=nature, size=15):
+                    ident = h.get("id", "")
+                    if not ident:  # traçabilité : pas d'identifiant → écarté
+                        continue
+                    titre = h.get("title", "")
+                    dedup = _decree_num(titre) or titre.strip().lower()[:60] or ident
+                    if dedup in vus:  # même décret vu dans un autre fond → on garde le 1er
+                        continue
+                    vus.add(dedup)
+                    out.append(Noeud(
+                        cluster=Cluster.APPLICATION, titre=titre,
+                        identifiant=ident, provenance=Provenance.LEGIFRANCE,
+                        kind=_LABEL.get(nature, nature.capitalize()), who="Légifrance",
+                        date=h.get("date_pub", "") or h.get("date", ""),
+                        url=h.get("url", ""), tag=tag,
+                    ))
+
+        _collect("LODA_ETAT", "VISA", cite, "application")   # vise la loi → confirmé
+        if loi.numero:  # texte plein JORF (n° précis) → à classer par le LLM
+            _collect("JORF", "ALL", loi.numero, "a_verifier")
         return out
 
     def cluster_jurisprudence(self, loi: Loi) -> list[Noeud]:
         # Cluster non couvert par les ressources hackathon → fonds PISTE.
+        # Citation par n° de loi, ou par DATE pour les lois anciennes (1881).
+        cite = loi.numero or _date_citation(loi.titre)
+        if not cite:
+            return []
         out: list[Noeud] = []
         vus: set[str] = set()
         prov = {"CETAT": Provenance.CETAT, "JURI": Provenance.JUDILIBRE,
                 "CONSTIT": Provenance.CONSTIT, "CNIL": Provenance.CNIL}
         for fond, p in prov.items():
-            for h in self._search(fond, loi.numero, size=8):
+            for h in self._search(fond, cite, size=8):
                 ident = h.get("id", "")
                 if not ident or ident in vus:   # traçabilité + dédup
                     continue
@@ -254,6 +311,49 @@ _re_iso = _re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
 _tag_re = _re.compile(r"<[^>]+>")
 _CONSTIT_TYPES = _re.compile(r"D[eé]cision\s+\S+\s+(QPC|DC)\b")  # type juste après le n° (≠ ELEC/AN/SEN…)
 
+# Résolution : détection d'un n° de loi + retrait des mots outils qui polluent
+# le classement PISTE sur les intitulés libres (« la loi X » → « X »).
+_LOI_NUM_RE = _re.compile(r"\b\d{4}[-\s]?\d{3,4}\b")
+_RESOLVE_STOP = {
+    "loi", "n", "du", "de", "des", "la", "le", "les", "l", "d", "pour", "portant",
+    "relative", "relatif", "au", "aux", "sur", "et", "en", "une", "un", "dite",
+}
+
+
+def _strip_stopwords(q: str) -> str:
+    mots = _re.findall(r"[0-9a-zà-ÿ]+", q.lower())
+    return " ".join(m for m in mots if m not in _RESOLVE_STOP and len(m) > 1)
+
+
+# PISTE suffixe les identifiants LODA d'une date de version « _JJ-MM-AAAA » qui
+# n'est PAS un segment de permalien Légifrance (le lien attend le LEGITEXT nu →
+# sinon la page bascule sur l'accueil) et alourdit l'affichage. On la retire.
+_VERSION_SUFFIX = _re.compile(r"_\d{2}-\d{2}-\d{4}$")
+
+
+def _strip_version_suffix(ident: str) -> str:
+    return _VERSION_SUFFIX.sub("", ident) if isinstance(ident, str) else ident
+
+
+# Lois anciennes sans numéro (ex. « Loi du 29 juillet 1881 ») : la citation de
+# référence dans les décrets et la jurisprudence est la DATE (« 29 juillet 1881 »).
+_DATE_TITLE_RE = _re.compile(r"\bdu\s+(\d{1,2}(?:er)?\s+[a-zà-ÿ]+\s+\d{4})", _re.I)
+
+
+def _date_citation(titre: str) -> str:
+    m = _DATE_TITLE_RE.search(titre or "")
+    return m.group(1) if m else ""
+
+
+# N° de décret/arrêté extrait du titre — clé de dédoublonnage entre fonds
+# (le même décret est un LEGITEXT en LODA et un JORFTEXT en JORF).
+_DECREE_NUM_RE = _re.compile(r"n[°ºo]\s*(\d{4}-\d{1,4})", _re.I)
+
+
+def _decree_num(titre: str) -> str:
+    m = _DECREE_NUM_RE.search(titre or "")
+    return m.group(1) if m else ""
+
 
 def _strip_html(v):
     """PISTE surligne le terme cherché avec des <mark>…</mark> → on nettoie le HTML."""
@@ -283,6 +383,7 @@ def _question_url(chambre: str, legislature, numero) -> str:
 
 def _legi_url(identifiant: str) -> str:
     """Construit le permalien Légifrance selon le préfixe de l'identifiant."""
+    identifiant = _strip_version_suffix(identifiant)
     prefix = identifiant[:8]
     base = {
         "CETATEXT": "ceta", "JURITEXT": "juri", "CONSTEXT": "cnst",
@@ -297,7 +398,7 @@ def _normalize_piste_hits(data: dict) -> list[dict]:
     out = []
     for res in data.get("results", []):
         t = _first_title(res)
-        identifiant = _pick(t, "id") or _pick(res, "id")
+        identifiant = _strip_version_suffix(_pick(t, "id") or _pick(res, "id"))
         out.append({
             "id": identifiant,
             "title": _strip_html(_pick(t, "title") or _pick(res, "title")),

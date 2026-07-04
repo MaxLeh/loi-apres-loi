@@ -36,6 +36,18 @@ class ConnectorAdapter(ABC):
         Doit renseigner au minimum : numero, titre, legitext ou jorftext, nor.
         """
 
+    def resolve_candidates(self, saisie: str, size: int = 8) -> list[Loi]:
+        """Lois candidates pour la saisie (les plus pertinentes d'abord).
+
+        L'orchestrateur laisse la couche LLM (compréhension) choisir PARMI ces
+        candidats déjà sourcés — jamais d'invention. Défaut : la résolution
+        top-1 ; les adaptateurs qui savent lister plusieurs candidats surchargent.
+        """
+        try:
+            return [self.resolve_loi(saisie)]
+        except ValueError:
+            return []
+
     @abstractmethod
     def cluster_application(self, loi: Loi) -> list[Noeud]:
         """Décrets et arrêtés d'application — via recherche VISA sur le n°."""

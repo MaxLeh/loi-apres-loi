@@ -20,10 +20,6 @@ def load_adapter() -> ConnectorAdapter:
         from backend.adapters.reference import ReferenceAdapter
         return ReferenceAdapter()
 
-    if backend == "canutes":
-        from backend.adapters.canutes import CanutesAdapter
-        return CanutesAdapter()
-
     if backend == "silexia":
         try:
             from backend.adapters.silexia import SilexiaAdapter  # plugin privé
@@ -35,7 +31,7 @@ def load_adapter() -> ConnectorAdapter:
             ) from e
         return SilexiaAdapter(_build_mcp_client())
 
-    raise RuntimeError(f"BACKEND inconnu : {backend!r} (attendu : canutes | reference | silexia).")
+    raise RuntimeError(f"BACKEND inconnu : {backend!r} (attendu : reference | silexia).")
 
 
 def _build_mcp_client():

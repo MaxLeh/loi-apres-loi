@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silexia · Fiche-loi enrichie — maquette adaptative</title>
+<title>La loi après la loi — Hackathon Assemblée nationale 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,12 +28,19 @@ body{font-family:var(--fb);background:var(--bg);color:var(--ink);line-height:1.5
 /* top bar */
 .topbar{background:var(--deep);color:#fff;padding:11px 0}
 .topbar .row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.tb-brand{display:flex;align-items:center;gap:11px}
-.tb-logo{width:30px;height:30px;border:1.4px solid var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;color:var(--gold);font-size:15px}
-.tb-brand b{font-family:var(--fd);font-size:15px}
-.tb-brand span{font-size:11.5px;color:#aeb7d0;letter-spacing:.03em}
-.breadcrumb{font-family:var(--fm);font-size:11px;color:#aeb7d0}
-.breadcrumb b{color:#e9c878}
+.topbar .tb-title{font-family:var(--fd);font-size:18px;font-weight:700;color:#fff;letter-spacing:.01em}
+.tb-credit{font-size:11.5px;color:#aeb7d0;text-align:right;line-height:1.45}
+.tb-credit b{color:#e9c878;font-weight:600}
+.tb-credit .tb-org{color:#c4cce0}
+/* bandeau blanc — logo Hackathon Assemblée nationale */
+.hackhead{background:#fff;padding:20px 0 18px;border-bottom:1px solid var(--border)}
+.hacklogo{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.hh-top{font-family:var(--fd);font-weight:400;font-size:27px;color:#41525f;letter-spacing:.015em}
+.hh-badge{display:inline-flex;align-items:center;gap:9px;background:#82e0a3;border-radius:24px;padding:7px 21px}
+.hh-spark{color:#159a63;font-size:15px;line-height:1}
+.hh-name{font-family:var(--fd);font-weight:600;font-size:22px;color:#123a4f}
+.hh-year{font-family:var(--fb);font-weight:700;font-size:20px;color:#123a4f}
+@media(max-width:640px){.tb-credit{text-align:left;flex-basis:100%}.hh-top{font-size:22px}.hh-name{font-size:19px}.hh-year{font-size:17px}}
 
 /* law selector */
 .lawbar{background:#101a33;border-bottom:1px solid rgba(255,255,255,.07);padding:13px 0}
@@ -46,6 +53,42 @@ body{font-family:var(--fb);background:var(--bg);color:var(--ink);line-height:1.5
 .lawpill:hover{background:rgba(255,255,255,.1);color:#fff}
 .lawpill.active{background:var(--gold);border-color:var(--gold);color:#231a07}
 .lawpill.active .pl-d{color:#5c4715}
+/* --- Barre de recherche en langage naturel (le « money shot ») --- */
+.nlsearch{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:4px 5px 4px 40px;position:relative;transition:.15s}
+.nlsearch:focus-within{border-color:var(--gold);background:rgba(255,255,255,.1)}
+.nlsearch .nl-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#8a96b8;font-size:17px}
+#nlq{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-family:var(--fb);font-size:15px;padding:9px 4px}
+#nlq::placeholder{color:#8a96b8}
+#nlbtn{flex:0 0 auto;font-family:var(--fb);font-size:13.5px;font-weight:600;color:#231a07;background:var(--gold);border:none;border-radius:9px;padding:9px 20px;cursor:pointer;transition:.15s}
+#nlbtn:hover{filter:brightness(1.07)}
+#nlbtn:disabled{opacity:.55;cursor:progress}
+.nl-status{font-family:var(--fm);font-size:12px;color:#c4cce0;margin-top:10px;display:flex;align-items:center;gap:8px}
+.nl-status.err{color:#ffb4a8}.nl-status.ok{color:#9fe0b0}
+.nl-status .spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:var(--gold);border-radius:50%;animation:nlspin .7s linear infinite;flex:0 0 auto}
+@keyframes nlspin{to{transform:rotate(360deg)}}
+.nl-examples{margin-top:13px}
+body.nl-loading .fiche,body.nl-loading main{opacity:.5;transition:opacity .2s}
+/* résolution : compréhension LLM (confiance + désambiguïsation) */
+.nl-resolution{font-family:var(--fb);font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.nl-resolution .nlr-info{color:#9fb0d0}
+.nl-resolution .nlr-info b{color:#e9c878;font-weight:600}
+.nl-resolution .nlr-alt-label{color:#8a96b8;margin-left:4px}
+.nlr-alt{font-family:var(--fb);font-size:12px;font-weight:600;color:#c4cce0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);padding:5px 11px;border-radius:8px;cursor:pointer;transition:.15s}
+.nlr-alt:hover{background:var(--gold);border-color:var(--gold);color:#231a07}
+.nlr-fam{color:#e9c878;font-weight:600}
+.nlr-alt.cur{background:rgba(233,200,120,.9);border-color:var(--gold);color:#231a07;cursor:default}
+.nlr-alt.cur:hover{background:rgba(233,200,120,.9);color:#231a07}
+/* classification LLM des textes d'application (union + étiquetage) */
+.tgbadge{display:inline-block;font-family:var(--fm);font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle;letter-spacing:.02em;white-space:nowrap}
+.tg-ok{background:#e3f5e9;color:#1a7a3e;border:1px solid #b8e6c8}
+.tg-cite{background:#fdf3e0;color:#9a6a1e;border:1px solid #f0dcae}
+.tg-codif{background:#f0eef2;color:#6b6478;border:1px solid #ddd6e2}
+.relitem.dimmed{opacity:.62}
+/* lien source de la loi + étiquette « synthèse IA » (fiche header, fond navy) */
+.lawmeta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:12px}
+.lawsrc{font-family:var(--fm);font-size:12px;font-weight:600;color:#e9c878;text-decoration:none;border:1px solid rgba(233,200,120,.38);padding:6px 12px;border-radius:8px;transition:.15s}
+.lawsrc:hover{background:rgba(233,200,120,.14);border-color:var(--gold)}
+.synthflag{font-family:var(--fm);font-size:11px;color:#aeb7d0;font-style:italic}
 
 /* fiche header */
 .fiche{background:linear-gradient(165deg,#15203f 0%,#1e2d5e 55%,#26407a 100%);color:#fff;padding:30px 0 26px;position:relative;overflow:hidden}
@@ -131,9 +174,9 @@ svg.constellation{width:100%;height:auto;display:block}
 .railcard{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:18px}
 .railcard h4{font-family:var(--fd);font-weight:600;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .toc{list-style:none;display:flex;flex-direction:column;gap:2px}
-.toc li{font-size:13px;color:var(--ink);padding:8px 10px;border-radius:8px;display:flex;gap:9px;align-items:baseline}
+.toc li{font-size:12.5px;color:var(--ink2);padding:8px 10px;border-radius:8px;display:flex;flex-direction:column;gap:3px;line-height:1.4}
 .toc li:nth-child(odd){background:var(--bg)}
-.toc li .art{font-family:var(--fm);font-size:11px;color:var(--gold);font-weight:600;flex:0 0 auto}
+.toc li .art{font-family:var(--fm);font-size:10.5px;color:var(--gold);font-weight:700;letter-spacing:.03em;text-transform:uppercase}
 .minigraph{display:flex;flex-direction:column;gap:9px}
 .mg{display:flex;align-items:center;gap:10px}
 .mg .lbl{font-size:12.5px;color:var(--ink2);flex:0 0 118px}
@@ -164,6 +207,16 @@ svg.constellation{width:100%;height:auto;display:block}
 .tlitem .tltitle{font-size:14px;font-weight:600;color:var(--ink);margin-top:2px;line-height:1.32}
 .tlitem .tlmeta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
 .tlitem .tlwho{font-size:11.5px;color:var(--navy);font-weight:600}
+.tlitem .tltitle a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(30,45,94,.2)}
+.tlitem .tltitle a:hover{color:var(--navy);border-color:var(--navy)}
+.tlitem .tlid{font-family:var(--fm);font-size:10.5px;color:var(--gold);margin-top:4px;word-break:break-all}
+.tlitem .tlid a{color:inherit;text-decoration:none}
+.tlitem .tlid a:hover{text-decoration:underline}
+.tlmile .mld a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.22)}
+.socle .si a{color:var(--ink2);text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+.socle .si a:hover{color:var(--navy)}
+.socle .si .siid a{color:var(--gold);border:none}
+.socle .si .siid a:hover{text-decoration:underline}
 .tlitem .tlprov{font-family:var(--fm);font-size:10px}
 .tlmile{position:relative;padding:12px 0 12px 14px;margin:4px 0}
 .tlmile .tldot{position:absolute;left:-26px;top:16px;width:20px;height:20px;border-radius:50%;background:var(--gold);border:3px solid var(--surface);box-shadow:0 0 0 2px var(--gold)}
@@ -189,14 +242,26 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
 </head>
 <body>
 
+<!-- BANDEAU BLANC — logo Hackathon Assemblée nationale -->
+<div class="hackhead">
+  <div class="wrap">
+    <div class="hacklogo" role="img" aria-label="Assemblée nationale — Hackathon 2026">
+      <span class="hh-top">Assemblée nationale</span>
+      <span class="hh-badge">
+        <span class="hh-spark">✳</span>
+        <span class="hh-name">Hackathon</span>
+        <span class="hh-year">2026</span>
+        <span class="hh-spark">✳</span>
+      </span>
+    </div>
+  </div>
+</div>
+
 <div class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="tb-brand">
-        <div class="tb-logo">S</div>
-        <div><b>Silexia</b> &nbsp;<span>Fiche-loi enrichie · maquette adaptative</span></div>
-      </div>
-      <div class="breadcrumb">Légifrance &nbsp;›&nbsp; LODA &nbsp;›&nbsp; <b id="bc">—</b></div>
+      <div class="tb-title">La loi après la loi</div>
+      <div class="tb-credit">Défi porté par <b>Maxime Lehmann</b> et <b>Clémence Paré</b> <span class="tb-org">(Silexia)</span> · avec l'aimable contribution d'<b>Anne-Frédérique Spitalier</b></div>
     </div>
   </div>
 </div>
@@ -204,8 +269,16 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
 <!-- LAW SELECTOR -->
 <div class="lawbar">
   <div class="wrap">
-    <div class="row">
-      <span class="lbl">Loi affichée</span>
+    <form class="nlsearch" id="nlform" autocomplete="off">
+      <span class="nl-ico">⌕</span>
+      <input id="nlq" type="text" aria-label="Recherche d'une loi en langage naturel"
+             placeholder="Cherchez une loi en langage naturel — « la loi plein emploi », « loi immigration 2024 », « 2023-1196 »…">
+      <button type="button" id="nlbtn">Explorer</button>
+    </form>
+    <div class="nl-status" id="nl-status" hidden></div>
+    <div class="nl-resolution" id="nl-resolution" hidden></div>
+    <div class="row nl-examples">
+      <span class="lbl">Exemples</span>
       <div class="lawpills" id="lawpills"></div>
     </div>
   </div>
@@ -221,6 +294,9 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
     </div>
     <h1 id="f-title">—</h1>
     <p class="subt" id="f-subt">—</p>
+    <div class="lawmeta">
+      <a id="f-source" class="lawsrc" target="_blank" rel="noopener" hidden>⎘ Consulter le texte sur Légifrance</a>
+    </div>
     <div class="idgrid">
       <div class="idcell"><div class="k">Identifiant Légifrance</div><div class="v" id="f-legitext">—</div></div>
       <div class="idcell"><div class="k">NOR</div><div class="v gold" id="f-nor">—</div></div>
@@ -228,11 +304,6 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
       <div class="idcell"><div class="k">Publication JO</div><div class="v" id="f-pub">—</div></div>
     </div>
   </div>
-</section>
-
-<!-- KEY MEASURES -->
-<section class="measures">
-  <div class="wrap"><div class="row" id="measures"></div></div>
 </section>
 
 <main>
@@ -318,7 +389,7 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
     </div>
 
     <div class="rel" id="rel"></div>
-    <p class="note">Maquette adaptative. Le sélecteur en haut reconfigure entièrement la fiche à partir des données de chaque loi. Les identifiants Légifrance (LEGITEXT), NOR et n° de décision sont réels, remontés par les connecteurs MCP Silexia ; la couche doctrine/presse provient de Juriveille.</p>
+    <p class="note">La barre de recherche reconstruit entièrement la fiche à partir des sources officielles ouvertes. Les identifiants (LEGITEXT, NOR, décisions, halId, UID parlementaires) sont réels et cliquables vers leur source : Légifrance/PISTE (application, jurisprudence), HAL (doctrine), parlement.tricoteuses.fr (questions). La compréhension de la requête et la classification sont assurées par un LLM, sans jamais produire de fait non sourcé.</p>
   </div>
 
   <!-- RIGHT RAIL -->
@@ -347,10 +418,10 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
 <footer>
   <div class="wrap">
     <div class="footrow">
-      <div><b>Silexia</b> · Fiche-loi enrichie — maquette adaptative (sources primaires + veille)</div>
-      <div style="font-family:var(--fm)">Généré le 26/06/2026</div>
+      <div><b>La loi après la loi</b> · Défi Hackathon Assemblée nationale 2026 — équipe Silexia</div>
+      <div style="font-family:var(--fm)">100 % open data · zéro affirmation non sourcée</div>
     </div>
-    <p class="note">Maquette de démonstration. Données réelles issues des connecteurs MCP Silexia (Légifrance / Conseil d'État) et de l'environnement Juriveille (juin 2026). Le contrôle de constitutionnalité, lorsqu'il existe, figure au titre des textes rattachés ; sa référence est indexée via le connecteur dédié.</p>
+    <p class="note">Données réelles issues des sources officielles ouvertes : Légifrance/PISTE (Licence Ouverte Etalab), HAL, parlement.tricoteuses.fr. La couche IA (Mistral, remplaçable par un modèle open-weight) ne fait que comprendre la requête et classer des textes déjà sourcés — chaque nœud porte un identifiant vérifiable et cliquable. Le contrôle de constitutionnalité, lorsqu'il existe, figure au titre des textes rattachés.</p>
   </div>
 </footer>
 
@@ -370,152 +441,883 @@ const PROV={
 };
 
 const LAWS={
-  /* ============ LIBERTÉ DE LA PRESSE — 29 juillet 1881 (constellation enrichie — données réelles, connecteurs officiels) ============ */
-  presse:{
-    pillName:"Liberté de la presse", pillDesc:"presse · 1881",
-    short:"1881", cdate:"29 juil. 1881",
-    title:"Loi du 29 juillet 1881 sur la liberté de la presse",
-    subt:"Socle de la liberté d'expression et d'information : régit les délits de presse (diffamation, injure, provocation), le droit de réponse et la responsabilité « en cascade ». Toujours en vigueur, abondamment modifiée depuis 145 ans.",
-    dom:"Libertés publiques · presse · droit pénal",
-    legitext:"LEGITEXT000006070722", nor:"LGFX0877119L", sig:"29/07/1881", pub:"30/07/1881",
-    measures:[
-      {n:"145",u:" ans",l:"en vigueur — loi du 29 juillet 1881, toujours applicable en 2026"},
-      {n:"27",u:" textes liés",l:"constellation reconstituée — chaque nœud porte un identifiant officiel vérifiable"},
-      {n:"5",u:" sources",l:"Légifrance · Judilibre · EUR-Lex · HAL · questions parlementaires"},
-      {n:"2024",u:"",l:"réforme UE en cours : EMFA + directive « procédures-bâillons » (transposition 2026)"}
+  /* ============ LOI SANTÉ AU TRAVAIL — 2021-1018 (données réelles PISTE + HAL + parlement.tricoteuses.fr) ============ */
+  sante: {
+    "pillName": "Loi santé au travail",
+    "pillDesc": "santé travail · 2021-1018",
+    "short": "2021-1018",
+    "cdate": "2 août 2021",
+    "title": "LOI n° 2021-1018 du 2 août 2021 pour renforcer la prévention en santé au travail (1)",
+    "subt": "La loi vise à renforcer les dispositifs de prévention en santé au travail. Elle encadre notamment les services de prévention et de santé au travail interentreprises et leurs modalités de fonctionnement.",
+    "dom": "Santé au travail · prévention · risques professionnels",
+    "legitext": "LEGITEXT000043886727",
+    "nor": "SSAX2103845L",
+    "sig": "02/08/2021",
+    "pub": "03/08/2021",
+    "measures": [
+      {
+        "n": "63",
+        "u": " textes liés",
+        "l": "constellation reconstituée, tous sourcés"
+      },
+      {
+        "n": "32",
+        "u": " application",
+        "l": "décrets & arrêtés (26 rattachés en dur)"
+      },
+      {
+        "n": "15",
+        "u": " décisions",
+        "l": "jurisprudence (Cour de cassation, Conseil d'État)"
+      },
+      {
+        "n": "2 août 2021",
+        "u": "",
+        "l": "loi de prévention en santé au travail, en vigueur"
+      }
     ],
-    toc:[
-      ["Art. 1","Principe : l'imprimerie et la librairie sont libres"],
-      ["Art. 29","Définition de la diffamation et de l'injure"],
-      ["Art. 32","Peines de la diffamation ; circonstances aggravantes"],
-      ["Art. 42","Responsabilité « en cascade » (directeur, auteur, imprimeur)"],
-      ["Art. 53","Formalisme de la citation — qualification et texte visé"],
-      ["Art. 65","Prescription de l'action publique : trois mois"]
+    "toc": [
+      [
+        "Financement",
+        "Un décret définit les modalités de financement des services de prévention et de santé au travail interentreprises."
+      ],
+      [
+        "Gouvernance",
+        "Un décret précise les règles de désignation des membres des conseils d'administration et commissions de contrôle de ces services."
+      ],
+      [
+        "Agrément et rapports",
+        "Un décret fixe les conditions d'agrément et les obligations de rapport d'activité des services de prévention et de santé au travail."
+      ],
+      [
+        "Document unique",
+        "Un décret établit le cahier des charges pour le déploiement et le fonctionnement du portail numérique de conservation du document unique d'évaluation des risques professionnels."
+      ]
     ],
-    tocNote:"Articles pivots de la loi. La couche pénale (diffamation, injure, provocation) concentre l'essentiel du contentieux.",
-    mgNote:"Corpus jurisprudentiel massif : la Cour de cassation applique et précise la loi de 1881 en continu. Échantillon d'arrêts de principe et récents ci-dessous (Judilibre), chacun identifié par son ECLI.",
-    related:[
-      /* ---- APPLICATION : textes qui modifient / appliquent la loi de 1881 (Légifrance) ---- */
-      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 2017-86 du 27 janvier 2017 relative à l'égalité et à la citoyenneté — réforme des délits de presse (prescriptions allongées, aggravation des provocations discriminatoires)",who:"Légifrance",date:"27/01/2017",id:"LEGITEXT000033938072 · NOR LHAL1528110L",prov:"legifrance",note:"« La loi après la loi » : refonte du régime répressif et procédural hérité de 1881."},
-      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 2014-56 du 27 janvier 2014 visant à harmoniser les délais de prescription des infractions prévues par la loi du 29 juillet 1881 commises en raison du sexe, de l'orientation ou de l'identité sexuelle ou du handicap",who:"Légifrance",date:"27/01/2014",id:"LEGITEXT000028527662 · NOR JUSX1132133L",prov:"legifrance",note:"Porte à un an la prescription de certaines infractions de presse discriminatoires."},
-      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 92-1336 du 16 décembre 1992 relative à l'entrée en vigueur du nouveau code pénal — adaptation des dispositions pénales de la loi de 1881",who:"Légifrance",date:"16/12/1992",id:"LEGITEXT000006080560 · NOR JUSX9200040L",prov:"legifrance",note:"Mise en cohérence de la loi de 1881 avec le nouveau code pénal."},
-      {f:'app',kind:'Loi',badge:'k-app',title:"Loi n° 52-336 du 25 mars 1952 modifiant certaines dispositions de la loi du 29 juillet 1881 sur la liberté de la presse",who:"Légifrance",date:"25/03/1952",id:"LEGITEXT000006068109",prov:"legifrance",note:"Illustration de la sédimentation : la loi de 1881 est déjà retouchée au milieu du XXe siècle."},
-      /* ---- CONNEXES : droit interne + droit de l'Union (Légifrance, EUR-Lex) ---- */
-      {f:'con',kind:'Loi',badge:'k-con',title:"Loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN) — responsabilité des contenus en ligne, en articulation avec la loi de 1881",who:"Légifrance",date:"21/06/2004",id:"LEGITEXT000005789847 · NOR ECOX0200175L",prov:"legifrance",note:"Étend le régime des délits de presse à la communication au public en ligne."},
-      {f:'con',kind:'Règlement UE',badge:'k-con',title:"Règlement (UE) 2024/1083 du 11 avril 2024 établissant un cadre commun pour les services de médias dans le marché intérieur (European Media Freedom Act)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024R1083",prov:"eurlex",note:"Cadre européen sur le pluralisme et la protection des sources — appelle une adaptation du droit interne de la presse."},
-      {f:'con',kind:'Directive UE',badge:'k-con',title:"Directive (UE) 2024/1069 du 11 avril 2024 sur la protection des personnes qui participent au débat public contre les procédures judiciaires abusives (« poursuites-bâillons » / anti-SLAPP)",who:"Parlement européen & Conseil / EUR-Lex",date:"11/04/2024",id:"CELEX 32024L1069",prov:"eurlex",note:"Transposition attendue en 2026 — protège notamment les journalistes poursuivis sur le fondement de la loi de 1881."},
-      /* ---- JURISPRUDENCE : échantillon réel Cour de cassation (Judilibre) ---- */
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 12 mai 2026, n° 25-81.556 — diffamation publique envers un particulier (directeur de la publication et journaliste)",who:"Cour de cassation / Judilibre",date:"12/05/2026",id:"ECLI:FR:CCASS:2026:CR00595 · n° 25-81.556",prov:"judilibre",note:"Arrêt récent : effet du désistement du plaignant sur l'action publique en matière de presse."},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 30 septembre 2025, n° 25-82.378 — diffamation (sur arrêt de la cour d'appel de Reims)",who:"Cour de cassation / Judilibre",date:"30/09/2025",id:"ECLI:FR:CCASS:2025:CR01401 · n° 25-82.378",prov:"judilibre",note:""},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 22 janvier 2025, n° 23-87.077 — propos rapportés dans un article de presse",who:"Cour de cassation / Judilibre",date:"22/01/2025",id:"ECLI:FR:CCASS:2025:CR00214 · n° 23-87.077",prov:"judilibre",note:""},
-      {f:'jur',kind:'Cass. Ass. plén.',badge:'k-jur',title:"Cour de cassation, assemblée plénière, 15 février 2013, n° 11-14.637 — art. 53 : précision et qualification du fait incriminé, à peine de nullité",who:"Cour de cassation / Judilibre",date:"15/02/2013",id:"ECLI:FR:CCASS:2013:PL00606 · n° 11-14.637",prov:"judilibre",note:"Arrêt de principe (assemblée plénière) sur le formalisme de l'article 53."},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 9 décembre 2014, n° 13-85.401 — injure publique et limites de la liberté d'expression dans le débat politique (art. 10 CEDH)",who:"Cour de cassation / Judilibre",date:"09/12/2014",id:"ECLI:FR:CCASS:2014:CR06506 · n° 13-85.401",prov:"judilibre",note:"Contrôle de proportionnalité de l'ingérence au regard de l'article 10 de la Convention EDH."},
-      {f:'jur',kind:'Cass. 1re civ.',badge:'k-jur',title:"Cour de cassation, première chambre civile, 14 janvier 2016, n° 14-28.327 — responsabilité civile et article 42 de la loi de 1881",who:"Cour de cassation / Judilibre",date:"14/01/2016",id:"ECLI:FR:CCASS:2016:C100044 · n° 14-28.327",prov:"judilibre",note:""},
-      {f:'jur',kind:'Cass. 1re civ.',badge:'k-jur',title:"Cour de cassation, première chambre civile, 2 avril 2009, n° 08-10.926 — définition de la diffamation et de l'injure (art. 29 et 32)",who:"Cour de cassation / Judilibre",date:"02/04/2009",id:"ECLI:FR:CCASS:2009:C100418 · n° 08-10.926",prov:"judilibre",note:""},
-      {f:'jur',kind:'Cass. crim.',badge:'k-jur',title:"Cour de cassation, chambre criminelle, 14 février 2012, n° 11-81.954 — garde à vue et délits de presse punis d'emprisonnement",who:"Cour de cassation / Judilibre",date:"14/02/2012",id:"ECLI:FR:CCASS:2012:CR01173 · n° 11-81.954",prov:"judilibre",note:""},
-      /* ---- DOCTRINE : accès ouvert (HAL) ---- */
-      {f:'doc',kind:'Article',badge:'k-doc',title:"Un an de droit de la presse (juillet 2024 - juin 2025)",who:"T. Besse — HAL",date:"2025",id:"HAL halshs-05288647",prov:"hal",note:"Panorama annuel de la jurisprudence et de l'actualité de la loi de 1881."},
-      {f:'doc',kind:'Article',badge:'k-doc',title:"Loi de 1881 : constitutionnalité de l'allongement de la prescription, inconstitutionnalité des exceptions à l'exceptio veritatis",who:"J.-B. Perrier — HAL",date:"2013",id:"HAL halshs-02226056",prov:"hal",note:"Commentaire de la décision QPC sur la prescription des délits de presse."},
-      {f:'doc',kind:'Chapitre',badge:'k-doc',title:"Blasphème, diffamation, injure : la religion devant la liberté de la presse",who:"P. Rolland — HAL",date:"2017",id:"HAL halshs-01588675",prov:"hal",note:""},
-      {f:'doc',kind:'Article',badge:'k-doc',title:"Rumeur et liberté d'expression : entre mensonge et vérité",who:"N. Mallet-Poujol — HAL",date:"2018",id:"HAL halshs-01947275",prov:"hal",note:""},
-      {f:'doc',kind:'Article',badge:'k-doc',title:"Mise en examen pour injure ou diffamation : l'absence d'information sur le droit au silence est contraire à la Constitution",who:"S. Lavric — HAL",date:"2024",id:"HAL hal-04615071",prov:"hal",note:"Écho doctrinal aux QPC procédurales sur les délits de presse."},
-      {f:'doc',kind:'Communication',badge:'k-doc',title:"Droit de la presse — rencontre autour de l'ouvrage",who:"E. Raschel — HAL",date:"2026",id:"HAL halshs-05569922",prov:"hal",note:""},
-      /* ---- PARLEMENT : questions écrites AN + Sénat (open data) ---- */
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Transposition de la directive européenne sur les procédures-bâillons",who:"Assemblée nationale (ECOS)",date:"26/05/2026",id:"QANR5L17QE15420 — en attente de réponse",prov:"qp",note:"Interroge le périmètre de la transposition de la directive (UE) 2024/1069."},
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Procédures-bâillon",who:"Assemblée nationale (SOC)",date:"30/06/2026",id:"QANR5L17QE16457 — en attente de réponse",prov:"qp",note:"Demande un renforcement des sanctions contre les poursuites abusives visant médias et lanceurs d'alerte."},
-      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Liberté de la presse et sécurité des journalistes",who:"Sénat — A. Souyris (GEST)",date:"25/09/2025",id:"Sénat qSEQ250906189 — RÉPONDUE",prov:"qp",note:"Réponse du ministère de l'Intérieur (12/02/2026)."},
-      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Conséquences pour la liberté de la presse du Schéma national des violences urbaines",who:"Sénat — S. Briante Guillemont (RDSE)",date:"18/09/2025",id:"Sénat qSEQ250906152 — RÉPONDUE",prov:"qp",note:""},
-      {f:'par',kind:'QE Sénat',badge:'k-par',title:"Incarcération du journaliste Christophe Gleizes",who:"Sénat — S. Demilly (UC)",date:"12/02/2026",id:"Sénat qSEQ260207625 — RÉPONDUE",prov:"qp",note:"Liberté de la presse à l'étranger — réponse du ministère de l'Europe et des affaires étrangères (04/06/2026)."},
-      {f:'par',kind:'Question AN',badge:'k-par',title:"Moyens de garantir la dignité humaine dans les médias",who:"Assemblée nationale (DR)",date:"20/01/2026",id:"QANR5L17QE12327 — RÉPONDUE",prov:"qp",note:"Réponse du ministère de la Culture (05/05/2026)."}
+    "tocNote": "Points clés — synthèse IA à partir des textes officiels rattachés, vérifiable via les sources.",
+    "mgNote": "Prévention en santé au travail : services de prévention interentreprises, document unique (DUERP), suivi et traçabilité des expositions.",
+    "related": [
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1749 du 30 décembre 2022 relatif au financement des services de prévention et de santé au travail interentreprises",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046861344",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046861344",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2023-704 du 31 juillet 2023 relatif aux modalités de désignation des membres des conseils d'administration et commissions de contrôle des services de prévention et de santé au travail interentreprises",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000047916526",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047916526",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1435 du 15 novembre 2022 relatif à l'agrément et aux rapports d'activité des services de prévention et de santé au travail",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046562751",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046562751",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-487 du 5 avril 2022 relatif au cahier des charges du déploiement et du fonctionnement du portail numérique de conservation du document unique d'évaluation des risques professionnels et aux statuts de l'organisme gestionnaire du portail",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000045513170",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000045513170",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-681 du 26 avril 2022 relatif aux modalités de prévention des risques professionnels et de suivi en santé au travail des travailleurs indépendants, des salariés des entreprises extérieures et des travailleurs d'entreprises de travail temporaire",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000045670861",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000045670861",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2023-1302 du 27 décembre 2023 relatif au médecin praticien correspondant",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000048711560",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000048711560",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2023-547 du 30 juin 2023 relatif au suivi de l'état de santé des travailleurs ayant plusieurs employeurs",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000047775829",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047775829",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-395 du 18 mars 2022 relatif au document unique d'évaluation des risques professionnels et aux modalités de prise en charge des formations en matière de santé, de sécurité et de conditions de travail par les opérateurs de compétences",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000045384525",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000045384525",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2023-670 du 26 juillet 2023 modifiant le décret n° 2022-1510 du 30 novembre 2022 relatif aux référentiels et aux principes guidant l'élaboration du cahier des charges de certification des services de santé au travail en agriculture",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000047898616",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047898616",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1031 du 20 juillet 2022 relatif aux référentiels et aux principes guidant l'élaboration du cahier des charges de certification des services de prévention et de santé au travail interentreprises",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046077875",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046077875",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1712 du 29 décembre 2022 relatif à l'approbation de la délibération du comité national de prévention et de santé au travail du conseil d'orientation des conditions de travail fixant les modalités de mise en œuvre du passeport de prévention et de sa mise à la disposition de l'employeur",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046839278",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046839278",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1510 du 30 novembre 2022 relatif aux référentiels et aux principes guidant l'élaboration du cahier des charges de certification des services de santé au travail en agriculture",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046679688",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046679688",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2021-1792 du 23 décembre 2021 relatif à la composition et au fonctionnement du Conseil d'orientation des conditions de travail et des comités régionaux",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000044630402",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000044630402",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1650 du 23 décembre 2022 portant dispositions relatives aux agents contractuels de l'Agence nationale pour l'amélioration des conditions de travail",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046814444",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046814444",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2026-321 du 28 avril 2026 relatif à la transmission d'informations des services de prévention et de santé au travail au service du contrôle médical prévue à l'article L. 4622-2-1 du code du travail et à l'article L. 315-4 du code de la sécurité sociale",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000053976400",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000053976400",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 3 mars 2025 modifiant l'arrêté du 16 octobre 2017 fixant le modèle d'avis d'aptitude, d'avis d'inaptitude, d'attestation de suivi individuel de l'état de santé et de proposition de mesures d'aménagement de poste",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000051331719",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051331719",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 5 novembre 2024 abrogeant l'arrêté du 26 septembre 2024 modifiant l'arrêté du 16 octobre 2017 fixant le modèle d'avis d'aptitude, d'avis d'inaptitude, d'attestation de suivi individuel de l'état de santé et de proposition de mesures d'aménagement de poste",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000050628045",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050628045",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 26 septembre 2024 modifiant l'arrêté du 16 octobre 2017 fixant le modèle d'avis d'aptitude, d'avis d'inaptitude, d'attestation de suivi individuel de l'état de santé et de proposition de mesures d'aménagement de poste",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000050326876",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050326876",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 21 mars 2024 fixant le cahier des charges de l'expérimentation d'actions de prévention collective à destination des salariés d'entreprises de travail temporaire",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000049324641",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049324641",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 22 décembre 2022 instituant un comité social d'administration d'établissement public administratif à l'Agence nationale pour l'amélioration des conditions de travail",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000046787298",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000046787298",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 5 mai 2025 modifiant l'arrêté du 20 décembre 2017 fixant le modèle d'avis d'aptitude, d'avis d'inaptitude, d'attestation de suivi individuel de l'état de santé et de proposition de mesures d'aménagement de poste",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000051589295",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051589295",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 6 mai 2026 modifiant les arrêtés du 16 octobre 2017 et du 20 décembre 2017 fixant le modèle d'avis d'aptitude, d'avis d'inaptitude, d'attestation de suivi individuel de l'état de santé et de proposition de mesures d'aménagement de poste et l'arrêté du 26 septembre 2025 fixant les modèles d'attestation d'absence de contre-indications médicales à la conduite et à la réalisation de certaines opérations, prévues aux articles R. 4323-56 et R. 4544-9 du code du travail",
+        "who": "Légifrance",
+        "date": "",
+        "id": "LEGITEXT000054058385",
+        "prov": "legifrance",
+        "note": "",
+        "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054058385",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-1664 du 27 décembre 2022 relatif à la formation spécifique des infirmiers de santé au travail",
+        "who": "Légifrance",
+        "date": "28/12/2022",
+        "id": "JORFTEXT000046820414",
+        "prov": "legifrance",
+        "note": "Pris pour l'application de la loi n° 2021-1018, notamment en précisant les modalités de formation des infirmiers de santé au travail.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046820414",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Décret",
+        "title": "Décret n° 2022-624 du 22 avril 2022 relatif à l'Agence nationale pour l'amélioration des conditions de travail et à la surveillance du marché des équipements de travail et des équipements de protection individuelle",
+        "who": "Légifrance",
+        "date": "24/04/2022",
+        "id": "JORFTEXT000045640699",
+        "prov": "legifrance",
+        "note": "Mentionne la loi n° 2021-1018 sans en être une mesure d'application directe, dans le cadre de la surveillance du marché des équipements de travail.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000045640699",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 30 juin 2023 portant extension d'un avenant à la convention collective nationale du tourisme social et familial (n° 1316)",
+        "who": "Légifrance",
+        "date": "13/07/2023",
+        "id": "JORFTEXT000047816912",
+        "prov": "legifrance",
+        "note": "Extension d'un avenant à une convention collective, sans lien direct avec l'application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000047816912",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 1er juillet 2022 portant extension d'un avenant à la convention collective nationale de la branche de l'aide, de l'accompagnement, des soins et des services à domicile (n° 2941)",
+        "who": "Légifrance",
+        "date": "13/07/2022",
+        "id": "JORFTEXT000046040976",
+        "prov": "legifrance",
+        "note": "Extension d'un avenant à une convention collective, sans lien direct avec l'application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046040976",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 13 décembre 2024 portant extension d'un avenant à la convention collective nationale de la banque populaire (n° 3210)",
+        "who": "Légifrance",
+        "date": "24/12/2024",
+        "id": "JORFTEXT000050823529",
+        "prov": "legifrance",
+        "note": "Extension d'un avenant à une convention collective, sans lien direct avec l'application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050823529",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 14 décembre 2022 portant extension de la convention collective nationale de la métallurgie du 7 février 2022 et d'un accord et d'avenants la complétant ou modifiant (n° 3248)",
+        "who": "Légifrance",
+        "date": "22/12/2022",
+        "id": "JORFTEXT000046772742",
+        "prov": "legifrance",
+        "note": "Extension d'une convention collective et d'avenants, sans lien direct avec l'application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046772742",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 27 juillet 2023 fixant le cahier des charges de certification des services de prévention et de santé au travail interentreprises",
+        "who": "Légifrance",
+        "date": "01/09/2023",
+        "id": "JORFTEXT000048034238",
+        "prov": "legifrance",
+        "note": "Fixe le cahier des charges de certification des services de prévention et de santé au travail interentreprises, en application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048034238",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 10 juillet 2024 portant extension de la convention collective nationale des commissaires de justice et sociétés de ventes volontaires (n° 3250)",
+        "who": "Légifrance",
+        "date": "18/07/2024",
+        "id": "JORFTEXT000050011579",
+        "prov": "legifrance",
+        "note": "Extension d'une convention collective, sans lien direct avec l'application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050011579",
+        "tag": "citation"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 3 septembre 2025 relatif à la composition des dossiers de demande d'agrément ou de renouvellement d'agrément des services de prévention et de santé au travail et des dossiers spécifiques d'agrément des services de prévention et de santé au travail en charge du suivi des travailleurs temporaires",
+        "who": "Légifrance",
+        "date": "09/09/2025",
+        "id": "JORFTEXT000052211732",
+        "prov": "legifrance",
+        "note": "Précise les modalités de composition des dossiers de demande d'agrément des services de prévention et de santé au travail, en application de la loi n° 2021-1018",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052211732",
+        "tag": "application"
+      },
+      {
+        "f": "app",
+        "badge": "k-app",
+        "kind": "Arrêté",
+        "title": "Arrêté du 28 novembre 2023 fixant le cahier des charges de certification des services de santé au travail en agriculture",
+        "who": "Légifrance",
+        "date": "01/12/2023",
+        "id": "JORFTEXT000048493807",
+        "prov": "legifrance",
+        "note": "Fixe le cahier des charges de certification des services de santé au travail en agriculture, en application de la loi n° 2021-1018.",
+        "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048493807",
+        "tag": "application"
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Conseil d'État",
+        "title": "Conseil d'État, 4ème chambre, 23/01/2025, 476688, Inédit au recueil Lebon",
+        "who": "CETAT",
+        "date": "",
+        "id": "CETATEXT000051031025",
+        "prov": "cetat",
+        "note": "data_juri",
+        "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000051031025",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Conseil d'État",
+        "title": "Conseil d'État, 1ère chambre, 29/12/2022, 461529, Inédit au recueil Lebon",
+        "who": "CETAT",
+        "date": "",
+        "id": "CETATEXT000046845540",
+        "prov": "cetat",
+        "note": "data_juri",
+        "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000046845540",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Conseil d'État",
+        "title": "Conseil d'État, 4ème - 1ère chambres réunies, 26/02/2025, 499303",
+        "who": "CETAT",
+        "date": "",
+        "id": "CETATEXT000051260437",
+        "prov": "cetat",
+        "note": "data_juri",
+        "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000051260437",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Conseil d'État",
+        "title": "Conseil d'État, 4ème - 1ère chambres réunies, 27/02/2026, 499303",
+        "who": "CETAT",
+        "date": "",
+        "id": "CETATEXT000053597927",
+        "prov": "cetat",
+        "note": "data_juri",
+        "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000053597927",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Conseil d'État",
+        "title": "Conseil d'État, 4ème - 1ère chambres réunies, 28/04/2023, 465318, Inédit au recueil Lebon",
+        "who": "CETAT",
+        "date": "",
+        "id": "CETATEXT000047523881",
+        "prov": "cetat",
+        "note": "data_juri",
+        "url": "https://www.legifrance.gouv.fr/ceta/id/CETATEXT000047523881",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 3 avril 2024, 22-15.784, Publié au bulletin",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000049385379",
+        "prov": "judilibre",
+        "note": "Rejet",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000049385379",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 21 mai 2025, 24-13.033, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000051661516",
+        "prov": "judilibre",
+        "note": "Cassation sans renvoi",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000051661516",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 17 janvier 2024, 22-17.321, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000048990930",
+        "prov": "judilibre",
+        "note": "Cassation",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000048990930",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 12 juin 2024, 23-11.695, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000049733787",
+        "prov": "judilibre",
+        "note": "Cassation partielle",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000049733787",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 19 avril 2023, 21-25.563, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000047483020",
+        "prov": "judilibre",
+        "note": "Rejet",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000047483020",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 5 novembre 2025, 24-18.932, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000052587171",
+        "prov": "judilibre",
+        "note": "Cassation",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000052587171",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 28 mai 2026, 25-12.420, Inédit",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000054218346",
+        "prov": "judilibre",
+        "note": "Rejet",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000054218346",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Cour de cassation",
+        "title": "Cour de cassation, civile, Chambre sociale, 13 mai 2026, 25-10.127, Publié au bulletin",
+        "who": "JURI",
+        "date": "",
+        "id": "JURITEXT000054110138",
+        "prov": "judilibre",
+        "note": "Cassation partielle",
+        "url": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000054110138",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Délibération CNIL",
+        "title": "Délibération n° 2025-105 du 6 novembre 2025 portant avis sur un projet de décret en Conseil d’Etat relatif à la transmission d’informations du service de contrôle médical de la Caisse nationale de l’Assurance maladie aux services de prévention et de santé au travail prévue à l’article L. 315-4 du code de la sécurité sociale",
+        "who": "CNIL",
+        "date": "01/05/2026",
+        "id": "CNILTEXT000054019591",
+        "prov": "cnil",
+        "note": "data_cnil",
+        "url": "https://www.legifrance.gouv.fr/cnil/id/CNILTEXT000054019591",
+        "tag": ""
+      },
+      {
+        "f": "jur",
+        "badge": "k-jur",
+        "kind": "Délibération CNIL",
+        "title": "Délibération n° 2022-069 du 23 juin 2022 portant avis sur un projet de décret en Conseil d'Etat relatif au dossier médical en santé au travail (demande d'avis n° 22006514)",
+        "who": "CNIL",
+        "date": "11/02/2023",
+        "id": "CNILTEXT000047110868",
+        "prov": "cnil",
+        "note": "data_cnil",
+        "url": "https://www.legifrance.gouv.fr/cnil/id/CNILTEXT000047110868",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "Proposition de loi pour renforcer la prévention en santé au travail : Quelles avancées pour la prévention ?",
+        "who": "Loïc Lerouge",
+        "date": "2021-06-17",
+        "id": "halshs-03265070",
+        "prov": "hal",
+        "note": "",
+        "url": "https://shs.hal.science/halshs-03265070v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "DUERP : les enseignements de la pandémie (premier regard sur la loi n° 2021-1018 du 2 août 2021 pour renforcer la prévention en santé au travail)",
+        "who": "Virginie Le Blan",
+        "date": "2022-04-06",
+        "id": "hal-04528962",
+        "prov": "hal",
+        "note": "",
+        "url": "https://hal.science/hal-04528962v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "L’avenir de la santé au travail et la loi du 2 août 2021 pour renforcer la prévention en santé au travail",
+        "who": "Loïc Lerouge",
+        "date": "2021-11-20",
+        "id": "halshs-03441350",
+        "prov": "hal",
+        "note": "",
+        "url": "https://shs.hal.science/halshs-03441350v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "La place de la représentation du personnel et du dialogue social en matière de santé au travail et de prévention des risques professionnels, après les réformes de 2020 – 2021",
+        "who": "Marc Vericel",
+        "date": "2021-11",
+        "id": "halshs-04103504",
+        "prov": "hal",
+        "note": "",
+        "url": "https://shs.hal.science/halshs-04103504v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "Les risques professionnels à la pêche : prévention et responsabilisation",
+        "who": "Patrick Chaumette",
+        "date": "2021",
+        "id": "hal-04010545",
+        "prov": "hal",
+        "note": "",
+        "url": "https://nantes-universite.hal.science/hal-04010545v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "La prévention de la pénibilité au travail",
+        "who": "Khaoula El Allagui",
+        "date": "2025-12-16",
+        "id": "tel-05587038",
+        "prov": "hal",
+        "note": "",
+        "url": "https://theses.hal.science/tel-05587038v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "Renforcer la prévention en santé au travail. Propos introductifs",
+        "who": "Sophie Fantoni Quinton, Isabelle Desbarats",
+        "date": "2021-11-01",
+        "id": "hal-03543935",
+        "prov": "hal",
+        "note": "",
+        "url": "https://lilloa.hal.science/hal-03543935v1",
+        "tag": ""
+      },
+      {
+        "f": "doc",
+        "badge": "k-doc",
+        "kind": "Article de revue",
+        "title": "Le maintien en emploi dans la nouvelle Loi pour renforcer la prévention en santé au travail de 2021 : une ambition renouvelée",
+        "who": "Sophie Fantoni Quinton",
+        "date": "2021-11-01",
+        "id": "hal-03659043",
+        "prov": "hal",
+        "note": "",
+        "url": "https://lilloa.hal.science/hal-03659043v1",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Manque de moyens des services sociaux départementaux",
+        "who": "Mme Cendrine Chazé",
+        "date": "30/06/2026",
+        "id": "QANR5L17QE16394",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16394QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Sécurité des soignants en psychiatrie",
+        "who": "Mme Christelle D'Intorni",
+        "date": "30/06/2026",
+        "id": "QANR5L17QE16420",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16420QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Protection des travailleurs face aux épisodes caniculaires",
+        "who": "M. Thierry Sother",
+        "date": "30/06/2026",
+        "id": "QANR5L17QE16339",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16339QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Protéger les enfants face au cadmium",
+        "who": "M. Rodrigo Arenas",
+        "date": "23/06/2026",
+        "id": "QANR5L17QE16179",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16179QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Suivi des personnes victimes d'AVC",
+        "who": "M. Jean-Luc Warsmann",
+        "date": "23/06/2026",
+        "id": "QANR5L17QE16311",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16311QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Prise en compte des troubles psychiatriques dans le plan national canicule",
+        "who": "Mme Ségolène Amiot",
+        "date": "23/06/2026",
+        "id": "QANR5L17QE16309",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16309QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Algie vasculaire de la face (AVF)",
+        "who": "Mme Audrey Abadie-Amiel",
+        "date": "16/06/2026",
+        "id": "QANR5L17QE16018",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-16018QE.htm",
+        "tag": ""
+      },
+      {
+        "f": "par",
+        "badge": "k-par",
+        "kind": "Question écrite AN",
+        "title": "Progression arrêts de travail longue durée liés aux troubles de la santé mentale",
+        "who": "Mme Sophie Blanc",
+        "date": "16/06/2026",
+        "id": "QANR5L17QE15909",
+        "prov": "qp",
+        "note": "Déposée",
+        "url": "https://questions.assemblee-nationale.fr/q17/17-15909QE.htm",
+        "tag": ""
+      }
     ]
   },
-  /* ============ LFI 2026 ============ */
-  lfi2026:{
-    pillName:"LFI 2026", pillDesc:"finances · 2026-103",
-    short:"2026-103", cdate:"19 fév. 2026",
-    title:"LOI n° 2026-103 du 19 février 2026 de finances pour 2026",
-    subt:"Loi de finances initiale. Porte notamment le gel de la DGF, le dispositif de lissage conjoncturel (DILICO), l'abondement du fonds de sauvegarde des départements et la hausse de la cotisation CNRACL.",
-    dom:"Finances publiques · collectivités",
-    legitext:"LEGITEXT000053511213", nor:"CPPX2524517L", sig:"19/02/2026", pub:"20/02/2026",
-    measures:[
-      {n:"27,4",u:" Md€",l:"DGF gelée, non indexée sur l'inflation"},
-      {n:"140",u:" M€",l:"DILICO à la charge des départements"},
-      {n:"600",u:" M€",l:"Abondement du fonds de sauvegarde des départements"},
-      {n:"+1,2",u:" Md€",l:"Surcoût CNRACL pour les budgets locaux"}
-    ],
-    toc:[
-      ["DGF","Gel de la dotation globale de fonctionnement à 27,4 Md€"],
-      ["DILICO","Lissage conjoncturel — 740 M€ (dont 140 M€ départements)"],
-      ["FDS","Fonds de sauvegarde des départements abondé de 600 M€"],
-      ["CNRACL","Hausse du taux de cotisation employeur (+3 pts étalés)"],
-      ["Fonds vert","Crédits ramenés à ~1,91 Md€ (−16 %)"],
-      ["Élu local","59 M€ fléchés vers le statut de l'élu local"]
-    ],
-    tocNote:"Dispositions intéressant le bloc départemental — sourcées AMF / ADF / Banque des territoires.",
-    mgNote:"Loi récente : la couche jurisprudentielle s'enrichira via Judilibre & Conseil d'État.",
-    related:[
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-363 du 8 mai 2026 portant diverses mesures relatives aux dotations de l'État aux collectivités territoriales et à la péréquation des ressources fiscales",who:"DGCL / Légifrance",date:"10/05/2026",id:"LEGITEXT000054056404 · NOR ATDB2605441D",prov:"legifrance",note:"Texte d'application central pour le volet collectivités."},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 15 avril 2026 — attributions individuelles de DGF aux collectivités et EPCI au titre de 2026 (art. L. 1613-5-1 CGCT)",who:"DGCL / Légifrance",date:"12/05/2026",id:"LEGITEXT000054064339 · NOR ATDB2608826A",prov:"legifrance",note:""},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 11 mai 2026 — dotation « conditions d'exercice des mandats locaux » (art. L. 2335-1 CGCT)",who:"DGCL / Légifrance",date:"23/06/2026",id:"LEGITEXT000054299153 · NOR ATDB2609741A",prov:"legifrance",note:""},
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-108 du 19 février 2026 pris en application de l'article 44 de la loi organique relative aux lois de finances",who:"Ministère / Légifrance",date:"20/02/2026",id:"LEGITEXT000053510983 · NOR CPPB2604304D",prov:"legifrance",note:""},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 16 avril 2026 relatif à l'application de l'article 184 de la loi de finances pour 2026",who:"Ministère / Légifrance",date:"19/04/2026",id:"LEGITEXT000053913012 · NOR ECOR2605762A",prov:"legifrance",note:""},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 5 mars 2026 relatif à la gestion et au contrôle budgétaires de l'État jusqu'au 31 décembre 2026",who:"Direction du budget / Légifrance",date:"08/03/2026",id:"LEGITEXT000053638341 · NOR CPPB2606525A",prov:"legifrance",note:""},
-      {f:'con',kind:'Loi organique',badge:'k-con',title:"LOI organique n° 2001-692 du 1er août 2001 relative aux lois de finances (LOLF)",who:"Visa fondateur / Légifrance",date:"02/08/2001",id:"Texte de référence — cadre organique",prov:"legifrance",note:"Fondement constitutionnel de la loi de finances."},
-      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2025-1249 du 22 décembre 2025 portant création d'un statut de l'élu local",who:"Légifrance",date:"22/12/2025",id:"LEGITEXT000053145205 — financé par la LFI (59 M€)",prov:"legifrance",note:"La LFI 2026 fléche les crédits de la dotation élu local."},
-      {f:'con',kind:'Ordonnance',badge:'k-con',title:"Ordonnance n° 2026-468 du 10 juin 2026 portant extension outre-mer du statut de l'élu local",who:"Légifrance",date:"11/06/2026",id:"LEGITEXT000054230901 · NOR MOMO2610008R",prov:"legifrance",note:""},
-      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2025-127 du 14 février 2025 de finances pour 2025",who:"Légifrance",date:"14/02/2025",id:"LEGITEXT000051172988 — exercice antérieur",prov:"legifrance",note:"Référence pour l'évolution des dotations."},
-      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Notification des attributions individuelles de la dotation élu local",who:"Cabinet Landot & associés",date:"23/06/2026",id:"blog.landot-avocats.net",prov:"juriveille",note:"Commente directement l'arrêté du 11 mai 2026 ci-dessus."},
-      {f:'doc',kind:'Veille pro',badge:'k-doc',title:"Collectivités locales : un décret et un arrêté pris pour application de la loi de finances pour 2026",who:"Weka — fonction publique",date:"2026",id:"weka.fr — veille finances locales",prov:"juriveille",note:""},
-      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Pérennisation de la rupture conventionnelle dans la fonction publique",who:"CNB — Blogs des avocats",date:"19/06/2026",id:"consultation.avocat.fr",prov:"juriveille",note:""},
-      {f:'jur',kind:'Conseil constit.',badge:'k-jur',title:"Contrôle de constitutionnalité a priori de la loi de finances pour 2026 (décision DC)",who:"Conseil constitutionnel",date:"févr. 2026",id:"Référence indexée via le connecteur CONSTIT",prov:"constit",note:"Saisine de droit pour les lois de finances — décision rendue avant promulgation."},
-      {f:'jur',kind:'Juge administ.',badge:'k-jur',title:"FNP-DMTO : non-conformité de la clé de répartition relevée par le juge administratif (à l'origine de la clarification opérée par la LFI 2026)",who:"Conseil d'État / Légifrance",date:"contexte 2024-2026",id:"Jurisprudence liée — péréquation des DMTO",prov:"cetat",note:"Illustre la veille remontant à la source d'un article de la loi."},
-      {f:'par',kind:'Presse instit.',badge:'k-par',title:"Finances locales : l'AMF appelle l'État à « en finir avec les erreurs du passé »",who:"Maires Infos — AMF",date:"26/06/2026",id:"maire-info.com",prov:"juriveille",note:"Préparation du budget 2027 dans le prolongement de la LFI 2026."},
-      {f:'par',kind:'Presse instit.',badge:'k-par',title:"Assises des petites villes : revitalisation, réindustrialisation… et baisse des dotations",who:"Banque des territoires (Localtis)",date:"19/06/2026",id:"banquedesterritoires.fr",prov:"juriveille",note:""},
-      {f:'par',kind:'Travaux Sénat',badge:'k-par',title:"Le Sénat reprend l'idée d'un « 1 % ingénierie » sanctuarisé sur les dotations",who:"Banque des territoires (Localtis)",date:"19/06/2026",id:"rapport sénatorial — dotations",prov:"juriveille",note:""},
-      {f:'par',kind:'Presse locale',badge:'k-par',title:"« Face à la loi de finances, nous avons intérêt à faire bloc » : les intercommunalités de Bretagne",who:"Le Télégramme",date:"18/06/2026",id:"letelegramme.fr",prov:"juriveille",note:""},
-      {f:'doc',kind:'Doctrine BOFiP',badge:'k-doc',title:"BOI-IF-TFB-10-170-20 — exonération de taxe foncière des jeunes entreprises d'innovation (application des art. 23 et 40 de la LFI 2026)",who:"BOFiP — impots.gouv.fr",date:"15/04/2026",id:"BOI-IF-TFB-10-170-20",prov:"bofip",note:"Doctrine fiscale officielle, datée, appliquant directement la loi."},
-      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Hausse tendancielle des dépenses de fonctionnement des collectivités et ralentissement de leurs recettes",who:"Sénat (H. Maurey) — réponse min. du 11/02/2026",date:"11/02/2026",id:"Sénat QE — RÉPONDUE",prov:"qp",note:"Réponse ministérielle officielle éclairant l'esprit du texte."},
-      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Critères d'attribution de la dotation globale de fonctionnement des communes",who:"Sénat (F. Bonneau)",date:"21/05/2026",id:"Sénat QE — en attente de réponse",prov:"qp",note:""}
-    ]
-  },
-
-  /* ============ STATUT ÉLU LOCAL ============ */
-  elu:{
-    pillName:"Statut de l'élu local", pillDesc:"mandats · 2025-1249",
-    short:"2025-1249", cdate:"22 déc. 2025",
-    title:"LOI n° 2025-1249 du 22 décembre 2025 portant création d'un statut de l'élu local",
-    subt:"Crée un statut de l'élu local : revalorisation des indemnités, protection sociale, congés, formation et conditions d'exercice des mandats. Financement adossé à la loi de finances.",
-    dom:"Vie politique locale · mandats",
-    legitext:"LEGITEXT000053145205", nor:"TECX2407140L", sig:"22/12/2025", pub:"23/12/2025",
-    measures:[
-      {n:"59",u:" M€",l:"fléchés par la LFI 2026 vers la dotation élu local"},
-      {n:"3",u:" textes",l:"décret, arrêté et ordonnance d'application publiés"},
-      {n:"Mars",u:" 2026",l:"municipales — pic de contentieux attendu"},
-      {n:"10",u:" textes liés",l:"application, doctrine, connexes"}
-    ],
-    toc:[
-      ["Indemnités","Revalorisation et barèmes des indemnités de fonction"],
-      ["Protection","Protection sociale et congés des élus locaux"],
-      ["Formation","Droit individuel à la formation (DIF) des élus"],
-      ["Dotation","« Conditions d'exercice des mandats locaux » (L. 2335-1 CGCT)"],
-      ["Outre-mer","Extension par ordonnance du 10 juin 2026"]
-    ],
-    tocNote:"Mesures structurant l'exercice des mandats — utiles aux services aux élus et à la DRH.",
-    mgNote:"Loi récente : contentieux électoral et inéligibilités suivis en continu via le Conseil d'État.",
-    related:[
-      {f:'app',kind:'Décret',badge:'k-app',title:"Décret n° 2026-380 du 15 mai 2026 pris pour l'application des articles 3, 9 et 40 de la loi portant création d'un statut de l'élu local",who:"DGCL / Légifrance",date:"15/05/2026",id:"LEGITEXT000054111152 · NOR ATDB2605182D",prov:"legifrance",note:"Premier décret d'application des dispositions structurantes."},
-      {f:'app',kind:'Arrêté',badge:'k-app',title:"Arrêté du 11 mai 2026 — attributions individuelles de la dotation « conditions d'exercice des mandats locaux » (art. L. 2335-1 CGCT)",who:"DGCL / Légifrance",date:"23/06/2026",id:"LEGITEXT000054299153 · NOR ATDB2609741A",prov:"legifrance",note:""},
-      {f:'app',kind:'Ordonnance',badge:'k-app',title:"Ordonnance n° 2026-468 du 10 juin 2026 — extension et adaptation outre-mer du statut de l'élu local",who:"Légifrance",date:"11/06/2026",id:"LEGITEXT000054230901 · NOR MOMO2610008R",prov:"legifrance",note:""},
-      {f:'con',kind:'Loi',badge:'k-con',title:"LOI n° 2026-103 du 19 février 2026 de finances pour 2026 — fléchage de 59 M€ vers la dotation élu local",who:"Légifrance",date:"19/02/2026",id:"LEGITEXT000053511213",prov:"legifrance",note:"Le financement du statut est porté par la loi de finances."},
-      {f:'con',kind:'Code',badge:'k-con',title:"Code général des collectivités territoriales — statut, indemnités et garanties des élus",who:"Légifrance — code consolidé",date:"à jour",id:"CGCT — articles modifiés par la loi",prov:"legifrance",note:"Version consolidée consultable à la date voulue."},
-      {f:'doc',kind:'Blog avocat',badge:'k-doc',title:"Notification des attributions individuelles de la dotation élu local",who:"Cabinet Landot & associés",date:"23/06/2026",id:"blog.landot-avocats.net",prov:"juriveille",note:"Commente l'arrêté du 11 mai 2026 ci-dessus."},
-      {f:'par',kind:'Veille pro',badge:'k-par',title:"Municipales 2026 : quelle pratique du contentieux électoral et de sécurisation des scrutins ?",who:"Weka — fonction publique",date:"2026",id:"weka.fr",prov:"juriveille",note:""},
-      {f:'jur',kind:'Veille',badge:'k-jur',title:"Contentieux électoral & inéligibilités — décisions du Conseil d'État (veille active)",who:"Conseil d'État / Judilibre",date:"en continu",id:"Indexation au fil des décisions",prov:"cetat",note:"Couche jurisprudentielle en cours d'enrichissement (loi récente)."},
-      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Modalités d'application de la revalorisation des indemnités de fonction des maires issue de la loi n° 2025-1249",who:"Sénat (S. Noël)",date:"05/03/2026",id:"Sénat QE — en attente de réponse",prov:"qp",note:"Cite expressément la loi commentée — signal d'une difficulté d'application."},
-      {f:'par',kind:'Question Sénat',badge:'k-par',title:"Revalorisation des indemnités de fonction des élus locaux par la loi du 22 décembre 2025",who:"Sénat (C. Pellevat)",date:"26/03/2026",id:"Sénat QE",prov:"qp",note:""}
-    ]
-  },
-
   /* ============ LOIS DE DÉMO — données réelles (PISTE + HAL + parlement.tricoteuses.fr) ============ */
   rsa:{
       "pillName": "Loi plein emploi",
@@ -583,10 +1385,10 @@ const LAWS={
               "title": "Décret n° 2025-208 du 4 mars 2025 relatif aux priorités pluriannuelles d'action en matière de surveillance et de contrôle des établissements et services d'accueil des enfants de moins de six ans et de contrôle, de surveillance et d'accompagnement des assistants maternels",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051293381_06-03-2025",
+              "id": "LEGITEXT000051293381",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051293381_06-03-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051293381"
           },
           {
               "f": "app",
@@ -595,10 +1397,10 @@ const LAWS={
               "title": "Décret n° 2025-819 du 13 août 2025 portant modification de l'article 49 septies Y de l'annexe III au code général des impôts",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052105922_16-08-2025",
+              "id": "LEGITEXT000052105922",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105922_16-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105922"
           },
           {
               "f": "app",
@@ -607,10 +1409,10 @@ const LAWS={
               "title": "Décret n° 2025-252 du 20 mars 2025 relatif aux éléments constitutifs de l'offre raisonnable d'emploi",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051358280_22-03-2025",
+              "id": "LEGITEXT000051358280",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358280_22-03-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358280"
           },
           {
               "f": "app",
@@ -619,10 +1421,10 @@ const LAWS={
               "title": "Décret n° 2025-253 du 20 mars 2025 relatif au schéma pluriannuel de maintien et de développement de l'offre d'accueil du jeune enfant prévus à l'article L. 214-1-3 du code de l'action sociale et des familles",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051358300_22-03-2025",
+              "id": "LEGITEXT000051358300",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358300_22-03-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051358300"
           },
           {
               "f": "app",
@@ -631,10 +1433,10 @@ const LAWS={
               "title": "Décret n° 2024-1242 du 30 décembre 2024 relatif à l'inscription, à l'orientation et au contrat d'engagement des demandeurs d'emploi",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000050924505_01-01-2025",
+              "id": "LEGITEXT000050924505",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050924505_01-01-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050924505"
           },
           {
               "f": "app",
@@ -643,10 +1445,10 @@ const LAWS={
               "title": "Décret n° 2024-584 du 24 juin 2024 relatif aux organismes chargés du repérage et de l'accompagnement spécifique des personnes les plus éloignées de l'emploi et à la rémunération de leurs bénéficiaires",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049776475_26-06-2024",
+              "id": "LEGITEXT000049776475",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049776475_26-06-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049776475"
           },
           {
               "f": "app",
@@ -655,10 +1457,10 @@ const LAWS={
               "title": "Décret n° 2025-678 du 21 juillet 2025 relatif aux modalités de répartition de l'accompagnement financier des communes de plus de 3 500 habitants pour l'exercice des compétences d'autorité organisatrice de l'accueil du jeune enfant",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051935978_23-07-2025",
+              "id": "LEGITEXT000051935978",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051935978_23-07-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051935978"
           },
           {
               "f": "app",
@@ -667,10 +1469,10 @@ const LAWS={
               "title": "Décret n° 2025-844 du 25 août 2025 relatif aux droits et aux parcours professionnels des travailleurs handicapés admis en établissements et services d'accompagnement par le travail",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052138832_28-08-2025",
+              "id": "LEGITEXT000052138832",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138832_28-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138832"
           },
           {
               "f": "app",
@@ -679,10 +1481,10 @@ const LAWS={
               "title": "Décret n° 2025-816 du 13 août 2025 relatif au délai dans lequel chaque organisme référent conclut le contrat d'engagement mentionné à l'article L. 5411-6 du code du travail avec le demandeur d'emploi dont il assure l'accompagnement au 1er janvier 2025 en Guadeloupe, en Guyane, en Martinique, à Mayotte, à La Réunion, à Saint-Barthélemy, à Saint-Martin et à Saint-Pierre-et-Miquelon",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052105881_16-08-2025",
+              "id": "LEGITEXT000052105881",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105881_16-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052105881"
           },
           {
               "f": "app",
@@ -691,10 +1493,10 @@ const LAWS={
               "title": "Décret n° 2024-1147 du 4 décembre 2024 relatif aux comités territoriaux pour l'emploi institués en Guadeloupe, en Guyane, en Martinique, à Mayotte, à La Réunion, à Saint-Barthélemy, à Saint-Martin et à Saint-Pierre-et-Miquelon",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000050737653_06-12-2024",
+              "id": "LEGITEXT000050737653",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050737653_06-12-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050737653"
           },
           {
               "f": "app",
@@ -703,10 +1505,10 @@ const LAWS={
               "title": "Décret n° 2024-99 du 10 février 2024 relatif aux entreprises adaptées et aux entreprises adaptées de travail temporaire",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049123665_12-02-2024",
+              "id": "LEGITEXT000049123665",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049123665_12-02-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049123665"
           },
           {
               "f": "app",
@@ -715,10 +1517,10 @@ const LAWS={
               "title": "Décret n° 2025-845 du 25 août 2025 relatif aux établissements et services d'accompagnement par le travail et au contrat d'accompagnement par le travail conclu avec les travailleurs admis au sein de ces établissements ou services",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052138938_28-08-2025",
+              "id": "LEGITEXT000052138938",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138938_28-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138938"
           },
           {
               "f": "app",
@@ -727,10 +1529,10 @@ const LAWS={
               "title": "Décret n° 2024-1244 du 30 décembre 2024 relatif aux délais d'orientation et d'accompagnement des demandeurs d'emploi",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000050923101_01-01-2025",
+              "id": "LEGITEXT000050923101",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050923101_01-01-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050923101"
           },
           {
               "f": "app",
@@ -739,10 +1541,10 @@ const LAWS={
               "title": "Décret du 14 janvier 2026 relatif au calendrier d'autorisation et de renouvellement pour les établissements d'accueil du jeune enfant existants avant l'application de la loi n° 2023-1196 du 18 décembre 2023 pour le plein emploi",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000053374824_17-01-2026",
+              "id": "LEGITEXT000053374824",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000053374824_17-01-2026"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000053374824"
           },
           {
               "f": "app",
@@ -751,10 +1553,10 @@ const LAWS={
               "title": "Décret n° 2025-478 du 30 mai 2025 relatif aux sanctions applicables aux demandeurs d'emploi en cas de manquement à leurs obligations",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051676587_01-06-2025",
+              "id": "LEGITEXT000051676587",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051676587_01-06-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051676587"
           },
           {
               "f": "app",
@@ -763,10 +1565,10 @@ const LAWS={
               "title": "Arrêté du 25 août 2025 fixant la base et les états justificatifs de la compensation par l'Etat des cotisations payées par les établissements et services d'accompagnement par le travail au titre de la couverture collective à adhésion obligatoire en matière de remboursements complémentaires de frais occasionnés par une maladie, une maternité ou un accident, prévue à l'article L. 344-2-10 du code de l'action sociale et des familles",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052138917_28-08-2025",
+              "id": "LEGITEXT000052138917",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138917_28-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052138917"
           },
           {
               "f": "app",
@@ -775,10 +1577,10 @@ const LAWS={
               "title": "Arrêté du 23 septembre 2025 modifiant l'arrêté du 25 août 2025 fixant la base et les états justificatifs de la compensation par l'Etat des cotisations payées par les établissements et services d'accompagnement par le travail au titre de la couverture collective à adhésion obligatoire en matière de remboursements complémentaires de frais occasionnés par une maladie, une maternité ou un accident, prévue à l'article L. 344-2-10 du code de l'action sociale et des familles",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052291301_27-09-2025",
+              "id": "LEGITEXT000052291301",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052291301_27-09-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052291301"
           },
           {
               "f": "jur",
@@ -1124,10 +1926,10 @@ const LAWS={
               "title": "Décret n° 2025-647 du 15 juillet 2025 relatif aux dispositions de l'article 20 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration et autres mesures relatives à l'évolution du contrat d'intégration républicaine",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051902505_18-07-2025",
+              "id": "LEGITEXT000051902505",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902505_18-07-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902505"
           },
           {
               "f": "app",
@@ -1136,10 +1938,10 @@ const LAWS={
               "title": "Décret n° 2024-809 du 5 juillet 2024 portant modification du dispositif de refus ou de cessation des conditions matérielles d'accueil",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049990867_17-07-2024",
+              "id": "LEGITEXT000049990867",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049990867_17-07-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049990867"
           },
           {
               "f": "app",
@@ -1148,10 +1950,10 @@ const LAWS={
               "title": "Décret n° 2026-471 du 10 juin 2026 relatif à l'exécution des mesures d'éloignement à Mayotte",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000054239222_13-06-2026",
+              "id": "LEGITEXT000054239222",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054239222_13-06-2026"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054239222"
           },
           {
               "f": "app",
@@ -1160,10 +1962,10 @@ const LAWS={
               "title": "Décret n° 2025-648 du 15 juillet 2025 portant modification du décret n° 93-1362 du 30 décembre 1993 modifié relatif aux déclarations de nationalité, aux décisions de naturalisation, de réintégration, de perte, de déchéance et de retrait de la nationalité française",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051902730_18-07-2025",
+              "id": "LEGITEXT000051902730",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902730_18-07-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051902730"
           },
           {
               "f": "app",
@@ -1172,10 +1974,10 @@ const LAWS={
               "title": "Décret n° 2025-756 du 1er août 2025 portant création des chambres territoriales de la Cour nationale du droit d'asile de Marseille et Nantes et relatif à la procédure applicable devant la Cour nationale du droit d'asile",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052035877_04-08-2025",
+              "id": "LEGITEXT000052035877",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052035877_04-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052035877"
           },
           {
               "f": "app",
@@ -1184,10 +1986,10 @@ const LAWS={
               "title": "Décret n° 2024-800 du 8 juillet 2024 pris pour l'application de l'article 70 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration et relatif à l'organisation et à la procédure applicable devant la Cour nationale du droit d'asile",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049973967_15-07-2024",
+              "id": "LEGITEXT000049973967",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049973967_15-07-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049973967"
           },
           {
               "f": "app",
@@ -1196,10 +1998,10 @@ const LAWS={
               "title": "Décret n° 2025-539 du 13 juin 2025 relatif aux cartes de séjour « talent » et modifiant certaines dispositions relatives aux cartes de séjour « recherche d'emploi-création d'entreprise » et « entrepreneur et profession libérale »",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000051737142_16-06-2025",
+              "id": "LEGITEXT000051737142",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051737142_16-06-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000051737142"
           },
           {
               "f": "app",
@@ -1208,10 +2010,10 @@ const LAWS={
               "title": "Décret n° 2024-799 du 2 juillet 2024 pris pour l'application du titre VII de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration, relatif à la simplification des règles du contentieux",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049969799_15-07-2024",
+              "id": "LEGITEXT000049969799",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049969799_15-07-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049969799"
           },
           {
               "f": "app",
@@ -1220,10 +2022,10 @@ const LAWS={
               "title": "Arrêté du 25 octobre 2025 modifiant l'arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052475649_02-11-2025",
+              "id": "LEGITEXT000052475649",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052475649_02-11-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052475649"
           },
           {
               "f": "app",
@@ -1232,10 +2034,10 @@ const LAWS={
               "title": "Arrêté du 6 octobre 2024 modifiant l'arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000050351465_17-10-2024",
+              "id": "LEGITEXT000050351465",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050351465_17-10-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050351465"
           },
           {
               "f": "app",
@@ -1244,10 +2046,10 @@ const LAWS={
               "title": "Arrêté du 13 mai 2024 fixant le périmètre géographique de l'expérimentation prévue à l'article 14 de la loi n° 2024-42 du 26 janvier 2024 pour contrôler l'immigration, améliorer l'intégration",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000049538550_02-11-2025",
+              "id": "LEGITEXT000049538550",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049538550_02-11-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000049538550"
           },
           {
               "f": "app",
@@ -1256,10 +2058,10 @@ const LAWS={
               "title": "Arrêté du 19 juin 2026 relatif au modèle type de contrat d'intégration républicaine créé par la loi n° 2016-274 du 7 mars 2016 relative au droit des étrangers en France",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000054306912_26-06-2026",
+              "id": "LEGITEXT000054306912",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306912_26-06-2026"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306912"
           },
           {
               "f": "app",
@@ -1268,10 +2070,10 @@ const LAWS={
               "title": "Arrêté du 22 juillet 2025 relatif au modèle type de contrat d'intégration républicaine créé par la loi n° 2016-274 du 7 mars 2016 relative au droit des étrangers en France",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052023467_26-06-2026",
+              "id": "LEGITEXT000052023467",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023467_26-06-2026"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023467"
           },
           {
               "f": "app",
@@ -1280,10 +2082,10 @@ const LAWS={
               "title": "Arrêté du 14 août 2024 fixant le modèle de formulaire rappelant les droits et obligations du demandeur d'asile pris pour l'application de l'article R. 523-3 du code de l'entrée et du séjour des étrangers et du droit d'asile",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000050134991_25-08-2024",
+              "id": "LEGITEXT000050134991",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050134991_25-08-2024"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000050134991"
           },
           {
               "f": "app",
@@ -1292,10 +2094,10 @@ const LAWS={
               "title": "Arrêté du 20 août 2025 relatif à la procédure d'agrément des organismes en charge de la mise en œuvre de l'examen civique",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052130796_24-08-2025",
+              "id": "LEGITEXT000052130796",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052130796_24-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052130796"
           },
           {
               "f": "app",
@@ -1304,10 +2106,10 @@ const LAWS={
               "title": "Arrêté du 19 juin 2026 relatif au modèle type de contrat d'intégration républicaine spécifique à Mayotte",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000054306956_26-06-2026",
+              "id": "LEGITEXT000054306956",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306956_26-06-2026"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000054306956"
           },
           {
               "f": "app",
@@ -1316,10 +2118,10 @@ const LAWS={
               "title": "Arrêté du 22 juillet 2025 relatif au modèle type de contrat d'intégration républicaine spécifique à Mayotte",
               "who": "Légifrance",
               "date": "",
-              "id": "LEGITEXT000052023492_02-08-2025",
+              "id": "LEGITEXT000052023492",
               "prov": "legifrance",
               "note": "",
-              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023492_02-08-2025"
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000052023492"
           },
           {
               "f": "jur",
@@ -1794,11 +2596,35 @@ function renderPills(){
   document.querySelectorAll('.lawpill').forEach(p=>p.addEventListener('click',()=>switchLaw(p.dataset.law)));
 }
 
+// retire le renvoi de note du JO (« … (1) ») de l'intitulé affiché
+function cleanTitle(t){ return String(t||'').replace(/\s*\(\d+\)\s*$/,'').trim(); }
+
+// permalien Légifrance de la loi à partir de son identifiant (LEGITEXT/JORFTEXT)
+function legiLawUrl(legitext){
+  if(!legitext) return '';
+  const id=String(legitext).replace(/_\d{2}-\d{2}-\d{4}$/,'').replace(/\s.*$/,'').trim();
+  if(/^JORFTEXT/.test(id)) return `https://www.legifrance.gouv.fr/jorf/id/${id}`;
+  if(/^LEGITEXT/.test(id)) return `https://www.legifrance.gouv.fr/loda/id/${id}`;
+  return '';
+}
+
+// badge de classification (cluster application) : on met en avant les EXCEPTIONS
+// (cite la loi / codification) ; les vraies applications restent sans badge.
+function tagBadge(d){
+  if(d.f!=='app'||!d.tag||d.tag==='application') return '';
+  const M={citation:['cite la loi','tg-cite'],codification:['codification','tg-codif']};
+  const m=M[d.tag];
+  return m?` <span class="tgbadge ${m[1]}" title="Classé par l'IA d'après le texte du décret">${m[0]}</span>`:'';
+}
+
 function renderLaw(){
   const L=LAWS[current];
-  $('bc').textContent='LOI '+L.short;
-  $('f-title').textContent=L.title;
+  { const bc=$('bc'); if(bc) bc.textContent='LOI '+L.short; }
+  $('f-title').textContent=cleanTitle(L.title);
   $('f-subt').textContent=L.subt;
+  const srcUrl=L.sourceUrl||legiLawUrl(L.legitext);   // lien source de la loi
+  const src=$('f-source');
+  if(srcUrl){ src.href=srcUrl; src.hidden=false; } else { src.hidden=true; }
   $('f-dom').textContent=L.dom;
   $('f-legitext').textContent=L.legitext;
   $('f-nor').textContent=L.nor;
@@ -1807,10 +2633,6 @@ function renderLaw(){
   $('c-short').textContent=L.short;
   $('c-date').textContent=L.cdate;
   $('cta-b').textContent='+ Suivre la LOI '+L.short;
-
-  // measures
-  $('measures').innerHTML=L.measures.map(m=>
-    `<div class="measure"><div class="mn">${m.n}<span>${m.u}</span></div><div class="ml">${m.l}</div></div>`).join('');
 
   // counts
   const counts={}; let total=0;
@@ -1832,10 +2654,10 @@ function renderLaw(){
   // related list
   $('rel').innerHTML=L.related.map(d=>{
     const p=PROV[d.prov];
-    return `<div class="relitem" data-f="${d.f}">
+    return `<div class="relitem${d.tag==='codification'?' dimmed':''}" data-f="${d.f}">
       <span class="kindbadge ${d.badge}">${d.kind}</span>
       <div class="relbody">
-        <div class="rt">${d.title}</div>
+        <div class="rt">${d.title}${tagBadge(d)}</div>
         <div class="rmeta"><span class="who">${d.who}</span><span class="dt">${d.date}</span></div>
         <div class="rid">${d.url?`<a href="${d.url}" target="_blank" rel="noopener">${d.id}</a>`:d.id}</div>
         ${d.note?`<div class="rnote">${d.note}</div>`:''}
@@ -1884,7 +2706,9 @@ function renderTimeline(L){
   let html=`<div class="tlphase"><span class="pi">▣</span><div><div class="pt">Amont parlementaire — dépôt, amendements, débats, votes</div><div class="ps">couvert par l'open data de l'Assemblée nationale · le pont Silexia prend le relais après la promulgation</div></div></div><div class="tlconn"></div><div class="tl">`;
   events.forEach(e=>{
     if(e._mile){
-      html+=`<div class="tlmile"><span class="tldot"></span><div class="mlbox"><div class="mlt">Promulgation de la loi · ${L.pub}</div><div class="mld">${L.title}</div></div></div>`;
+      const srcUrl=L.sourceUrl||legiLawUrl(L.legitext);
+      const mlTitle=srcUrl?`<a href="${srcUrl}" target="_blank" rel="noopener">${cleanTitle(L.title)}</a>`:cleanTitle(L.title);
+      html+=`<div class="tlmile"><span class="tldot"></span><div class="mlbox"><div class="mlt">Promulgation de la loi · ${L.pub}</div><div class="mld">${mlTitle}</div></div></div>`;
     }else if(e._amont){
       const p=PROV[e.prov]||{c:'#7a2650',label:e.kind};
       html+=`<div class="tlitem tlamont" data-f="amont"><span class="tldot" style="background:${p.c}"></span>
@@ -1896,15 +2720,16 @@ function renderTimeline(L){
       const col=TYPECOL[e.f]||'#888', p=PROV[e.prov];
       html+=`<div class="tlitem" data-f="${e.f}"><span class="tldot" style="background:${col}"></span>
         <div class="tldate">${e.date}</div>
-        <div class="tltitle">${e.title}</div>
+        <div class="tltitle">${e.url?`<a href="${e.url}" target="_blank" rel="noopener">${e.title}</a>`:e.title}</div>
         <div class="tlmeta"><span class="kindbadge ${e.badge}">${e.kind}</span><span class="tlwho">${e.who}</span><span class="tlprov" style="color:${p.c}">● ${p.label}</span></div>
+        ${e.id?`<div class="tlid">${e.url?`<a href="${e.url}" target="_blank" rel="noopener">${e.id}</a>`:e.id}</div>`:''}
       </div>`;
     }
   });
   html+=`</div>`;
   if(socle.length){
     html+=`<div class="socle"><div class="sh">Socle permanent & veille continue (sans date ponctuelle)</div>`+
-      socle.map(s=>`<div class="si" data-f="${s.f}"><b>${s.kind} —</b> ${s.title} <span style="color:var(--muted)">· ${PROV[s.prov].label}</span></div>`).join('')+`</div>`;
+      socle.map(s=>`<div class="si" data-f="${s.f}"><b>${s.kind} —</b> ${s.url?`<a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>`:s.title} <span style="color:var(--muted)">· ${PROV[s.prov].label}${s.id?` · <span class="siid">${s.url?`<a href="${s.url}" target="_blank" rel="noopener">${s.id}</a>`:s.id}</span>`:''}</span></div>`).join('')+`</div>`;
   }
   $('timeline').innerHTML=html;
 }
@@ -1936,6 +2761,7 @@ function setFilter(f){
 function switchLaw(k){
   if(k===current)return;
   current=k; activeF='all'; q=''; $('q').value='';
+  if(k!=='_live'){ setStatus(null); activeFamily=null; renderResolution(null); }   // exemple ≠ recherche live
   document.querySelectorAll('.lawpill').forEach(p=>p.classList.toggle('active',p.dataset.law===k));
   renderLaw();
   window.scrollTo({top:0,behavior:'smooth'});
@@ -1944,6 +2770,142 @@ function switchLaw(k){
 document.querySelectorAll('.node-c').forEach(n=>n.addEventListener('click',()=>{ if(n.style.pointerEvents!=='none') setFilter(n.dataset.filter); }));
 document.querySelectorAll('.vt').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 $('q').addEventListener('input',e=>{q=e.target.value.toLowerCase().trim();apply();});
+
+/* ============ BARRE NL → GET /constellation?q= ============ *
+ * L'IA (côté back) ne fait que COMPRENDRE la requête ; le contenu affiché
+ * reste 100 % remonté des sources officielles, chaque nœud identifié.       */
+// Base de l'API. Cas nominal (prod / dev servi par uvicorn) = même origine → ''.
+// Sans origine http exploitable (panneau de preview en srcdoc/blob, ouverture
+// en file://) ou via http.server:8181 → on vise l'API locale en absolu.
+const _httpOrigin = /^https?:$/.test(location.protocol) && !!location.host;
+const API_BASE = (_httpOrigin && location.port!=='8181') ? '' : 'http://127.0.0.1:8000';
+let activeFamily=null;   // famille de lois en cours d'exploration (requête thématique)
+
+const _MOISFR={janvier:'01','février':'02',fevrier:'02',mars:'03',avril:'04',mai:'05',juin:'06',juillet:'07','août':'08',aout:'08',septembre:'09',octobre:'10',novembre:'11','décembre':'12',decembre:'12'};
+function dateFromTitle(t){ // « LOI n° 2023-1196 du 18 décembre 2023 … » → 18/12/2023
+  const m=(t||'').match(/du\s+(\d{1,2})(?:er)?\s+([a-zà-ÿ]+)\s+(\d{4})/i);
+  const mm=m&&_MOISFR[m[2].toLowerCase()];
+  return mm?`${m[1].padStart(2,'0')}/${mm}/${m[3]}`:'';
+}
+
+function setStatus(msg,kind){
+  const el=$('nl-status');
+  if(!msg){el.hidden=true;el.innerHTML='';return;}
+  el.hidden=false; el.className='nl-status'+(kind?' '+kind:'');
+  el.innerHTML=(kind==='load'?'<span class="spin"></span>':'')+msg;
+}
+
+// compréhension LLM : requête référentielle → confiance ; requête thématique →
+// FAMILLE de lois (on n'impose pas un choix, on montre les possibilités sourcées).
+function _lawChip(a, cur){
+  const t = cleanTitle(a.titre);
+  const label = a.numero ? ('LOI '+a.numero) : (t.replace(/^Loi\s+/i,'').slice(0,32));
+  const qv = (a.numero||a.titre||'').replace(/"/g,'&quot;');
+  return `<button class="nlr-alt${cur?' cur':''}" data-q="${qv}" title="${t.replace(/"/g,'&quot;')}">${label}${cur?' · affichée':''}</button>`;
+}
+// `family` = {saisie, members:[{numero,titre}]} à garder affiché quand on
+// navigue DANS une famille ; sinon on retombe sur l'affichage référentiel.
+function renderResolution(res, saisie, chosen, family){
+  const el=$('nl-resolution');
+  let html;
+  if(family && family.members && family.members.length){
+    // THÉMATIQUE : la famille reste affichée, on déplace juste le marqueur « affichée »
+    const curNum=chosen?(chosen.numero||''):'', curTit=chosen?(chosen.title||''):'';
+    html = `<span class="nlr-info nlr-fam">⤳ Plusieurs lois correspondent${family.saisie?` à « ${family.saisie} »`:''} — cliquez pour explorer :</span>`
+         + family.members.map(a=>{
+             const cur=(a.numero&&a.numero===curNum)||(!a.numero&&(a.titre||'')===curTit);
+             return _lawChip(a, cur);
+           }).join('');
+  } else if(res){
+    const src = res.source==='mistral' ? 'Mistral' : (res.source==='heuristic' ? 'heuristique' : (res.source||'—'));
+    const conf = Math.round((res.confidence||0)*100);
+    html = `<span class="nlr-info">Requête comprise via <b>${src}</b>${conf?` · confiance ${conf}%`:''}</span>`;
+    const alts=res.alternatives||[];
+    if(alts.length){
+      html += `<span class="nlr-alt-label">Vouliez-vous plutôt :</span>` + alts.map(a=>_lawChip(a, false)).join('');
+    }
+  } else { el.hidden=true; el.innerHTML=''; return; }
+  el.hidden=false; el.innerHTML=html;
+  el.querySelectorAll('.nlr-alt:not(.cur)').forEach(b=>b.addEventListener('click',()=>chargerLoi(b.dataset.q, {family: activeFamily})));
+}
+function _inFamily(family, data){
+  return !!family && (family.members||[]).some(m => (m.numero&&m.numero===data.numero) || (!m.numero&&(m.titre||'')===(data.title||'')));
+}
+
+// mappe la sortie /constellation vers la structure interne du proto
+function adapt(d,saisie){
+  const c=d.counts||{}, total=Object.values(c).reduce((a,b)=>a+b,0);
+  const CL={app:'Application (décrets, arrêtés)',con:'Textes connexes',doc:'Doctrine',jur:'Jurisprudence & contrôle',par:'Parlement & presse'};
+  const dt=d.sig||d.pub||dateFromTitle(d.title);
+  const year=((d.title||'').match(/\b(1[6-9]\d\d|20\d\d)\b/)||[])[1]||'';
+  const numLabel=d.numero||year||'—';           // lois anciennes (1881) : sans n°
+  const points=d.points||[];
+  return {
+    pillName:'LOI '+numLabel, pillDesc:d.numero?'recherche live':'texte fondateur',
+    short:numLabel, cdate:dt||numLabel||'',
+    title:d.title||saisie,
+    // description : synthèse IA ancrée si dispo, sinon phrase générique honnête
+    subt:d.subt||'Constellation reconstruite en direct depuis les sources officielles (Légifrance/PISTE, HAL, questions parlementaires). Chaque nœud porte un identifiant vérifiable.',
+    dom:d.dom||'Constellation reconstruite en langage naturel',
+    legitext:d.legitext||'—', sourceUrl:d.loi_url||'', syntheseIa:!!d.synthese_ia,
+    nor:d.nor||'—', sig:d.sig||dt||'—', pub:d.pub||dt||'—',
+    // mesures = comptages RÉELS uniquement (jamais de chiffre inventé par l'IA)
+    measures:[
+      {n:total,u:'',l:'Textes rattachés, tous sourcés'},
+      {n:c.app||0,u:'',l:"Décrets & arrêtés d'application"},
+      {n:c.jur||0,u:'',l:'Décisions & contrôle'},
+      {n:(c.doc||0)+(c.par||0),u:'',l:'Doctrine & travaux parlementaires'},
+    ],
+    // points clés : synthèse IA ancrée si dispo, sinon répartition par nature
+    toc: points.length ? points.map(p=>[p.label||'•', p.text||''])
+                       : Object.entries(CL).filter(([k])=>c[k]>0).map(([k,l])=>[String(c[k]),l]),
+    tocNote: d.synthese_ia
+      ? 'Points clés — synthèse IA à partir des textes officiels rattachés, vérifiable via les sources.'
+      : 'Répartition des textes rattachés par nature (comptage réel, non estimé).',
+    mgNote:'Chaque nœud porte un identifiant officiel vérifiable et cliquable.',
+    related:d.related||[],
+  };
+}
+
+async function chargerLoi(saisie, opts){
+  opts=opts||{};
+  saisie=(saisie||'').trim();
+  if(saisie.length<2){ setStatus('Tapez au moins deux caractères.','err'); return; }
+  $('nlbtn').disabled=true; document.body.classList.add('nl-loading');
+  if(!opts.family) renderResolution(null);   // clic dans une famille : on garde le panneau
+  setStatus('Reconstruction de la constellation depuis les sources officielles…','load');
+  try{
+    const r=await fetch(`${API_BASE}/constellation?q=${encodeURIComponent(saisie)}`);
+    if(!r.ok){
+      let detail='Source indisponible'; try{ detail=(await r.json()).detail||detail; }catch(_){}
+      setStatus(r.status===404?`Aucune loi trouvée pour « ${saisie} ».`:detail,'err');
+      return;
+    }
+    const data=await r.json();
+    LAWS['_live']=adapt(data,saisie);
+    current='_live'; activeF='all'; q=''; $('q').value='';
+    renderPills(); renderLaw();
+    // contexte FAMILLE : nouvelle famille (requête thématique), ou on reste dans
+    // la famille active (clic sur une sœur), sinon rien (requête référentielle).
+    let family=null;
+    if(data.resolution && data.resolution.ambiguous){
+      family={saisie, members:[{numero:data.numero,titre:data.title}, ...(data.resolution.alternatives||[])]};
+    } else if(opts.family && _inFamily(opts.family, data)){
+      family=opts.family;
+    }
+    activeFamily=family;
+    renderResolution(data.resolution, saisie, data, family);
+    const n=(data.related||[]).length;
+    setStatus(`✓ ${data.numero?('LOI '+data.numero):LAWS['_live'].short} — ${n} texte${n>1?'s':''} rattaché${n>1?'s':''}, 100 % sourcés.`,'ok');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    setStatus(`API injoignable (${e.message}). L'API tourne-t-elle ? — py -m uvicorn backend.api:app`,'err');
+  }finally{
+    $('nlbtn').disabled=false; document.body.classList.remove('nl-loading');
+  }
+}
+$('nlform').addEventListener('submit',e=>{ e.preventDefault(); chargerLoi($('nlq').value); }); // touche Entrée
+$('nlbtn').addEventListener('click',()=>chargerLoi($('nlq').value));                          // clic « Explorer »
 
 renderPills();
 renderLaw();

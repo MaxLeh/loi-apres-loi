@@ -8,6 +8,9 @@ Lancer (stdio) :  python -m backend.mcp_server
 """
 from __future__ import annotations
 
+from backend.env import load_env
+load_env()  # charge .env avant l'import de cache.py (qui lit DEMO_MODE à l'import)
+
 from mcp.server.fastmcp import FastMCP
 
 from backend.orchestrator import constellation

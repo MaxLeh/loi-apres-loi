@@ -1,27 +1,37 @@
 # Sources & ouverture des données
 
-Toutes les données mobilisées par l'adaptateur de référence sont ouvertes.
+L'adaptateur de référence mobilise exclusivement des **données ouvertes**. La
+couche IA n'ajoute aucune donnée : elle comprend et classe le matériel sourcé.
 
-| Source | Contenu | Ouverture / licence | Accès |
-|---|---|---|---|
-| **API Canutes-Légifrance** (Tricoteuses/LegiWatch) | Textes promulgués + consolidés, **échéancier DOLE**, amont parlementaire (dossiers, amendements, votes), questions | Licence Ouverte | API REST JSON, **sans clé** — ressource officielle du hackathon |
-| **Légifrance (API PISTE)** | Jurisprudence CETAT/JURI/CONSTIT/CNIL *(cluster jurisprudence)* | Licence Ouverte Etalab 2.0 | OAuth2, clé gratuite sur piste.gouv.fr |
-| **HAL** (archives-ouvertes.fr) | Doctrine en accès ouvert (articles, thèses) | Dépôts sous droits de leurs auteurs ; API ouverte | API publique, sans clé |
-| **Isidore** (Huma-Num) | Doctrine SHS multi-plateformes (OpenEdition, Persée…) | Notices ouvertes ; plein-texte selon source | API publique |
-| **BOFiP** | Doctrine fiscale officielle | Données publiques | API |
-| **DOLE** (dossiers législatifs) | Échéancier d'application des lois | Licence Ouverte Etalab | via API Canutes (ou dumps data.gouv) |
+| Source | Contenu | Cluster / rôle | Ouverture / licence | Accès |
+|---|---|---|---|---|
+| **Légifrance (API PISTE)** | Lois (LODA), décrets/arrêtés, jurisprudence `CETAT/JURI/CONSTIT/CNIL` | résolution, application, jurisprudence | Licence Ouverte Etalab 2.0 | OAuth2, clé gratuite sur piste.gouv.fr |
+| **HAL** (archives-ouvertes.fr) | Doctrine en accès ouvert (articles, thèses), collection `AO-DROIT` | doctrine | API ouverte ; dépôts sous droits de leurs auteurs | API publique, **sans clé** |
+| **`parlement.tricoteuses.fr`** | Questions écrites AN/Sénat | parlement | open data | API REST JSON, **sans clé** |
+| **Mistral** (API) | *Aucune donnée* — compréhension de la requête, classification, synthèse | couche LLM | modèle propriétaire (API) ou **open-weight Apache-2.0** (auto-hébergeable) | clé sur console.mistral.ai ; **optionnel** (repli déterministe sans clé) |
 
 ## Notes de reproductibilité
 
 - **Clé PISTE requise** : l'API Légifrance impose une inscription (gratuite).
-  Les données restent ouvertes ; seul le client est authentifié. Pour une
-  reproductibilité sans clé, une variante peut pointer vers les **dumps LEGI /
-  JORF** publiés sur data.gouv.fr (plus lourd à mettre en œuvre).
-- **HAL** est le maillon 100 % ouvert et sans clé — d'où son rôle de preuve
-  d'ouverture dans l'adaptateur de référence.
+  Les données restent ouvertes ; seul le client est authentifié. Une variante
+  sans clé pourrait pointer vers les **dumps LEGI / JORF** de data.gouv.fr
+  (plus lourd).
+- **HAL** et **`parlement.tricoteuses.fr`** sont les maillons 100 % ouverts et
+  sans clé.
+- **Mistral est optionnel** : sans `MISTRAL_API_KEY`, la résolution/classification
+  bascule sur un repli déterministe (`HeuristicLLM`). Pour la souveraineté, la
+  couche `backend/llm.py` accepte un **modèle open-weight auto-hébergé** derrière
+  la même interface.
+
+## Sur la nature « IA de confiance »
+
+Appeler une API LLM propriétaire depuis un projet AGPL est licite (appel réseau
+à un service tiers — pas une combinaison de code). Pour ce défi (secteur public,
+souveraineté), un modèle **open-weight auto-hébergé** est toutefois préférable :
+pas d'egress de données juridiques, pleine reproductibilité.
 
 ## Ce que la doctrine n'est PAS
 
 La doctrine propriétaire (Dalloz, LexisNexis…) est **hors périmètre** : non
-ouverte, non incluse. Le cluster doctrine s'appuie exclusivement sur des
-sources ouvertes (HAL, Isidore, BOFiP).
+ouverte, non incluse. Le cluster doctrine s'appuie exclusivement sur HAL (accès
+ouvert). Isidore et BOFiP sont des compléments possibles (non encore branchés).

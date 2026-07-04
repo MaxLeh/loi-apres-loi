@@ -1,68 +1,90 @@
 # Architecture
 
-## Flux d'une requête
+## Flux d'une requête (`orchestrator.constellation`)
 
-1. **Saisie** en langage naturel (« loi plein emploi ») ou n° (« 2023-1196 »).
-2. **`resolve_loi`** → identifiants complets (LEGITEXT, NOR, JORFTEXT).
-3. **`expansion.expand`** → `{numero, mots_cles}`.
-   - `numero` alimente les clusters par **citation** (application, jurisprudence, connexes).
-   - `mots_cles` alimentent les clusters **thématiques** (doctrine, parlement).
-4. **Cinq recherches** de clusters, chacune passée par `cache.cached(...)`.
-5. **Assemblage** en `Constellation`, filtrage des nœuds sans identifiant,
-   sérialisation `to_front()` pour le moteur de rendu.
+1. **Saisie** en langage naturel (« la loi plein emploi ») ou n° (« 2023-1196 »).
+2. **`adapter.resolve_candidates`** → N lois candidates (PISTE `LODA_ETAT`,
+   `nature=LOI`), chacune avec ses identifiants (LEGITEXT, NOR).
+3. **`llm.rank_laws`** (caché) → choisit la loi **par son indice** parmi les
+   candidats (jamais inventée), avec confiance + justification, et distingue
+   requête **référentielle** (une loi) vs **thématique** (`ambiguous=true` +
+   `alternatives` = la famille).
+4. **`expansion.expand`** → `mots_cles` (dérivés du titre de la loi) pour les
+   clusters thématiques.
+5. **Cinq recherches** de clusters, chacune passée par `cache.cached(...)`.
+6. **`llm.classify_application`** (caché) → qualifie les textes d'application
+   *application / citation / codification*.
+7. **`llm.synthesize`** (caché) → description + points clés, **ancrés** sur le
+   matériel sourcé (jamais de chiffre inventé).
+8. **Assemblage** en `Constellation` (loi + nœuds + `resolution` + `synthese`),
+   filtrage des nœuds sans identifiant, `to_front()`.
+
+## Couche LLM — le « contrat de confiance » (`backend/llm.py`)
+
+Le LLM ne fait que **comprendre et classer du matériel déjà sourcé**. Interface
+**swappable** :
+
+- **`MistralLLM`** si `MISTRAL_API_KEY` (souveraineté FR ; remplaçable par un
+  modèle open-weight Apache-2.0 derrière la même interface).
+- **`HeuristicLLM`** (repli déterministe, sans réseau) sinon, ou si l'appel échoue.
+
+Garde-fous : la résolution renvoie un **indice validé ∈ candidats** (pas de loi
+inventée) ; la classification et la synthèse portent leur **justification** ;
+les **mesures** (KPIs) restent des comptages déterministes — l'IA n'émet
+**aucun chiffre**. Toutes les sorties LLM sont **cachées** (clé = requête +
+identifiants + nom du modèle) → démo offline reproductible.
 
 ## Le split open-core
 
-`ConnectorAdapter` (abstrait) définit six méthodes : `resolve_loi` + un cluster
-chacun. Trois implémentations :
+`ConnectorAdapter` (abstrait) définit `resolve_loi` / `resolve_candidates` + un
+cluster chacun. Implémentations :
 
-- **`CanutesAdapter`** *(recommandé)* — source l'aval (application via échéancier
-  DOLE, connexes, parlement) et l'amont via l'**API Canutes** ouverte du
-  hackathon ; délègue la **jurisprudence** à PISTE et la **doctrine** à HAL (via
-  un `ReferenceAdapter` composé). Neutralise la fragilité PISTE sur l'aval.
-- **`ReferenceAdapter`** — variante « tout PISTE + HAL », sans Canutes.
-  Utile en repli ou pour comparer.
+- **`ReferenceAdapter`** *(défaut, `BACKEND=reference`)* — l'adaptateur publié :
+  PISTE (application + jurisprudence), HAL (doctrine), `parlement.tricoteuses.fr`
+  (parlement). 100 % open data.
 - **`SilexiaAdapter`** — wrappe les connecteurs MCP Silexia via un client injecté.
-- **`SilexiaAdapter`** — wrappe les connecteurs MCP Silexia via un client
-  injecté (`call(tool, params)`). Plus rapide, plus robuste, supporté. **Non
-  requis** pour la démo, et **livré séparément** : absent du dépôt public, il se
-  dépose dans `backend/adapters/silexia.py` côté déploiement privé. Le sélecteur
-  `backend/plugins.load_adapter` le charge s'il est présent, sinon renvoie une
-  erreur actionnable.
+  Plus rapide/robuste, **non requis**, **livré séparément** (absent du dépôt
+  public) : il se dépose dans `backend/adapters/silexia.py` côté déploiement privé.
 
-Frontière : ce qui est publié = la logique de constellation, l'orchestration,
-l'expansion, le cache, l'UI, et l'adaptateur de référence. Ce qui reste fermé =
-les connecteurs Silexia de prod (antérieurs au hackathon, hors périmètre du
-défi).
+> Note : l'API « Canutes » (Tricoteuses), pressentie côté hackathon, a été
+> **écartée** en préparation (résolution non fiable) au profit de PISTE.
 
-## Expansion de requête
+## Cluster application : union + classification
 
-La recherche plein-texte est **sensible aux termes** (constat live : « revenu
-solidarité active sanction » remonte des questions, « RSA suspension contrat
-d'engagement » n'en remonte aucune). L'expansion découple donc la liaison par
-citation (robuste, sur le n°) de la liaison thématique (fragile, sur les mots).
-MVP heuristique ; cible : dérivation LLM (Haiku) avec synonymes et sigles.
+- **Union (recall)** : `LODA_ETAT/VISA` (décrets qui *visent* la loi → confirmés)
+  **∪** `JORF/ALL` (textes qui citent le n° sans la viser, cas des lois qui
+  s'appliquent en modifiant un **code**), dédoublonnés par n° de décret.
+- **Classification** : le LLM tranche *application / citation / codification*.
+  On ne **jette rien** — on **étiquette**. Le compteur reste l'union ; le front
+  signale le bruit (ex. un décret de codification qui cite la loi sans l'appliquer).
 
-## Cache & robustesse PISTE
+## Résolution : référentiel vs thématique
 
-PISTE renvoie des **500 transitoires** (observés en préparation). Deux parades :
+La « confiance » d'un LLM porte sur la **canonicité**, pas sur l'**intention**.
+D'où la distinction : n° / intitulé précis → une loi ; thème → une **famille**
+de lois distinctes, présentée pour désambiguïsation (le front garde la famille
+affichée pendant l'exploration). Les lois **anciennes sans numéro** (ex. 1881)
+sont identifiées par `LEGITEXT` + date et citées par leur date dans les clusters.
 
-- `ReferenceAdapter._piste` : retry exponentiel (`tenacity`) sur les ≥500.
-- `cache.cached` : mémoïsation disque. En `DEMO_MODE=1`, lecture seule — le
-  pitch ne touche jamais l'API. Réchauffage via `backend.warmup`.
+## Cache & robustesse
+
+- PISTE renvoie des **500 transitoires** → `ReferenceAdapter._piste` retente
+  (`tenacity`).
+- `cache.cached` : mémoïsation disque (clé = adaptateur/méthode/arguments). En
+  `DEMO_MODE=1`, **lecture seule** : le pitch ne touche ni PISTE ni le LLM ;
+  une clé absente lève `CacheMiss` → `503`. Réchauffage via `backend.warmup`.
+- `backend/env.py` auto-charge `.env` avant l'import de `cache.py`.
 
 ## Traçabilité (exigence du défi)
 
-Tout nœud sans `identifiant` est **écarté** à l'assemblage. Un nœud non sourçable
-n'existe pas. C'est ce qui distingue la constellation d'un résumé génératif.
+Tout nœud sans `identifiant` est **écarté** à l'assemblage. Un nœud non
+sourçable n'existe pas. C'est ce qui distingue la constellation d'un résumé
+génératif — et pourquoi les identifiants sont affichés et **cliquables** vers
+leur source (constellation **et** parcours).
 
-## Points ouverts (`TODO(24h)`)
+## Feuille de route
 
-- Confirmer les endpoints de l'API Canutes sur la doc OpenAPI (`canutes_client`).
-- Cluster parlement open data (AN + Sénat) dans `ReferenceAdapter`.
-- Isidore + BOFiP en complément doctrine.
-- `expand_llm` (bascule Haiku).
-- Câblage front → `/constellation` (voir `frontend/README.md`).
-
-Fait : mapping PISTE du cluster jurisprudence (`_normalize_piste_hits`), testé
-hors-ligne (`tests/test_piste_mapping.py`).
+- Cluster **connexes** (lois/codes/ordonnances liés) — actuellement vide.
+- Pivot **réglementaire** (racine décret, pas seulement loi) + seuil de confiance.
+- Qualification **dur/mou** généralisée à tous les clusters.
+- Bascule **open-weight** derrière `backend/llm.py` (souveraineté, reproductibilité).

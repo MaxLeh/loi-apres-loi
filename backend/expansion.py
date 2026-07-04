@@ -11,8 +11,10 @@ D'où cette couche, qui produit à partir d'une saisie libre :
   - `numero`   : pour les clusters par citation ;
   - `mots_cles`: pour les clusters thématiques.
 
-MVP : heuristique (regex + titre). Cible : bascule LLM (Haiku) pour dériver des
-mots-clés robustes à partir du titre + de l'objet de la loi.
+Couche **déterministe** (regex + titre de la loi résolue). La COMPRÉHENSION de la
+requête (choix de la loi, désambiguïsation, classification, synthèse) est confiée
+à la couche LLM `backend/llm.py` — pas à cette couche, qui se contente de dériver
+des mots-clés thématiques et reste donc reproductible sans réseau.
 """
 from __future__ import annotations
 
@@ -63,6 +65,7 @@ def _keywords(titre: str, k: int = 6) -> list[str]:
     return out[:k]
 
 
-# TODO(24h) : `expand_llm(saisie, loi)` — prompt Haiku renvoyant un JSON
-# {"numero": "...", "mots_cles": [...]} pour couvrir synonymes et sigles
-# (RSA ↔ revenu de solidarité active, DDADUE ↔ adaptation au droit de l'UE…).
+# Piste d'amélioration : enrichir les mots-clés par synonymes/sigles (RSA ↔
+# revenu de solidarité active…). La couche LLM existe déjà (`backend/llm.py`) et
+# pourrait produire ces variantes ; cette couche-ci reste néanmoins volontairement
+# déterministe pour garder la génération de mots-clés reproductible sans clé.
