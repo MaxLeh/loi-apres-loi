@@ -2672,7 +2672,7 @@ function renderLaw(){
 
   // minigraph
   const max=Math.max(...CLUSTERS.map(c=>counts[c]),1);
-  const cfg={app:['Application','#1e40af'],con:['Connexes','#0d6b6b'],par:['Parlement & presse','#a3540f'],doc:['Doctrine & blogs','#b0892f'],jur:['Jurisprudence','#5b3aa6']};
+  const cfg={app:['Application','#1e40af'],con:['Connexes','#0d6b6b'],par:['Parlement & presse','#a3540f'],doc:['Doctrine','#b0892f'],jur:['Jurisprudence','#5b3aa6']};
   $('minigraph').innerHTML=Object.entries(cfg).map(([c,[lbl,col]])=>
     `<div class="mg"><span class="lbl">${lbl}</span><span class="bar"><i style="width:${Math.round(counts[c]/max*100)}%;background:${col}"></i></span><span class="num">${counts[c]}</span></div>`).join('');
   $('mg-note').textContent=L.mgNote;
