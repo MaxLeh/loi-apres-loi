@@ -37,10 +37,10 @@ Silexia — Maxime Lehmann
 Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 
 - [ ] `openfisca-france-parameters` — Base de données de paramètres ✺ OpenFisca
-- [x] `an-dossiers-legislatifs` — Dossiers législatifs de l'Assemblée nationale (législature courante) ✺ Assemblée nationale
-- [x] `an-amendements-xvii` — Amendements déposés à l'Assemblée nationale (législature actuelle) ✺ Assemblée nationale
+- [ ] `an-dossiers-legislatifs` — Dossiers législatifs de l'Assemblée nationale (législature courante) ✺ Assemblée nationale
+- [ ] `an-amendements-xvii` — Amendements déposés à l'Assemblée nationale (législature actuelle) ✺ Assemblée nationale
 - [ ] `an-comptes-rendus` — Comptes rendus de la séance publique à l'Assemblée nationale (législature actuelle) ✺ Assemblée nationale
-- [x] `an-votes-xvii` — Votes des députés (législature actuelle) ✺ Assemblée nationale
+- [ ] `an-votes-xvii` — Votes des députés (législature actuelle) ✺ Assemblée nationale
 - [ ] `an-deputes-en-exercice` — Députés en exercice ✺ Assemblée nationale
 - [ ] `an-deputes-historique` — Historique des députés ✺ Assemblée nationale
 - [ ] `an-deputes-senateurs-ministres-par-legislature` — Députés, sénateurs et ministres d'une législature ✺ Assemblée nationale
@@ -49,7 +49,7 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 - [x] `an-questions-gouvernement-ecrites` — Questions écrites de l'Assemblée nationale au Gouvernement ✺ Assemblée nationale
 - [ ] `an-questions-gouvernement-orales` — Questions orales de l'Assemblée nationale au Gouvernement ✺ Assemblée nationale
 - [x] `premier-ministre-legi` — Codes, lois et règlements consolidés ✺ Premier ministre
-- [x] `premier-ministre-dole` — Dossiers législatifs Légifrance ✺ Premier ministre
+- [ ] `premier-ministre-dole` — Dossiers législatifs Légifrance ✺ Premier ministre
 - [x] `premier-ministre-jorf` — Édition ''Lois et décrets'' du Journal officiel ✺ Premier ministre
 - [ ] `senat-dispositifs-textes` — Dispositifs des textes déposés ou adoptés au Sénat ✺ Sénat
 - [ ] `senat-dossiers-legislatifs` — Dossiers législatifs du Sénat ✺ Sénat
@@ -57,9 +57,9 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 - [ ] `senat-senateurs` — Sénateurs ✺ Sénat
 - [x] `senat-questions-gouvernement` — Questions orales et écrites du Sénat au Gouvernement ✺ Sénat
 - [ ] `senat-comptes-rendus` — Comptes rendus de la séance publique au Sénat ✺ Sénat
-- [x] `an-et-co-database-regroupement-toutes-donnees` — Base de données unifiée Parlement / Législation / Service Public ✺ Assemblée nationale & communauté
+- [ ] `an-et-co-database-regroupement-toutes-donnees` — Base de données unifiée Parlement / Législation / Service Public ✺ Assemblée nationale & communauté
 - [ ] `an-et-co-serveur-mcp-regroupement-toutes-donnees` — Serveur MCP  - Accès unifié Parlement / Législation / Service Public ✺ Assemblée nationale & communauté
-- [x] `an-et-co-api-regroupement-toutes-donnees` — API - Accès unifié Parlement / Législation / Service Public ✺ Assemblée nationale & communauté
+- [ ] `an-et-co-api-regroupement-toutes-donnees` — API - Accès unifié Parlement / Législation / Service Public ✺ Assemblée nationale & communauté
 - [x] `legiwatch-api-parlement` — API Parlement ✺ LegiWatch
 - [ ] `legiwatch-database-parlement` — Base de données Parlement ✺ LegiWatch
 - [ ] `legiwatch-serveur-mcp-parlement` — Serveur MCP Parlement ✺ LegiWatch
