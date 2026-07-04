@@ -12,15 +12,17 @@ Silexia — Maxime Lehmann
 
 **Notre réponse.** Une interface où l'on saisit une loi en langage naturel (« la loi plein emploi », « RSA 2023 »), et où se déploie une **constellation** de tout ce qui en découle, organisée en cinq branches :
 
-- **Application** — décrets et arrêtés, avec leur **statut** (publié / en attente), via l'échéancier officiel d'application de la loi. C'est le *reste-à-appliquer* : l'angle « contrôle de l'application des lois ».
+- **Application** — décrets et arrêtés, chaque lien étant **qualifié** par l'IA (application confirmée / simple citation / codification), pour distinguer un vrai texte d'application d'un décret qui ne fait que citer la loi. C'est l'angle « contrôle de l'application des lois ».
 - **Connexes** — lois, codes et ordonnances liés.
 - **Parlement** — questions écrites AN et Sénat rattachées au texte.
 - **Jurisprudence** — décisions du Conseil d'État, de la Cour de cassation, du Conseil constitutionnel et de la CNIL.
 - **Doctrine** — articles et thèses en accès ouvert.
 
-**Le principe directeur : zéro affirmation non sourcée.** Chaque nœud de la constellation porte un identifiant officiel vérifiable (JORFTEXT, LEGIARTI, CETATEXT, halId…) et un lien vers sa source. Un élément non sourçable est écarté. C'est ce qui distingue notre constellation d'un résumé génératif — et ce qui incarne « l'IA de confiance ».
+**Le principe directeur : zéro affirmation non sourcée.** Chaque nœud de la constellation porte un identifiant officiel vérifiable (JORFTEXT, LEGIARTI, CETATEXT, halId…) et un lien cliquable vers sa source. Un élément non sourçable est écarté. C'est ce qui distingue notre constellation d'un résumé génératif — et ce qui incarne « l'IA de confiance ».
 
-**Répartition des sources.** L'amont, l'application, le consolidé et le parlement sont alimentés par les **données ouvertes du hackathon** (LEGI, JORF, DOLE, questions écrites AN/Sénat, via l'API unifiée). La jurisprudence et la doctrine — que le catalogue du hackathon ne couvre pas — proviennent de sources ouvertes complémentaires (API PISTE de Légifrance pour la jurisprudence, HAL pour la doctrine).
+**Où l'IA intervient — et où elle n'intervient pas.** Un LLM (Mistral, souverain, remplaçable par un modèle open-weight) sert uniquement à **comprendre** la requête et à **classer** des textes déjà sourcés : il choisit la loi parmi des candidats officiels (jamais inventée, sélection par indice validé), distingue une requête précise d'un **thème couvrant plusieurs lois** (qu'il présente alors comme une famille à explorer), qualifie les liens d'application, et rédige une synthèse **ancrée** sur le seul matériel remonté. Il ne produit jamais un fait ni un chiffre affiché — les comptages restent déterministes. C'est cette frontière stricte qui rend l'IA « de confiance ».
+
+**Répartition des sources — 100 % ouvertes.** Légifrance via l'API **PISTE** (lois et codes consolidés, décrets/arrêtés, jurisprudence Conseil d'État / Cour de cassation / Conseil constitutionnel / CNIL) ; **HAL** pour la doctrine en accès ouvert ; **parlement.tricoteuses.fr** (open data) pour les questions écrites AN et Sénat. Aucune donnée propriétaire n'entre dans la constellation.
 
 **Architecture & ouverture.** Le code est publié en open source (licence AGPL-3.0), structuré autour d'un orchestrateur `constellation(loi)` et d'adaptateurs interchangeables branchés sur les données ouvertes — entièrement reproductible. Un adaptateur premium propriétaire existe mais n'est pas requis : la démonstration tourne intégralement sur données ouvertes.
 
@@ -68,3 +70,6 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 
 ### Documents
 - [Sources & répartition des données](docs/sources-donnees.pdf)
+
+### URL de démonstration
+https://hackathon.silexia.legal/
