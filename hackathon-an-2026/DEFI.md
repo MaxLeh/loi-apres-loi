@@ -71,5 +71,8 @@ Cochez les ressources utilisées en remplaçant `[ ]` par `[x]`.
 ### Documents
 - [Sources & répartition des données](docs/sources-donnees.pdf)
 
+#### Diapositives de présentation
+[Diapositives de présentation](docs/diapositives.pdf)
+
 ### URL de démonstration
 https://hackathon.silexia.legal/
